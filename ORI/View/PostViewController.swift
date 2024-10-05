@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  ThirdViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 10/5/24.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .blue
         // Do any additional setup after loading the view.
     }
     

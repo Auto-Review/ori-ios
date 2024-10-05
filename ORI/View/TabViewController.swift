@@ -11,17 +11,17 @@ class TabViewController: UIViewController {
     
     let tabBarVC = UITabBarController()
     
-    let vc1 = UINavigationController(rootViewController: FirstViewController())
-    let vc2 = SecondViewController()
-    let vc3 = ThirdViewController()
-    let vc4 = SecondViewController()
-    let vc5 = ThirdViewController()
+    let vc1 = UINavigationController(rootViewController: TCLListViewController())
+    let vc2 = CodeListViewController()
+    let vc3 = PostViewController()
+    let vc4 = NotifyViewController()
+    let vc5 = ProfileViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let customTabBar = CustomTabBar()
-         tabBarVC.setValue(customTabBar, forKey: "tabBar")
+        tabBarVC.setValue(customTabBar, forKey: "tabBar")
         
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
@@ -41,12 +41,11 @@ class TabViewController: UIViewController {
     }
 }
 
-import UIKit
-
+// MARK: 커스텀 탭바
 class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var size = super.sizeThatFits(size)
-        size.height = 100 // 원하는 높이 설정
+        size.height = 100
         return size
     }
 }

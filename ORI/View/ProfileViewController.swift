@@ -1,5 +1,5 @@
 //
-//  ThirdViewController.swift
+//  ProfileViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 10/5/24.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+
         // Do any additional setup after loading the view.
     }
     
