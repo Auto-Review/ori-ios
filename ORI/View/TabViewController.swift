@@ -16,7 +16,7 @@ class TabViewController: UIViewController {
     let vc3 = PostViewController()
     let vc4 = NotifyViewController()
     let vc5 = ProfileViewController()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,18 +25,24 @@ class TabViewController: UIViewController {
         
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.backgroundColor = .white
+        
+        tabBarVC.tabBar.backgroundColor = UIColor.systemGray6.withAlphaComponent(0.85)
+        
+        tabBarVC.tabBar.tintColor = .oriYellow
+        tabBarVC.tabBar.unselectedItemTintColor = .systemGray2
+        
+        let boldConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
         
         guard let items = tabBarVC.tabBar.items else { return }
-        items[0].image = UIImage(systemName: "line.horizontal.3")
-        items[1].image = UIImage(systemName: "chevron.left.forwardslash.chevron.right")
-        items[2].image = UIImage(systemName: "square.and.pencil")
-        items[3].image = UIImage(systemName: "bell")
-        items[4].image = UIImage(systemName: "person")
+        items[0].image = UIImage(systemName: "square.text.square", withConfiguration: boldConfig)
+        items[1].image = UIImage(systemName: "chevron.left.forwardslash.chevron.right", withConfiguration: boldConfig)
+        items[2].image = UIImage(systemName: "square.and.pencil", withConfiguration: boldConfig)
+        items[3].image = UIImage(systemName: "bell", withConfiguration: boldConfig)
+        items[4].image = UIImage(systemName: "person", withConfiguration: boldConfig)
         
         addChild(tabBarVC)
         view.addSubview(tabBarVC.view)
-        tabBarVC.view.frame = view.bounds
+        tabBarVC.view.frame = view.bounds.insetBy(dx: 0, dy: -10)
         tabBarVC.didMove(toParent: self)
     }
 }
@@ -45,7 +51,7 @@ class TabViewController: UIViewController {
 class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var size = super.sizeThatFits(size)
-        size.height = 100
+        size.height = 110
         return size
     }
 }
