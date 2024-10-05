@@ -31,7 +31,7 @@ class TabViewController: UIViewController {
         tabBarVC.tabBar.tintColor = .oriYellow
         tabBarVC.tabBar.unselectedItemTintColor = .systemGray2
         
-        let boldConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold)
+        let boldConfig = UIImage.SymbolConfiguration(pointSize: 21, weight: .bold)
         
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "square.text.square", withConfiguration: boldConfig)
@@ -51,7 +51,7 @@ class TabViewController: UIViewController {
 class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var size = super.sizeThatFits(size)
-        size.height = 110
+        size.height = 100
         return size
     }
 }
