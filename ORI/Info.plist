@@ -40,10 +40,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>github</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ori-ios</string>
+				<string>ori</string>
 			</array>
 		</dict>
 	</array>
@@ -64,6 +64,10 @@
 	<string>$(NAVER_API_SECRET)</string>
 	<key>NAVER_API_URL</key>
 	<string>$(NAVER_API_URL)</string>
+	<key>GITHUB_API_KEY</key>
+	<string>$(GITHUB_API_KEY)</string>
+	<key>GITHUB_API_SECRET</key>
+	<string>$(GITHUB_API_SECRET)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
