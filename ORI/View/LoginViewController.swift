@@ -13,7 +13,6 @@ import Alamofire
 import KeychainSwift
 
 class LoginViewController: UIViewController {
-    
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     
     let naverLoginButton: UIButton = {
@@ -80,14 +79,7 @@ class LoginViewController: UIViewController {
     
     //깃허브 로그인
     @objc func handleGitHubLogin() {
-        let client_id: String = Bundle.main.infoDictionary?["GITHUB_API_KEY"] as? String ?? ""
-        print(client_id)
-        let scope = "repo,user"
-        let urlString = "https://github.com/login/oauth/authorize?client_id=\(client_id)&scope=\(scope)"
-        if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
-        
+        GitLoginManager.shared.requestCode()
     }
     
     //구글 로그인
@@ -108,7 +100,6 @@ class LoginViewController: UIViewController {
         getNaverUserInfo(accessToken: naverLoginInstance?.accessToken ?? "")
     }
 }
-
 
 func getNaverUserInfo(accessToken: String) {
     let url = URL(string: "https://openapi.naver.com/v1/nid/me")!
@@ -133,4 +124,79 @@ func getNaverUserInfo(accessToken: String) {
         }
     }
     task.resume()
+}
+
+class GitLoginManager {
+    static let shared = GitLoginManager()
+    private init() {}
+    
+    private let client_id = Bundle.main.infoDictionary?["GITHUB_API_KEY"] as? String ?? ""
+    private let client_secret = Bundle.main.infoDictionary?["GITHUB_API_SECRET"] as? String ?? ""
+    
+    func requestCode() {
+        let scope = "repo,user"
+        let urlString = "https://github.com/login/oauth/authorize?client_id=\(client_id)&scope=\(scope)"
+        if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    func requestAccessToken(with code: String) {
+        let url = "https://github.com/login/oauth/access_token"
+        
+        let parameters = ["client_id": client_id,
+                          "client_secret": client_secret,
+                          "code": code]
+        
+        let headers: HTTPHeaders = ["Accept": "application/json"]
+        
+        AF.request(url, method: .post, parameters: parameters, headers: headers)
+            .responseDecodable(of: GitHubAccessTokenResponse.self) { response in
+                switch response.result {
+                case .success(let tokenResponse):
+                    let accessToken = tokenResponse.access_token
+                    KeychainSwift().set(accessToken, forKey: "accessToken")
+                    print(accessToken)
+                    self.requestGitHubUserInfo(accessToken: accessToken)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    func requestGitHubUserInfo(accessToken: String) {
+        let url = "https://api.github.com/user"
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(accessToken)",
+            "Accept": "application/json"
+        ]
+        
+        AF.request(url, method: .get, headers: headers)
+            .responseDecodable(of: GitHubUserResponse.self) { response in
+                switch response.result {
+                case .success(let userResponse):
+                    let email = userResponse.email ?? "No email provided"
+                    print("GitHub 유저 이메일: \(email)")
+                    
+                case .failure(let error):
+                    print("Failed to get user info: \(error)")
+                }
+            }
+    }
+    
+    func logout() {
+        KeychainSwift().clear()
+    }
+}
+
+struct GitHubAccessTokenResponse: Decodable {
+    let access_token: String
+    let token_type: String
+    let scope: String
+}
+
+struct GitHubUserResponse: Decodable {
+    let login: String
+    let id: Int
+    let email: String?
 }
