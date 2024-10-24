@@ -18,12 +18,14 @@ private func didReceiveUserAccessToken(_ token: String, email: String) {
 }
 
 func moveToMain() {
-    let tabBarController = TabViewController()
-
-    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-        if let window = windowScene.windows.first {
-            window.rootViewController = tabBarController
-            window.makeKeyAndVisible()
+    DispatchQueue.main.async {
+        let tabBarController = TabViewController()
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                window.rootViewController = tabBarController
+                window.makeKeyAndVisible()
+            }
         }
     }
 }
