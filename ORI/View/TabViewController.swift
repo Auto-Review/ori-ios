@@ -11,7 +11,7 @@ class TabViewController: UIViewController {
     
     let tabBarVC = UITabBarController()
     
-    let vc1 = UINavigationController(rootViewController: TCLListViewController())
+    let vc1 = UINavigationController(rootViewController: TILListViewController())
     let vc2 = CodeListViewController()
     let vc3 = PostViewController()
     let vc4 = NotifyViewController()
