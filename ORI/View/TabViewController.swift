@@ -12,10 +12,10 @@ class TabViewController: UIViewController {
     let tabBarVC = UITabBarController()
     
     let vc1 = UINavigationController(rootViewController: TILListViewController())
-    let vc2 = CodeListViewController()
-    let vc3 = PostViewController()
-    let vc4 = NotifyViewController()
-    let vc5 = ProfileViewController()
+    let vc2 = UINavigationController(rootViewController: CodeListViewController())
+    let vc3 = UINavigationController(rootViewController: PostViewController())
+    let vc4 = UINavigationController(rootViewController: NotifyViewController())
+    let vc5 = UINavigationController(rootViewController: ProfileViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
