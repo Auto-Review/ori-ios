@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		5760BEFE2CB8E67300A94068 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BEFD2CB8E67300A94068 /* NaverThirdPartyLogin */; };
 		5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BF012CBD087500A94068 /* KeychainSwift */; };
+		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
+		57C35C6C2CCA24190083A346 /* TILPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6B2CCA24190083A346 /* TILPost.swift */; };
 		57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9DED2CAFADE60036E5D8 /* AppDelegate.swift */; };
 		57EB9DF02CAFADE60036E5D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9DEF2CAFADE60036E5D8 /* SceneDelegate.swift */; };
 		57EB9DF72CAFADE80036E5D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57EB9DF62CAFADE80036E5D8 /* Assets.xcassets */; };
 		57EB9DFA2CAFADE80036E5D8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 57EB9DF92CAFADE80036E5D8 /* Base */; };
-		57EB9E062CAFC4D60036E5D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9DF12CAFADE60036E5D8 /* ViewController.swift */; };
 		57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E072CAFC50A0036E5D8 /* TabViewController.swift */; };
-		57EB9E0A2CB15D9B0036E5D8 /* TCLListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E092CB15D9B0036E5D8 /* TCLListViewController.swift */; };
+		57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */; };
 		57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */; };
 		57EB9E0E2CB15DB70036E5D8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0D2CB15DB70036E5D8 /* PostViewController.swift */; };
 		57EB9E102CB164170036E5D8 /* NotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0F2CB164170036E5D8 /* NotifyViewController.swift */; };
@@ -31,15 +32,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
+		57C35C6B2CCA24190083A346 /* TILPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILPost.swift; sourceTree = "<group>"; };
 		57EB9DEA2CAFADE60036E5D8 /* ORI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EB9DED2CAFADE60036E5D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57EB9DEF2CAFADE60036E5D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		57EB9DF12CAFADE60036E5D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		57EB9DF62CAFADE80036E5D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57EB9DF92CAFADE80036E5D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57EB9DFB2CAFADE80036E5D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57EB9E072CAFC50A0036E5D8 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
-		57EB9E092CB15D9B0036E5D8 /* TCLListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCLListViewController.swift; sourceTree = "<group>"; };
+		57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewController.swift; sourceTree = "<group>"; };
 		57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewController.swift; sourceTree = "<group>"; };
 		57EB9E0D2CB15DB70036E5D8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		57EB9E0F2CB164170036E5D8 /* NotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		57C35C6A2CCA23240083A346 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				57C35C6B2CCA24190083A346 /* TILPost.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		57EB9DE12CAFADE50036E5D8 = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +105,9 @@
 		57EB9DEC2CAFADE60036E5D8 /* ORI */ = {
 			isa = PBXGroup;
 			children = (
-				57EB9DF12CAFADE60036E5D8 /* ViewController.swift */,
-				5760BEFF2CB8ECA600A94068 /* Extension */,
 				57EB9E052CAFB5D30036E5D8 /* App */,
+				5760BEFF2CB8ECA600A94068 /* Extension */,
+				57C35C6A2CCA23240083A346 /* Model */,
 				57EB9E042CAFB5810036E5D8 /* ViewModel */,
 				57EB9E012CAFB54A0036E5D8 /* View */,
 				57EB9DF62CAFADE80036E5D8 /* Assets.xcassets */,
@@ -112,7 +122,7 @@
 			children = (
 				57EB9E212CB528230036E5D8 /* LoginViewController.swift */,
 				57EB9E072CAFC50A0036E5D8 /* TabViewController.swift */,
-				57EB9E092CB15D9B0036E5D8 /* TCLListViewController.swift */,
+				57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */,
 				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E0D2CB15DB70036E5D8 /* PostViewController.swift */,
 				57EB9E0F2CB164170036E5D8 /* NotifyViewController.swift */,
@@ -124,6 +134,7 @@
 		57EB9E042CAFB5810036E5D8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				57C35C682CCA228D0083A346 /* TILListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -224,12 +235,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57C35C6C2CCA24190083A346 /* TILPost.swift in Sources */,
 				57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */,
-				57EB9E0A2CB15D9B0036E5D8 /* TCLListViewController.swift in Sources */,
+				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
+				57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */,
 				57EB9E102CB164170036E5D8 /* NotifyViewController.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,
 				57EB9E0E2CB15DB70036E5D8 /* PostViewController.swift in Sources */,
-				57EB9E062CAFC4D60036E5D8 /* ViewController.swift in Sources */,
 				57EB9E122CB164480036E5D8 /* ProfileViewController.swift in Sources */,
 				57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */,
 				57EB9E222CB528230036E5D8 /* LoginViewController.swift in Sources */,
