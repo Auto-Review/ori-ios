@@ -102,7 +102,7 @@ class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
             guard error == nil, let signInResult = signInResult else { return }
             let email = signInResult.user.profile?.email ?? ""
-            let token = signInResult.user.accessToken.tokenString
+            let token = signInResult.user.idToken?.tokenString ?? ""
             didReceiveUserAccessToken(token, email: email)
             moveToMain()
         }
