@@ -30,7 +30,7 @@ class TabViewController: UIViewController {
         
         tabBarVC.tabBar.backgroundColor = UIColor.systemGray6.withAlphaComponent(0.85)
         
-        tabBarVC.tabBar.tintColor = .oriYellow
+        tabBarVC.tabBar.tintColor = .systemYellow
         tabBarVC.tabBar.unselectedItemTintColor = .systemGray2
         
         let boldConfig = UIImage.SymbolConfiguration(pointSize: 21, weight: .bold)

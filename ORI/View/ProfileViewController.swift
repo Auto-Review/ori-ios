@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.circle.fill")
-        imageView.tintColor = UIColor.systemYellow
+        imageView.tintColor = UIColor.oriyellow
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
     
     let usernameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -77,21 +77,21 @@ class ProfileViewController: UIViewController {
         profileContainerView.addSubview(emailLabel)
         
         NSLayoutConstraint.activate([
-            profileContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            profileContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             profileContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             profileContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             profileContainerView.heightAnchor.constraint(equalToConstant: 120),
             
-            profileImageView.leadingAnchor.constraint(equalTo: profileContainerView.leadingAnchor, constant: 16),
+            profileImageView.leadingAnchor.constraint(equalTo: profileContainerView.leadingAnchor, constant: 10),
             profileImageView.centerYAnchor.constraint(equalTo: profileContainerView.centerYAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 80),
-            profileImageView.heightAnchor.constraint(equalToConstant: 80),
+            profileImageView.widthAnchor.constraint(equalToConstant: 100),
+            profileImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            usernameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 20),
-            usernameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            usernameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 25),
+            usernameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
             
             emailLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 4),
-            emailLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16)
+            emailLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10)
         ])
     }
 }
