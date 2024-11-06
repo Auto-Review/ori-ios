@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var viewModel = ProfileViewModel()
     
     let profileContainerView: UIView = {
@@ -42,23 +42,20 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    let settingsContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    let settingsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
+        return tableView
     }()
     
-    let settingsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.distribution = .fillEqually
-        stackView.spacing = 16
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    let settingItems = [
+        ("계정", "person"),
+        ("화면", "ipad.and.iphone"),
+        ("알림", "bell"),
+        ("문의", "questionmark.circle"),
+        ("로그아웃", "power")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +65,7 @@ class ProfileViewController: UIViewController {
         emailLabel.text = viewModel.user.email
         
         setupProfileView()
+        setupSettingsTableView()
     }
     
     func setupProfileView() {
@@ -93,5 +91,39 @@ class ProfileViewController: UIViewController {
             emailLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 4),
             emailLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10)
         ])
+    }
+    
+    func setupSettingsTableView() {
+        view.addSubview(settingsTableView)
+        settingsTableView.dataSource = self
+        settingsTableView.delegate = self
+        settingsTableView.layer.cornerRadius = 10
+        settingsTableView.separatorStyle = .none
+        
+        NSLayoutConstraint.activate([
+            settingsTableView.topAnchor.constraint(equalTo: profileContainerView.bottomAnchor, constant: 20),
+            settingsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            settingsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            settingsTableView.heightAnchor.constraint(equalToConstant: 225)
+        ])
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return settingItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
+        let item = settingItems[indexPath.row]
+        cell.textLabel?.text = item.0
+        cell.imageView?.image = UIImage(systemName: item.1)
+        cell.imageView?.tintColor = .systemYellow
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = settingItems[indexPath.row]
+        print("Item tapped: \(selectedItem.0)")
     }
 }
