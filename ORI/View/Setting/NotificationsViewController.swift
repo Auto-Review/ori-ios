@@ -1,13 +1,13 @@
 //
-//  ProfileViewController.swift
+//  NotificationsViewController.swift
 //  ORI
 //
-//  Created by Song Kim on 10/5/24.
+//  Created by Song Kim on 11/6/24.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class NotificationsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

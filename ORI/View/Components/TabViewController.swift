@@ -23,12 +23,14 @@ class TabViewController: UIViewController {
         let customTabBar = CustomTabBar()
         tabBarVC.setValue(customTabBar, forKey: "tabBar")
         
+        vc5.topViewController?.navigationItem.title = "마이페이지"
+        
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         
         tabBarVC.tabBar.backgroundColor = UIColor.systemGray6.withAlphaComponent(0.85)
         
-        tabBarVC.tabBar.tintColor = .oriYellow
+        tabBarVC.tabBar.tintColor = .systemYellow
         tabBarVC.tabBar.unselectedItemTintColor = .systemGray2
         
         let boldConfig = UIImage.SymbolConfiguration(pointSize: 21, weight: .bold)
