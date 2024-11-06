@@ -80,12 +80,12 @@ class ProfileViewController: UIViewController {
             profileContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             profileContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             profileContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            profileContainerView.heightAnchor.constraint(equalToConstant: 120),
+            profileContainerView.heightAnchor.constraint(equalToConstant: 110),
             
             profileImageView.leadingAnchor.constraint(equalTo: profileContainerView.leadingAnchor, constant: 10),
             profileImageView.centerYAnchor.constraint(equalTo: profileContainerView.centerYAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: 100),
-            profileImageView.heightAnchor.constraint(equalToConstant: 100),
+            profileImageView.widthAnchor.constraint(equalToConstant: 90),
+            profileImageView.heightAnchor.constraint(equalToConstant: 90),
             
             usernameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 25),
             usernameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
