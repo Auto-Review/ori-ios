@@ -119,6 +119,20 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.imageView?.image = UIImage(systemName: item.1)
         cell.imageView?.tintColor = .systemYellow
         
+        cell.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cell.imageView!.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 16),
+            cell.imageView!.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
+            cell.imageView!.widthAnchor.constraint(equalToConstant: 19),
+            cell.imageView!.heightAnchor.constraint(equalToConstant: 17)
+        ])
+        
+        cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cell.textLabel!.leadingAnchor.constraint(equalTo: cell.imageView!.trailingAnchor, constant: 8),
+            cell.textLabel!.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
+        ])
+        
         return cell
     }
     
