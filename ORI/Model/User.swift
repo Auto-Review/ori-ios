@@ -11,5 +11,4 @@ struct User {
     var name: String
     var email: String
     var token: String
-    var image: String
 }
