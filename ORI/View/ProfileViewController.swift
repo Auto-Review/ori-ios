@@ -8,22 +8,90 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    var viewModel = ProfileViewModel()
+    
+    let profileContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.circle.fill")
+        imageView.tintColor = UIColor.systemYellow
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let usernameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let emailLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let settingsContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let settingsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.systemGray6
+        
+        usernameLabel.text = viewModel.user.name
+        emailLabel.text = viewModel.user.email
+        
+        setupProfileView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupProfileView() {
+        view.addSubview(profileContainerView)
+        profileContainerView.addSubview(profileImageView)
+        profileContainerView.addSubview(usernameLabel)
+        profileContainerView.addSubview(emailLabel)
+        
+        NSLayoutConstraint.activate([
+            profileContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            profileContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            profileContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            profileContainerView.heightAnchor.constraint(equalToConstant: 120),
+            
+            profileImageView.leadingAnchor.constraint(equalTo: profileContainerView.leadingAnchor, constant: 16),
+            profileImageView.centerYAnchor.constraint(equalTo: profileContainerView.centerYAnchor),
+            profileImageView.widthAnchor.constraint(equalToConstant: 80),
+            profileImageView.heightAnchor.constraint(equalToConstant: 80),
+            
+            usernameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant: 20),
+            usernameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            
+            emailLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 4),
+            emailLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16)
+        ])
     }
-    */
-
 }
