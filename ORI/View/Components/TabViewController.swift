@@ -28,12 +28,12 @@ class TabViewController: UIViewController {
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         
-        tabBarVC.tabBar.backgroundColor = UIColor.systemGray6.withAlphaComponent(0.85)
+        tabBarVC.tabBar.backgroundColor = UIColor.systemGray6
         
         tabBarVC.tabBar.tintColor = .systemYellow
         tabBarVC.tabBar.unselectedItemTintColor = .systemGray2
         
-        let boldConfig = UIImage.SymbolConfiguration(pointSize: 21, weight: .bold)
+        let boldConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
         
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "square.text.square", withConfiguration: boldConfig)
@@ -44,16 +44,15 @@ class TabViewController: UIViewController {
         
         addChild(tabBarVC)
         view.addSubview(tabBarVC.view)
-        tabBarVC.view.frame = view.bounds.insetBy(dx: 0, dy: -10)
+        tabBarVC.view.frame = view.bounds.insetBy(dx: 0, dy: -15)
         tabBarVC.didMove(toParent: self)
     }
 }
 
-// MARK: 커스텀 탭바
 class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var size = super.sizeThatFits(size)
-        size.height = 100
+        size.height = 90
         return size
     }
 }

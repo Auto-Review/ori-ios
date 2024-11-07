@@ -12,6 +12,7 @@
 		5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */; };
 		5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D52CDB91FC00FB9ADC /* DisplaySettingsViewController.swift */; };
 		5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */; };
+		5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */; };
 		5760BEFE2CB8E67300A94068 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BEFD2CB8E67300A94068 /* NaverThirdPartyLogin */; };
 		5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BF012CBD087500A94068 /* KeychainSwift */; };
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
@@ -43,6 +44,7 @@
 		5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		5729F6D52CDB91FC00FB9ADC /* DisplaySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsViewController.swift; sourceTree = "<group>"; };
 		5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
 		57C35C6B2CCA24190083A346 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewModel.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		57EB9E042CAFB5810036E5D8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */,
 				57C35C682CCA228D0083A346 /* TILListViewModel.swift */,
 				57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */,
 				5729F6CC2CDB095400FB9ADC /* ProfileViewModel.swift */,
@@ -285,6 +288,7 @@
 				57EB9E102CB164170036E5D8 /* NotifyViewController.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* User.swift in Sources */,
+				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,
 				5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */,
 				57EB9E0E2CB15DB70036E5D8 /* PostViewController.swift in Sources */,
