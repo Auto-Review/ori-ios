@@ -99,6 +99,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         settingsTableView.delegate = self
         settingsTableView.layer.cornerRadius = 10
         settingsTableView.separatorStyle = .none
+        settingsTableView.isScrollEnabled = false
         
         NSLayoutConstraint.activate([
             settingsTableView.topAnchor.constraint(equalTo: profileContainerView.bottomAnchor, constant: 20),
@@ -131,8 +132,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         NSLayoutConstraint.activate([
             cell.textLabel!.leadingAnchor.constraint(equalTo: cell.imageView!.trailingAnchor, constant: 8),
             cell.textLabel!.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
-            cell.textLabel!.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 8),
-            cell.textLabel!.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8)
+            cell.textLabel!.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 12),
+            cell.textLabel!.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -12)
         ])
         
         return cell
