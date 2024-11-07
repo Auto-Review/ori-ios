@@ -142,9 +142,33 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = settingItems[indexPath.row]
-        if selectedItem.0 == "로그아웃" {
+        if selectedItem.0 == "계정" {
+            let accountVC = AccountViewController()
+            navigationController?.pushViewController(accountVC, animated: true)
+            navigationItem.backButtonTitle = "뒤로"
+        } else if selectedItem.0 == "화면" {
+            let accountVC = DisplaySettingsViewController()
+            navigationController?.pushViewController(accountVC, animated: true)
+            navigationItem.backButtonTitle = "뒤로"
+        } else if selectedItem.0 == "알림" {
+            let accountVC = NotificationsViewController()
+            navigationController?.pushViewController(accountVC, animated: true)
+            navigationItem.backButtonTitle = "뒤로"
+        } else if selectedItem.0 == "문의" {
+            showInquiryAlert()
+        } else if selectedItem.0 == "로그아웃" {
             showLogoutAlert()
         }
+    }
+    
+    private func showInquiryAlert() {
+        let alertController = UIAlertController(title: "문의", message: "문의사항이 있으시면\nnadana0929@gmail.com\n으로 연락해 주세요.", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     private func showLogoutAlert() {
