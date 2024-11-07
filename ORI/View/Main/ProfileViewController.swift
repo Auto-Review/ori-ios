@@ -143,22 +143,23 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = settingItems[indexPath.row]
         if selectedItem.0 == "계정" {
-            let accountVC = AccountViewController()
-            navigationController?.pushViewController(accountVC, animated: true)
-            navigationItem.backButtonTitle = "뒤로"
+            moveSettingView(vc: AccountViewController(), title: "계정")
         } else if selectedItem.0 == "화면" {
-            let accountVC = DisplaySettingsViewController()
-            navigationController?.pushViewController(accountVC, animated: true)
-            navigationItem.backButtonTitle = "뒤로"
+            moveSettingView(vc: DisplaySettingsViewController(), title: "화면")
         } else if selectedItem.0 == "알림" {
-            let accountVC = NotificationsViewController()
-            navigationController?.pushViewController(accountVC, animated: true)
-            navigationItem.backButtonTitle = "뒤로"
+            moveSettingView(vc: NotificationsViewController(), title: "알림")
         } else if selectedItem.0 == "문의" {
             showInquiryAlert()
         } else if selectedItem.0 == "로그아웃" {
             showLogoutAlert()
         }
+    }
+    
+    private func moveSettingView(vc: UIViewController, title: String) {
+        vc.navigationItem.title = title
+        navigationController?.pushViewController(vc, animated: true)
+        navigationItem.backButtonTitle = "뒤로"
+        navigationController?.navigationBar.tintColor = UIColor.systemYellow
     }
     
     private func showInquiryAlert() {
