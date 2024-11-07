@@ -130,7 +130,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cell.textLabel!.leadingAnchor.constraint(equalTo: cell.imageView!.trailingAnchor, constant: 8),
-            cell.textLabel!.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
+            cell.textLabel!.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
+            cell.textLabel!.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 8),
+            cell.textLabel!.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -8)
         ])
         
         return cell
@@ -138,6 +140,23 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = settingItems[indexPath.row]
-        print("Item tapped: \(selectedItem.0)")
+        if selectedItem.0 == "로그아웃" {
+            showLogoutAlert()
+        }
+    }
+    
+    private func showLogoutAlert() {
+        let alertController = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+            LogOutManager().logOut(isGoole: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
