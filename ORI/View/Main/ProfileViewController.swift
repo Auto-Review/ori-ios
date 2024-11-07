@@ -105,7 +105,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             settingsTableView.topAnchor.constraint(equalTo: profileContainerView.bottomAnchor, constant: 20),
             settingsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             settingsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            settingsTableView.heightAnchor.constraint(equalToConstant: 225)
+            settingsTableView.heightAnchor.constraint(equalToConstant: 220)
         ])
     }
     
@@ -119,6 +119,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.textLabel?.text = item.0
         cell.imageView?.image = UIImage(systemName: item.1)
         cell.imageView?.tintColor = .systemYellow
+        cell.selectionStyle = .none
         
         cell.imageView?.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
