@@ -68,6 +68,8 @@
 	<string>$(GITHUB_API_KEY)</string>
 	<key>GITHUB_API_SECRET</key>
 	<string>$(GITHUB_API_SECRET)</string>
+	<key>SERVER_API_URL</key>
+	<string>$(SERVER_API_URL)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

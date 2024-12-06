@@ -36,6 +36,13 @@ class LoginViewController: UIViewController {
         
         view.backgroundColor = .white
         setupUI()
+        
+        disableGitHubLoginButton() // 깃허브 로그인 비활성화
+    }
+    
+    private func disableGitHubLoginButton() {
+        githubLoginButton.isEnabled = false
+        githubLoginButton.alpha = 0.5
     }
     
     private func setupUI() {
@@ -68,7 +75,6 @@ class LoginViewController: UIViewController {
             let email = signInResult.user.profile?.email ?? ""
             let token = signInResult.user.idToken?.tokenString ?? ""
             self.viewModel.didReceiveUserAccessToken(token, email: email)
-            self.viewModel.moveToMain()
         }
     }
     
@@ -108,7 +114,6 @@ class GitLoginManager {
                     let accessToken = tokenResponse.access_token
                     KeychainSwift().set(accessToken, forKey: "accessToken")
                     self.fetchGitHubUserInfo(accessToken: accessToken)
-                    self.viewModel.moveToMain()
 
                 case .failure(let error):
                     print("Failed to request access token: \(error)")
