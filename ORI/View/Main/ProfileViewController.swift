@@ -176,7 +176,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let alertController = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
-            LogOutManager().logOut(isGoole: true)
+            LogOutManager().logOut(isGoogle: true)
         }
         
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)

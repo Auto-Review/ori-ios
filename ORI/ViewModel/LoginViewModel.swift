@@ -30,6 +30,8 @@ class LoginViewModel {
 class LogOutManager {
     func logOut(isGoole: Bool) {
         if isGoole {
+    func logOut(isGoogle: Bool) {
+        if isGoogle {
             GIDSignIn.sharedInstance.signOut()
         } else {
             GitLoginManager.shared.logout()
