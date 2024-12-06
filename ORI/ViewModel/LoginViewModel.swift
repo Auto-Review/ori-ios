@@ -44,6 +44,7 @@ class LoginViewModel {
                         
                         let serverTokenResponse = ServerTokenResponse(accessToken: accessToken, refreshToken: refreshToken)
                         completion(serverTokenResponse)
+                        moveToMain()
                     } else {
                         print("Failed to retrieve tokens from headers")
                     }
@@ -53,16 +54,16 @@ class LoginViewModel {
                 }
             }
     }
+}
 
-    func moveToMain() {
-        DispatchQueue.main.async {
-            let tabBarController = TabViewController()
+func moveToMain() {
+    DispatchQueue.main.async {
+        let tabBarController = TabViewController()
 
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                if let window = windowScene.windows.first {
-                    window.rootViewController = tabBarController
-                    window.makeKeyAndVisible()
-                }
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                window.rootViewController = tabBarController
+                window.makeKeyAndVisible()
             }
         }
     }

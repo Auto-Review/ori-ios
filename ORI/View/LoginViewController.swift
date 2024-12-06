@@ -75,7 +75,6 @@ class LoginViewController: UIViewController {
             let email = signInResult.user.profile?.email ?? ""
             let token = signInResult.user.idToken?.tokenString ?? ""
             self.viewModel.didReceiveUserAccessToken(token, email: email)
-            self.viewModel.moveToMain()
         }
     }
     
@@ -115,7 +114,6 @@ class GitLoginManager {
                     let accessToken = tokenResponse.access_token
                     KeychainSwift().set(accessToken, forKey: "accessToken")
                     self.fetchGitHubUserInfo(accessToken: accessToken)
-                    self.viewModel.moveToMain()
 
                 case .failure(let error):
                     print("Failed to request access token: \(error)")
