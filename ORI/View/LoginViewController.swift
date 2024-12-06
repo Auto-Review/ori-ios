@@ -36,6 +36,13 @@ class LoginViewController: UIViewController {
         
         view.backgroundColor = .white
         setupUI()
+        
+        disableGitHubLoginButton() // 깃허브 로그인 비활성화
+    }
+    
+    private func disableGitHubLoginButton() {
+        githubLoginButton.isEnabled = false
+        githubLoginButton.alpha = 0.5
     }
     
     private func setupUI() {
