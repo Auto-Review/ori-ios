@@ -26,8 +26,8 @@
 		57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E072CAFC50A0036E5D8 /* TabViewController.swift */; };
 		57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */; };
 		57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */; };
-		57EB9E0E2CB15DB70036E5D8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0D2CB15DB70036E5D8 /* PostViewController.swift */; };
-		57EB9E102CB164170036E5D8 /* NotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0F2CB164170036E5D8 /* NotifyViewController.swift */; };
+		57EB9E0E2CB15DB70036E5D8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */; };
+		57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */; };
 		57EB9E122CB164480036E5D8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E112CB164480036E5D8 /* ProfileViewController.swift */; };
 		57EB9E182CB527960036E5D8 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E172CB527960036E5D8 /* KakaoSDK */; };
 		57EB9E1A2CB527960036E5D8 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E192CB527960036E5D8 /* KakaoSDKAuth */; };
@@ -59,8 +59,8 @@
 		57EB9E072CAFC50A0036E5D8 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewController.swift; sourceTree = "<group>"; };
 		57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewController.swift; sourceTree = "<group>"; };
-		57EB9E0D2CB15DB70036E5D8 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		57EB9E0F2CB164170036E5D8 /* NotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyViewController.swift; sourceTree = "<group>"; };
+		57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		57EB9E112CB164480036E5D8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		57EB9E212CB528230036E5D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
@@ -101,8 +101,8 @@
 			children = (
 				57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */,
 				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
-				57EB9E0D2CB15DB70036E5D8 /* PostViewController.swift */,
-				57EB9E0F2CB164170036E5D8 /* NotifyViewController.swift */,
+				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
+				57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */,
 				57EB9E112CB164480036E5D8 /* ProfileViewController.swift */,
 			);
 			path = Main;
@@ -289,13 +289,13 @@
 				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
 				57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */,
 				5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */,
-				57EB9E102CB164170036E5D8 /* NotifyViewController.swift in Sources */,
+				57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* User.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,
 				5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */,
-				57EB9E0E2CB15DB70036E5D8 /* PostViewController.swift in Sources */,
+				57EB9E0E2CB15DB70036E5D8 /* MainViewController.swift in Sources */,
 				57EB9E122CB164480036E5D8 /* ProfileViewController.swift in Sources */,
 				57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */,
 				5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */,
@@ -453,6 +453,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,6 +482,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
