@@ -78,8 +78,6 @@ class LogOutManager {
     func logOut(isGoogle: Bool) {
         if isGoogle {
             GIDSignIn.sharedInstance.signOut()
-        } else {
-            GitLoginManager.shared.logout()
         }
         
         DispatchQueue.main.async {

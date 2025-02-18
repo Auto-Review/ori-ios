@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if GIDSignIn.sharedInstance.handle(url) {
             return true
         }
-        
         return false
     }
 }
