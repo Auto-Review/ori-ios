@@ -20,7 +20,7 @@ class TabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let customTabBar = CustomTabBar()
+        let customTabBar = UITabBar()
         tabBarVC.setValue(customTabBar, forKey: "tabBar")
 
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
@@ -30,16 +30,10 @@ class TabViewController: UIViewController {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .black
         
-        let normalAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 12, weight: .medium)
-        ]
-        
         let selectedAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 12, weight: .bold)
+            .font: UIFont.systemFont(ofSize: 10, weight: .bold)
         ]
-        
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = normalAttributes
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttributes
         
         tabBarVC.tabBar.standardAppearance = appearance
@@ -59,8 +53,8 @@ class TabViewController: UIViewController {
         ]
         
         for (index, item) in items.enumerated() {
-            let image = UIImage(systemName: tabImages[index])
-            let boldImage = UIImage(systemName: tabImages[index], withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+            let image = UIImage(systemName: tabImages[index],withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
+            let boldImage = UIImage(systemName: tabImages[index], withConfiguration: UIImage.SymbolConfiguration(pointSize: 15,weight: .bold))
 
             item.image = image
             item.selectedImage = boldImage
