@@ -33,8 +33,8 @@ Close #
     <td> </td>
   </tr>
   <tr>
-    <td><img src="" /></td>
-    <td><img src="" /></td>
+    <td><img src="" width: 200/></td>
+    <td><img src="" width: 200/></td>
   </tr>
 </table>
 
