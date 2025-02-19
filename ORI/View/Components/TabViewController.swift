@@ -65,12 +65,3 @@ class TabViewController: UIViewController {
         view.addSubview(tabBarVC.view)
     }
 }
-
-
-class CustomTabBar: UITabBar {
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        var size = super.sizeThatFits(size)
-        size.height = 90
-        return size
-    }
-}
