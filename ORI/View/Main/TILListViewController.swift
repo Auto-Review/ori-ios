@@ -14,6 +14,12 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        let image = UIImage(named: "logo_b.png")
+        imageView.image = image
+        navigationItem.titleView = imageView
+
         setupTableView()
     }
 
