@@ -1,5 +1,5 @@
 //
-//  PostViewController.swift
+//  NotifyViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 10/5/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostViewController: UIViewController {
+class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

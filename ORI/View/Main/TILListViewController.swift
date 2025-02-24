@@ -10,13 +10,13 @@ import UIKit
 class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var viewModel = TILListViewModel()
     var tableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
+        mainNavigationBar()
     }
-
+    
     func setupTableView() {
         tableView = UITableView(frame: self.view.bounds, style: .plain)
         tableView.delegate = self
@@ -26,11 +26,11 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.register(CustomTILCell.self, forCellReuseIdentifier: "TILCell")
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfPosts()
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TILCell", for: indexPath) as? CustomTILCell else {
             return UITableViewCell()
@@ -43,10 +43,10 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.createdTimeLabel.text = dateFormatter.string(from: post.createdTime)
             cell.descriptionLabel.text = post.description
         }
-
+        
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
@@ -63,7 +63,7 @@ class CustomTILCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         contentView.layer.masksToBounds = false
         contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
         contentView.layer.shadowRadius = 4

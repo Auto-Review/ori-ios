@@ -11,48 +11,69 @@ class TabViewController: UIViewController {
     
     let tabBarVC = UITabBarController()
     
-    let vc1 = UINavigationController(rootViewController: TILListViewController())
-    let vc2 = UINavigationController(rootViewController: CodeListViewController())
-    let vc3 = UINavigationController(rootViewController: PostViewController())
-    let vc4 = UINavigationController(rootViewController: NotifyViewController())
-    let vc5 = UINavigationController(rootViewController: ProfileViewController())
+    let vc1 = UINavigationController(rootViewController: CodeListViewController())
+    let vc2 = UINavigationController(rootViewController: TILListViewController())
+    let vc3 = UINavigationController(rootViewController: MainViewController())
+    let vc4 = UINavigationController(rootViewController: ProfileViewController())
+    let vc5 = UINavigationController(rootViewController: SettingViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let customTabBar = CustomTabBar()
-        tabBarVC.setValue(customTabBar, forKey: "tabBar")
-        
-        vc5.topViewController?.navigationItem.title = "마이페이지"
+        // ✅ 네비게이션 바 설정은 viewDidLoad에서 직접 하지 않고, 네비게이션 컨트롤러 내부에서 처리
+        setupNavigationBar()
         
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         
-        tabBarVC.tabBar.backgroundColor = UIColor.systemGray6
-        
-        tabBarVC.tabBar.tintColor = .systemYellow
-        tabBarVC.tabBar.unselectedItemTintColor = .systemGray2
-        
-        let boldConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
-        
-        guard let items = tabBarVC.tabBar.items else { return }
-        items[0].image = UIImage(systemName: "square.text.square", withConfiguration: boldConfig)
-        items[1].image = UIImage(systemName: "chevron.left.forwardslash.chevron.right", withConfiguration: boldConfig)
-        items[2].image = UIImage(systemName: "square.and.pencil", withConfiguration: boldConfig)
-        items[3].image = UIImage(systemName: "bell", withConfiguration: boldConfig)
-        items[4].image = UIImage(systemName: "person", withConfiguration: boldConfig)
+        setupTabBarAppearance()
         
         addChild(tabBarVC)
         view.addSubview(tabBarVC.view)
-        tabBarVC.view.frame = view.bounds.insetBy(dx: 0, dy: -15)
-        tabBarVC.didMove(toParent: self)
     }
-}
-
-class CustomTabBar: UITabBar {
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        var size = super.sizeThatFits(size)
-        size.height = 90
-        return size
+    
+    private func setupNavigationBar() {
+        guard let navController = self.navigationController else { return }
+        navController.navigationBar.prefersLargeTitles = true
+        navController.navigationBar.barTintColor = .black
+        navController.navigationBar.tintColor = .white
+        navController.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
+    private func setupTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .black
+        
+        let selectedAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.systemFont(ofSize: 10, weight: .bold)
+        ]
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttributes
+        
+        tabBarVC.tabBar.standardAppearance = appearance
+        tabBarVC.tabBar.scrollEdgeAppearance = appearance
+        
+        tabBarVC.tabBar.isTranslucent = false
+        tabBarVC.tabBar.tintColor = .white
+        
+        guard let items = tabBarVC.tabBar.items else { return }
+        let tabTitles = ["CODE", "TIL", "MAIN", "MY", "SET"]
+        let tabImages = [
+            "chevron.left.forwardslash.chevron.right",
+            "checkmark.circle",
+            "house",
+            "person",
+            "gearshape"
+        ]
+        
+        for (index, item) in items.enumerated() {
+            let image = UIImage(systemName: tabImages[index], withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
+            let boldImage = UIImage(systemName: tabImages[index], withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .bold))
+            
+            item.image = image
+            item.selectedImage = boldImage
+            item.title = tabTitles[index]
+        }
     }
 }
