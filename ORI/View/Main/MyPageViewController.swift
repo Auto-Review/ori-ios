@@ -82,9 +82,9 @@ class MyPageViewController: UIViewController {
             infoStackView.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 20),
             infoStackView.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -20),
 
-            emailTextField.widthAnchor.constraint(equalToConstant: 260),
-            nameTextField.widthAnchor.constraint(equalToConstant: 260),
-            bioTextField.widthAnchor.constraint(equalToConstant: 260),
+            emailTextField.widthAnchor.constraint(equalToConstant: 270),
+            nameTextField.widthAnchor.constraint(equalToConstant: 270),
+            bioTextField.widthAnchor.constraint(equalToConstant: 270),
 
             editButton.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 20),
             editButton.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -20),
