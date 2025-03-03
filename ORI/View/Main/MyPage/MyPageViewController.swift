@@ -87,10 +87,10 @@ class MyPageViewController: UIViewController {
             nameTextField.widthAnchor.constraint(equalToConstant: 270),
             bioTextField.widthAnchor.constraint(equalToConstant: 270),
             
-            editButton.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 30),
+            editButton.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 20),
             editButton.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -20),
-            editButton.widthAnchor.constraint(equalToConstant: 18),
-            editButton.heightAnchor.constraint(equalToConstant: 18),
+            editButton.widthAnchor.constraint(equalToConstant: 15),
+            editButton.heightAnchor.constraint(equalToConstant: 15),
         ])
     }
     
