@@ -33,7 +33,7 @@ class MyPageViewController: UIViewController {
     lazy var emailTextField: UITextField = createTextField(text: "laplaya1411@gmail.com")
     lazy var nameTextField: UITextField = createTextField(text: "치킨")
     lazy var bioTextField: UITextField = createTextField(text: "4월 20일까지 모든 것을 끝냅시다!")
-
+    
     lazy var emailStackView: UIStackView = createStackView(label: emailLabel, textField: emailTextField)
     lazy var nameStackView: UIStackView = createStackView(label: nameLabel, textField: nameTextField)
     lazy var bioStackView: UIStackView = createStackView(label: bioLabel, textField: bioTextField)
@@ -55,7 +55,7 @@ class MyPageViewController: UIViewController {
         button.addTarget(self, action: #selector(toggleEditMode), for: .touchUpInside)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(myPageMainTextLabel)
@@ -65,6 +65,7 @@ class MyPageViewController: UIViewController {
         
         mainNavigationBar()
         setupConstraints()
+        addMyTabView()
     }
     
     func setupConstraints() {
@@ -81,15 +82,15 @@ class MyPageViewController: UIViewController {
             infoStackView.centerYAnchor.constraint(equalTo: grayBackgroundView.centerYAnchor),
             infoStackView.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 20),
             infoStackView.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -20),
-
+            
             emailTextField.widthAnchor.constraint(equalToConstant: 270),
             nameTextField.widthAnchor.constraint(equalToConstant: 270),
             bioTextField.widthAnchor.constraint(equalToConstant: 270),
-
-            editButton.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 20),
+            
+            editButton.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 30),
             editButton.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -20),
             editButton.widthAnchor.constraint(equalToConstant: 18),
-            editButton.heightAnchor.constraint(equalToConstant: 18)
+            editButton.heightAnchor.constraint(equalToConstant: 18),
         ])
     }
     
@@ -118,7 +119,7 @@ class MyPageViewController: UIViewController {
         stackView.spacing = 8
         return stackView
     }
-
+    
     @objc func toggleEditMode() {
         let isEditing = emailTextField.isUserInteractionEnabled
         emailTextField.isUserInteractionEnabled.toggle()
@@ -131,5 +132,22 @@ class MyPageViewController: UIViewController {
         } else {
             editButton.setImage(UIImage(systemName: "tray.and.arrow.down.fill"), for: .normal)
         }
+    }
+    
+    func addMyTabView() {
+        let myTabVC = MyTabViewController()
+        addChild(myTabVC)
+        myTabVC.view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(myTabVC.view)
+
+        NSLayoutConstraint.activate([
+            myTabVC.view.topAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor, constant: 40),
+            myTabVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            myTabVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            myTabVC.view.heightAnchor.constraint(equalToConstant: 200)
+        ])
+
+        myTabVC.didMove(toParent: self)
     }
 }

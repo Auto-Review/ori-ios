@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		571F881C2D759F8000188226 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */; };
 		571F881E2D759FC000188226 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F881D2D759FC000188226 /* Extension+Font.swift */; };
+		571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88212D75B6ED00188226 /* MyTabViewController.swift */; };
 		5729F6CD2CDB095400FB9ADC /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */; };
 		5729F6CF2CDB096000FB9ADC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CE2CDB096000FB9ADC /* User.swift */; };
 		5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		571F881D2D759FC000188226 /* Extension+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
+		571F88212D75B6ED00188226 /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
 		5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		5729F6CE2CDB096000FB9ADC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,15 @@
 			path = File;
 			sourceTree = "<group>";
 		};
+		571F88232D75B85700188226 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				57EB9E112CB164480036E5D8 /* MyPageViewController.swift */,
+				571F88212D75B6ED00188226 /* MyTabViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		5729F6D02CDB590500FB9ADC /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,11 +141,11 @@
 		5729F6D12CDB590F00FB9ADC /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				571F88232D75B85700188226 /* MyPage */,
 				57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */,
 				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
 				57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */,
-				57EB9E112CB164480036E5D8 /* MyPageViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -319,6 +330,7 @@
 				5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */,
 				57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
+				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* User.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,
