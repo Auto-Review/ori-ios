@@ -10,6 +10,8 @@
 		571F881C2D759F8000188226 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */; };
 		571F881E2D759FC000188226 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F881D2D759FC000188226 /* Extension+Font.swift */; };
 		571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88212D75B6ED00188226 /* MyTabViewController.swift */; };
+		571F88272D773C8A00188226 /* TILNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88262D773C8A00188226 /* TILNetwork.swift */; };
+		571F88292D773DBD00188226 /* TILModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88282D773DB300188226 /* TILModel.swift */; };
 		5729F6CD2CDB095400FB9ADC /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */; };
 		5729F6CF2CDB096000FB9ADC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CE2CDB096000FB9ADC /* User.swift */; };
 		5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */; };
@@ -47,6 +49,8 @@
 		571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		571F881D2D759FC000188226 /* Extension+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		571F88212D75B6ED00188226 /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
+		571F88262D773C8A00188226 /* TILNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILNetwork.swift; sourceTree = "<group>"; };
+		571F88282D773DB300188226 /* TILModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILModel.swift; sourceTree = "<group>"; };
 		5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		5729F6CE2CDB096000FB9ADC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +132,14 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		571F88252D773C7500188226 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				571F88262D773C8A00188226 /* TILNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		5729F6D02CDB590500FB9ADC /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +174,7 @@
 		57C35C6A2CCA23240083A346 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				571F88282D773DB300188226 /* TILModel.swift */,
 				57C35C6B2CCA24190083A346 /* Post.swift */,
 				5729F6CE2CDB096000FB9ADC /* User.swift */,
 			);
@@ -189,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				57EB9E052CAFB5D30036E5D8 /* App */,
+				571F88252D773C7500188226 /* Network */,
 				57C35C6A2CCA23240083A346 /* Model */,
 				57EB9E042CAFB5810036E5D8 /* ViewModel */,
 				57EB9E012CAFB54A0036E5D8 /* View */,
@@ -326,10 +340,12 @@
 				57DC2C5E2D617F2300DAE832 /* NotifyViewModel.swift in Sources */,
 				57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */,
 				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
+				571F88272D773C8A00188226 /* TILNetwork.swift in Sources */,
 				57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */,
 				5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */,
 				57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
+				571F88292D773DBD00188226 /* TILModel.swift in Sources */,
 				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* User.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
