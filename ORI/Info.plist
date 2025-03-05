@@ -68,6 +68,11 @@
 	<string>$(NAVER_API_SECRET)</string>
 	<key>NAVER_API_URL</key>
 	<string>$(NAVER_API_URL)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>SERVER_API_URL</key>
 	<string>$(SERVER_API_URL)</string>
 	<key>UIAppFonts</key>

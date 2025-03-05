@@ -46,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		571F881D2D759FC000188226 /* Extension+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		571F88212D75B6ED00188226 /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		57EB9E112CB164480036E5D8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		57EB9E212CB528230036E5D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,7 +184,7 @@
 		57EB9DE12CAFADE50036E5D8 = {
 			isa = PBXGroup;
 			children = (
-				57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */,
+				5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */,
 				57EB9DEC2CAFADE60036E5D8 /* ORI */,
 				57EB9DEB2CAFADE60036E5D8 /* Products */,
 			);
@@ -377,6 +377,7 @@
 /* Begin XCBuildConfiguration section */
 		57EB9DFC2CAFADE80036E5D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -440,6 +441,7 @@
 		};
 		57EB9DFD2CAFADE80036E5D8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -496,7 +498,7 @@
 		};
 		57EB9DFF2CAFADE80036E5D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -525,7 +527,7 @@
 		};
 		57EB9E002CAFADE80036E5D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

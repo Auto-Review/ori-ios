@@ -10,7 +10,7 @@ import Alamofire
 
 func fetchTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Error>) -> Void) {
         let api_url = Bundle.main.infoDictionary?["SERVER_API_URL"] as? String ?? ""
-        let url = "\(api_url)v1/api/post/til/list?page=0&size=1"
+        let url = "http://\(api_url)/post/til/list?page=0&size=1"
     let parameters: [String: Any] = ["page": page, "size": size]
     
     AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)
