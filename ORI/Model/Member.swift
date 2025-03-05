@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct User {
-    var name: String
-    var email: String
-    var token: String
-}
-
 struct Member: Decodable {
     let id: Int
     let email: String

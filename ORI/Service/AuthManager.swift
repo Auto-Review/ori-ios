@@ -27,7 +27,7 @@ class AuthManager {
     }
     
     private func refreshAccessToken(refreshToken: String) {
-        let api_url = Bundle.main.infoDictionary?["SERVER_API_URL"] as? String ?? ""
+        let api_url = NetworkConstants.baseURL
         let url = "http://\(api_url)v1/api/auth/refresh"
         let parameters: [String: String] = ["refreshToken": refreshToken]
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
