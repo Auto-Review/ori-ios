@@ -12,6 +12,7 @@
 		5719E7E22D77F17800C3D9B8 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */; };
 		5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */; };
 		5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */; };
+		5719E7E82D77F95E00C3D9B8 /* LogOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */; };
 		571F881C2D759F8000188226 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */; };
 		571F881E2D759FC000188226 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F881D2D759FC000188226 /* Extension+Font.swift */; };
 		571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88212D75B6ED00188226 /* MyTabViewController.swift */; };
@@ -56,6 +57,7 @@
 		5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetwork.swift; sourceTree = "<group>"; };
+		5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutManager.swift; sourceTree = "<group>"; };
 		571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		571F881D2D759FC000188226 /* Extension+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		571F88212D75B6ED00188226 /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		5719E7E02D77F15400C3D9B8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */,
 				5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */,
 				5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */,
 			);
@@ -364,6 +367,7 @@
 				571F88272D773C8A00188226 /* TILNetwork.swift in Sources */,
 				57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */,
 				5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */,
+				5719E7E82D77F95E00C3D9B8 /* LogOutManager.swift in Sources */,
 				57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */,
 				5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,

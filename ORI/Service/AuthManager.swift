@@ -22,7 +22,7 @@ class AuthManager {
             refreshAccessToken(refreshToken: refreshToken)
         } else {
             print("❌ 토큰 없음, 로그인 필요")
-            moveToLogin()
+            LogOutManager().moveToLogin()
         }
     }
     
@@ -45,29 +45,14 @@ class AuthManager {
                         moveToMain()
                     } else {
                         print("❌ Refresh Token 만료, 로그인 필요")
-                        moveToLogin()
+                        LogOutManager().moveToLogin()
                     }
                     
                 case .failure(let error):
                     print("❌ 토큰 갱신 실패: \(error)")
-                    moveToLogin()
+                    LogOutManager().moveToLogin()
                 }
             }
-    }
-}
-
-func moveToLogin() {
-    GIDSignIn.sharedInstance.signOut()
-    
-    DispatchQueue.main.async {
-        let tabBarController = LoginViewController()
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            if let window = windowScene.windows.first {
-                window.rootViewController = tabBarController
-                window.makeKeyAndVisible()
-            }
-        }
     }
 }
 

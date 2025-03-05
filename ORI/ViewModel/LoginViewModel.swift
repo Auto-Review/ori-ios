@@ -77,22 +77,3 @@ struct ServerTokenResponse {
     let accessToken: String
     let refreshToken: String
 }
-
-class LogOutManager {
-    func logOut(isGoogle: Bool) {
-        if isGoogle {
-            GIDSignIn.sharedInstance.signOut()
-        }
-        
-        DispatchQueue.main.async {
-            let tabBarController = LoginViewController()
-            
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                if let window = windowScene.windows.first {
-                    window.rootViewController = tabBarController
-                    window.makeKeyAndVisible()
-                }
-            }
-        }
-    }
-}
