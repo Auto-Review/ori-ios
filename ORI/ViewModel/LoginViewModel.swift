@@ -13,17 +13,21 @@ class LoginViewModel {
     let keychain = KeychainSwift()
 
     func didReceiveUserAccessToken(_ token: String, email: String) {
-        sendTokenToServer(accessToken: token) { [weak self] serverTokenResponse in
-            guard let self = self else { return }
-            self.keychain.set(serverTokenResponse.accessToken, forKey: "accessToken")
-            self.keychain.set(serverTokenResponse.refreshToken, forKey: "refreshToken")
-            print("New tokens saved to Keychain")
+        keychain.set(email, forKey: "userEmail")
+        sendTokenToServer(accessToken: token) { serverTokenResponse in
+            let expiresIn: TimeInterval = 3600 // 초 단위 토큰
+
+            TokenManager.shared.saveTokens(accessToken: serverTokenResponse.accessToken,
+                                           refreshToken: serverTokenResponse.refreshToken,
+                                           expiresIn: expiresIn)
+            print("✅ 로그인 완료! 토큰 저장")
+            moveToMain()
         }
     }
 
     private func sendTokenToServer(accessToken: String, completion: @escaping (ServerTokenResponse) -> Void) {
         let api_url = Bundle.main.infoDictionary?["SERVER_API_URL"] as? String ?? ""
-        let url = "\(api_url)v1/api/auth/token"
+        let url = "http://\(api_url)/auth/token"
         let parameters: [String: String] = ["accessToken": accessToken]
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
 
@@ -41,7 +45,7 @@ class LoginViewModel {
                         print("Received tokens from server:")
                         print("Access Token: \(accessToken)")
                         print("Refresh Token: \(refreshToken)")
-                        
+
                         let serverTokenResponse = ServerTokenResponse(accessToken: accessToken, refreshToken: refreshToken)
                         completion(serverTokenResponse)
                         moveToMain()

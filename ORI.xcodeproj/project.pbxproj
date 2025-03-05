@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5719E7DD2D77E76500C3D9B8 /* CodeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */; };
 		5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DE2D77E77A00C3D9B8 /* Code.swift */; };
+		5719E7E22D77F17800C3D9B8 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */; };
+		5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */; };
+		5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */; };
 		571F881C2D759F8000188226 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */; };
 		571F881E2D759FC000188226 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F881D2D759FC000188226 /* Extension+Font.swift */; };
 		571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88212D75B6ED00188226 /* MyTabViewController.swift */; };
@@ -50,6 +53,9 @@
 		5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNetwork.swift; sourceTree = "<group>"; };
 		5719E7DE2D77E77A00C3D9B8 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetwork.swift; sourceTree = "<group>"; };
 		571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		571F881D2D759FC000188226 /* Extension+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		571F88212D75B6ED00188226 /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +106,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5719E7E02D77F15400C3D9B8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */,
+				5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		571F881A2D759F7600188226 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				571F881A2D759F7600188226 /* Font */,
+				571F88252D773C7500188226 /* Network */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -138,6 +154,7 @@
 		571F88252D773C7500188226 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */,
 				5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */,
 				571F88262D773C8A00188226 /* TILNetwork.swift */,
 			);
@@ -205,7 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				57EB9E052CAFB5D30036E5D8 /* App */,
-				571F88252D773C7500188226 /* Network */,
+				5719E7E02D77F15400C3D9B8 /* Service */,
 				57C35C6A2CCA23240083A346 /* Model */,
 				57EB9E042CAFB5810036E5D8 /* ViewModel */,
 				57EB9E012CAFB54A0036E5D8 /* View */,
@@ -337,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */,
 				57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */,
 				5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */,
 				571F881E2D759FC000188226 /* Extension+Font.swift in Sources */,
@@ -347,6 +365,7 @@
 				57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */,
 				5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */,
 				57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */,
+				5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
 				571F88292D773DBD00188226 /* TIL.swift in Sources */,
 				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
@@ -358,6 +377,7 @@
 				57EB9E122CB164480036E5D8 /* MyPageViewController.swift in Sources */,
 				57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */,
 				5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */,
+				5719E7E22D77F17800C3D9B8 /* TokenManager.swift in Sources */,
 				5729F6CD2CDB095400FB9ADC /* MyPageViewModel.swift in Sources */,
 				5719E7DD2D77E76500C3D9B8 /* CodeNetwork.swift in Sources */,
 				57EB9E222CB528230036E5D8 /* LoginViewController.swift in Sources */,
