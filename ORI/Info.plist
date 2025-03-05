@@ -10,30 +10,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>kakao</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>kakao$(KAKAO_API_KEY)</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
 			<string>google</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.$(GOOGLE_API_KEY)</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>naver</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(NAVER_API_URL)</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,32 +29,15 @@
 	</array>
 	<key>GIDClientID</key>
 	<string>$(GOOGLE_API_KEY).apps.googleusercontent.com</string>
-	<key>GITHUB_API_KEY</key>
-	<string>$(GITHUB_API_KEY)</string>
-	<key>GITHUB_API_SECRET</key>
-	<string>$(GITHUB_API_SECRET)</string>
 	<key>GOOGLE_API_KEY</key>
 	<string>$(GOOGLE_API_KEY)</string>
-	<key>KAKAO_API_KEY</key>
-	<string>$(KAKAO_API_KEY)</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>naversearchapp</string>
-		<string>naversearchthirdlogin</string>
-	</array>
-	<key>NAVER_API_KEY</key>
-	<string>$(NAVER_API_KEY)</string>
-	<key>NAVER_API_SECRET</key>
-	<string>$(NAVER_API_SECRET)</string>
-	<key>NAVER_API_URL</key>
-	<string>$(NAVER_API_URL)</string>
+    <key>SERVER_API_URL</key>
+    <string>$(SERVER_API_URL)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>SERVER_API_URL</key>
-	<string>$(SERVER_API_URL)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BlackHanSans-Regular.ttf</string>
