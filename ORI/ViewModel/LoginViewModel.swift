@@ -15,7 +15,7 @@ class LoginViewModel {
     func didReceiveUserAccessToken(_ token: String, email: String) {
         keychain.set(email, forKey: "userEmail")
         sendTokenToServer(accessToken: token) { serverTokenResponse in
-            let expiresIn: TimeInterval = 3600 // 초 단위 토큰
+            let expiresIn: TimeInterval = 1800 // 초 단위 (30분)
 
             TokenManager.shared.saveTokens(accessToken: serverTokenResponse.accessToken,
                                            refreshToken: serverTokenResponse.refreshToken,
