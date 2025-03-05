@@ -25,9 +25,3 @@ struct TIL: Decodable {
     let member: Member
     let createdDate: String
 }
-
-struct Member: Decodable {
-    let id: Int
-    let email: String
-    let nickname: String
-}

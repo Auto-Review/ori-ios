@@ -8,8 +8,5 @@
 import UIKit
 
 class TILListViewModel {
-}
-
-extension Notification.Name {
-    static let didUpdateData = Notification.Name("didUpdateData")
+    
 }

@@ -12,3 +12,9 @@ struct User {
     var email: String
     var token: String
 }
+
+struct Member: Decodable {
+    let id: Int
+    let email: String
+    let nickname: String
+}
