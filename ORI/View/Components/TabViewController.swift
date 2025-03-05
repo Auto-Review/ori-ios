@@ -14,7 +14,7 @@ class TabViewController: UIViewController {
     let vc1 = UINavigationController(rootViewController: CodeListViewController())
     let vc2 = UINavigationController(rootViewController: TILListViewController())
     let vc3 = UINavigationController(rootViewController: MainViewController())
-    let vc4 = UINavigationController(rootViewController: ProfileViewController())
+    let vc4 = UINavigationController(rootViewController: MyPageViewController())
     let vc5 = UINavigationController(rootViewController: SettingViewController())
     
     override func viewDidLoad() {

@@ -49,6 +49,10 @@
 	</array>
 	<key>GIDClientID</key>
 	<string>$(GOOGLE_API_KEY).apps.googleusercontent.com</string>
+	<key>GITHUB_API_KEY</key>
+	<string>$(GITHUB_API_KEY)</string>
+	<key>GITHUB_API_SECRET</key>
+	<string>$(GITHUB_API_SECRET)</string>
 	<key>GOOGLE_API_KEY</key>
 	<string>$(GOOGLE_API_KEY)</string>
 	<key>KAKAO_API_KEY</key>
@@ -64,12 +68,12 @@
 	<string>$(NAVER_API_SECRET)</string>
 	<key>NAVER_API_URL</key>
 	<string>$(NAVER_API_URL)</string>
-	<key>GITHUB_API_KEY</key>
-	<string>$(GITHUB_API_KEY)</string>
-	<key>GITHUB_API_SECRET</key>
-	<string>$(GITHUB_API_SECRET)</string>
 	<key>SERVER_API_URL</key>
 	<string>$(SERVER_API_URL)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BlackHanSans-Regular.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
