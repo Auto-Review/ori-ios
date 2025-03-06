@@ -58,8 +58,7 @@ class LoginViewController: UIViewController {
     @objc func handleGoogleLogin() {
         viewModel.signInWithGoogle(presentingViewController: self) { success in
             if success {
-                print("ID Token: \(self.viewModel.idToken ?? "")")
-                print("User Email: \(self.viewModel.userEmail ?? "nil")")
+                self.viewModel.requestTokenFromServer(idToken: self.viewModel.idToken)
             } else {
                 print("Google login failed")
             }
