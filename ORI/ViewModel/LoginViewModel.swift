@@ -50,7 +50,6 @@ class LoginViewModel {
                     
                     if let accessToken = httpResponse.headers["accesstoken"],
                        let refreshToken = httpResponse.headers["refreshtoken"] {
-                        print("Received tokens from server:")
                         print("Access Token: \(accessToken)")
                         print("Refresh Token: \(refreshToken)")
                         if KeychainManager.save("accessToken", accessToken) && KeychainManager.save("refreshToken", refreshToken) {

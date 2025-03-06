@@ -59,6 +59,7 @@ class LoginViewController: UIViewController {
         viewModel.signInWithGoogle(presentingViewController: self) { success in
             if success {
                 self.viewModel.requestTokenFromServer(idToken: self.viewModel.idToken)
+                NavigationManager().navigateToTabView()
             } else {
                 print("Google login failed")
             }
