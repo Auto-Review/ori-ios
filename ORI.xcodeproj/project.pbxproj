@@ -146,7 +146,6 @@
 		571F88232D75B85700188226 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E112CB164480036E5D8 /* MyPageViewController.swift */,
 				571F88212D75B6ED00188226 /* MyTabViewController.swift */,
 			);
@@ -178,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				571F88232D75B85700188226 /* MyPage */,
+				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */,
 				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
 				57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */,

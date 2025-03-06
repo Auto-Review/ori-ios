@@ -10,8 +10,7 @@ import Alamofire
 
 // 전체 Code 리스트
 func fetchCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], Error>) -> Void) {
-    let api_url = NetworkConstants.baseURL
-    let url = "http://\(api_url)/post/code/list?page=0&size=5"
+    let url = "http://\(NetworkConstants.baseURL)/post/code/list?page=0&size=5"
     let parameters: [String: Any] = ["page": page, "size": size]
     
     AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)

@@ -34,8 +34,7 @@ class LoginViewModel {
     
     
     func requestTokenFromServer(idToken: String) {
-        let api_url = Bundle.main.infoDictionary?["SERVER_API_URL"] as? String ?? ""
-        let url = "http://\(api_url)/auth/token"
+        let url = "http://\(NetworkConstants.baseURL)/auth/token"
         let parameters: [String: String] = ["accessToken": idToken]
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         
