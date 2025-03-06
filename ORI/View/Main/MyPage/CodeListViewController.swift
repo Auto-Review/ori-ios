@@ -1,5 +1,5 @@
 //
-//  TILListViewController.swift
+//  CodeListViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 10/5/24.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var posts: [TIL] = []
+class CodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var posts: [Code] = []
     let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
-        fetchTILList(page: 0, size: 1) { [weak self] result in
+        fetchCodeList(page: 0, size: 5) { [weak self] result in
             switch result {
             case .success(let posts):
                 self?.posts = posts

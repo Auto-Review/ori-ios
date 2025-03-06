@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
             guard error == nil, let signInResult = signInResult else { return }
             let email = signInResult.user.profile?.email ?? ""
             let token = signInResult.user.idToken?.tokenString ?? ""
-            self.viewModel.didReceiveUserAccessToken(token, email: email)
+
         }
     }
 }

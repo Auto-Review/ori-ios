@@ -7,11 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5719E7DD2D77E76500C3D9B8 /* CodeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */; };
+		5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DE2D77E77A00C3D9B8 /* Code.swift */; };
+		5719E7E22D77F17800C3D9B8 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */; };
+		5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */; };
+		5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */; };
+		5719E7E82D77F95E00C3D9B8 /* LogOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */; };
+		5719E7EA2D78179B00C3D9B8 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */; };
 		571F881C2D759F8000188226 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */; };
 		571F881E2D759FC000188226 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F881D2D759FC000188226 /* Extension+Font.swift */; };
 		571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88212D75B6ED00188226 /* MyTabViewController.swift */; };
+		571F88272D773C8A00188226 /* TILNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88262D773C8A00188226 /* TILNetwork.swift */; };
+		571F88292D773DBD00188226 /* TIL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88282D773DB300188226 /* TIL.swift */; };
 		5729F6CD2CDB095400FB9ADC /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */; };
-		5729F6CF2CDB096000FB9ADC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CE2CDB096000FB9ADC /* User.swift */; };
+		5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CE2CDB096000FB9ADC /* Member.swift */; };
 		5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */; };
 		5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D52CDB91FC00FB9ADC /* DisplaySettingsViewController.swift */; };
 		5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */; };
@@ -19,7 +28,6 @@
 		5760BEFE2CB8E67300A94068 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BEFD2CB8E67300A94068 /* NaverThirdPartyLogin */; };
 		5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BF012CBD087500A94068 /* KeychainSwift */; };
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
-		57C35C6C2CCA24190083A346 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6B2CCA24190083A346 /* Post.swift */; };
 		57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */; };
 		57DC2C5E2D617F2300DAE832 /* NotifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC2C5D2D617F0C00DAE832 /* NotifyViewModel.swift */; };
 		57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E867DE2D6C9D4E00D87D8E /* MainNavigationBar.swift */; };
@@ -44,17 +52,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNetwork.swift; sourceTree = "<group>"; };
+		5719E7DE2D77E77A00C3D9B8 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetwork.swift; sourceTree = "<group>"; };
+		5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutManager.swift; sourceTree = "<group>"; };
+		5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		571F881D2D759FC000188226 /* Extension+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		571F88212D75B6ED00188226 /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
+		571F88262D773C8A00188226 /* TILNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILNetwork.swift; sourceTree = "<group>"; };
+		571F88282D773DB300188226 /* TIL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TIL.swift; sourceTree = "<group>"; };
 		5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
-		5729F6CE2CDB096000FB9ADC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5729F6CE2CDB096000FB9ADC /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		5729F6D32CDB91E500FB9ADC /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		5729F6D52CDB91FC00FB9ADC /* DisplaySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsViewController.swift; sourceTree = "<group>"; };
 		5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
-		57C35C6B2CCA24190083A346 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewModel.swift; sourceTree = "<group>"; };
 		57DC2C5D2D617F0C00DAE832 /* NotifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyViewModel.swift; sourceTree = "<group>"; };
 		57E867DE2D6C9D4E00D87D8E /* MainNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationBar.swift; sourceTree = "<group>"; };
@@ -71,7 +88,6 @@
 		57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		57EB9E112CB164480036E5D8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		57EB9E212CB528230036E5D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +110,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5719E7E02D77F15400C3D9B8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */,
+				5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */,
+				5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		571F881A2D759F7600188226 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				571F881A2D759F7600188226 /* Font */,
+				571F88252D773C7500188226 /* Network */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -122,10 +149,22 @@
 		571F88232D75B85700188226 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E112CB164480036E5D8 /* MyPageViewController.swift */,
 				571F88212D75B6ED00188226 /* MyTabViewController.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		571F88252D773C7500188226 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */,
+				5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */,
+				571F88262D773C8A00188226 /* TILNetwork.swift */,
+				5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		5729F6D02CDB590500FB9ADC /* Setting */ = {
@@ -143,7 +182,6 @@
 			children = (
 				571F88232D75B85700188226 /* MyPage */,
 				57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */,
-				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
 				57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */,
 			);
@@ -162,8 +200,9 @@
 		57C35C6A2CCA23240083A346 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				57C35C6B2CCA24190083A346 /* Post.swift */,
-				5729F6CE2CDB096000FB9ADC /* User.swift */,
+				5719E7DE2D77E77A00C3D9B8 /* Code.swift */,
+				571F88282D773DB300188226 /* TIL.swift */,
+				5729F6CE2CDB096000FB9ADC /* Member.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -171,7 +210,7 @@
 		57EB9DE12CAFADE50036E5D8 = {
 			isa = PBXGroup;
 			children = (
-				57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */,
+				5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */,
 				57EB9DEC2CAFADE60036E5D8 /* ORI */,
 				57EB9DEB2CAFADE60036E5D8 /* Products */,
 			);
@@ -189,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				57EB9E052CAFB5D30036E5D8 /* App */,
+				5719E7E02D77F15400C3D9B8 /* Service */,
 				57C35C6A2CCA23240083A346 /* Model */,
 				57EB9E042CAFB5810036E5D8 /* ViewModel */,
 				57EB9E012CAFB54A0036E5D8 /* View */,
@@ -320,26 +360,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */,
 				57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */,
-				57C35C6C2CCA24190083A346 /* Post.swift in Sources */,
+				5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */,
 				571F881E2D759FC000188226 /* Extension+Font.swift in Sources */,
 				57DC2C5E2D617F2300DAE832 /* NotifyViewModel.swift in Sources */,
 				57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */,
 				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
+				571F88272D773C8A00188226 /* TILNetwork.swift in Sources */,
 				57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */,
 				5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */,
+				5719E7E82D77F95E00C3D9B8 /* LogOutManager.swift in Sources */,
 				57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */,
+				5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
+				571F88292D773DBD00188226 /* TIL.swift in Sources */,
 				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
-				5729F6CF2CDB096000FB9ADC /* User.swift in Sources */,
+				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,
 				5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */,
 				57EB9E0E2CB15DB70036E5D8 /* MainViewController.swift in Sources */,
 				57EB9E122CB164480036E5D8 /* MyPageViewController.swift in Sources */,
+				5719E7EA2D78179B00C3D9B8 /* NetworkConstants.swift in Sources */,
 				57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */,
 				5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */,
+				5719E7E22D77F17800C3D9B8 /* TokenManager.swift in Sources */,
 				5729F6CD2CDB095400FB9ADC /* MyPageViewModel.swift in Sources */,
+				5719E7DD2D77E76500C3D9B8 /* CodeNetwork.swift in Sources */,
 				57EB9E222CB528230036E5D8 /* LoginViewController.swift in Sources */,
 				57EB9DF02CAFADE60036E5D8 /* SceneDelegate.swift in Sources */,
 			);
@@ -361,6 +409,7 @@
 /* Begin XCBuildConfiguration section */
 		57EB9DFC2CAFADE80036E5D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -424,6 +473,7 @@
 		};
 		57EB9DFD2CAFADE80036E5D8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -480,7 +530,7 @@
 		};
 		57EB9DFF2CAFADE80036E5D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -509,7 +559,7 @@
 		};
 		57EB9E002CAFADE80036E5D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57EB9E262CB52B9C0036E5D8 /* Secrets.xcconfig */;
+			baseConfigurationReference = 5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
