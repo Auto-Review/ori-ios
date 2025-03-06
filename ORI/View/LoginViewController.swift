@@ -7,7 +7,6 @@
 
 import UIKit
 import GoogleSignIn
-import Alamofire
 
 class LoginViewController: UIViewController {
     var viewModel = LoginViewModel()
@@ -33,11 +32,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .black
         setupUI()
     }
-
+    
     private func setupUI() {
         view.addSubview(googleLoginButton)
         view.addSubview(oriLoginImage)
@@ -58,11 +56,13 @@ class LoginViewController: UIViewController {
     }
     
     @objc func handleGoogleLogin() {
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
-            guard error == nil, let signInResult = signInResult else { return }
-            let email = signInResult.user.profile?.email ?? ""
-            let token = signInResult.user.idToken?.tokenString ?? ""
-
+        viewModel.signInWithGoogle(presentingViewController: self) { success in
+            if success {
+                print("ID Token: \(self.viewModel.idToken ?? "")")
+                print("User Email: \(self.viewModel.userEmail ?? "nil")")
+            } else {
+                print("Google login failed")
+            }
         }
     }
 }
