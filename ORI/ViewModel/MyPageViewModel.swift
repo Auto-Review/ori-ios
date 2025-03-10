@@ -34,4 +34,9 @@ class MyPageViewModel {
         guard index >= 0 && index < myTILPosts.count else { return nil }
         return myTILPosts[index].title
     }
+    
+    func postDate(at index: Int) -> String? {
+        guard index >= 0 && index < myTILPosts.count else { return nil }
+        return myTILPosts[index].createdDate.prefix(10).description
+    }
 }

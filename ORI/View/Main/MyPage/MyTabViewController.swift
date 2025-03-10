@@ -66,14 +66,12 @@ class MyTabViewController: UIViewController {
     
     private lazy var myCodeListView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var myTILListView: UIView = {
         let view = UIView()
-        view.backgroundColor = .yellow
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -117,12 +115,12 @@ class MyTabViewController: UIViewController {
             myCodeListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
             myCodeListView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             myCodeListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            myCodeListView.heightAnchor.constraint(equalToConstant: 200),
+            myCodeListView.heightAnchor.constraint(equalToConstant: 420),
             
             myTILListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
             myTILListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             myTILListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            myTILListView.heightAnchor.constraint(equalToConstant: 200),
+            myTILListView.heightAnchor.constraint(equalToConstant: 420),
         ])
     }
     
