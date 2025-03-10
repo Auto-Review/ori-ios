@@ -1,5 +1,5 @@
 //
-//  MyTILListViewController.swift
+//  MyPostViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 3/10/25.
@@ -7,8 +7,17 @@
 
 import UIKit
 
-class MyTILViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    private var viewModel: MyPageViewModel!
+class MyPostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var viewModel: MyPageViewModel
+    
+    init(viewModel: MyPageViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -42,8 +51,6 @@ class MyTILViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     private func setupViewModel() {
-        viewModel = MyPageViewModel()
-        
         viewModel.didUpdateData = { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()

@@ -8,6 +8,8 @@
 import UIKit
 
 class MyTabViewController: UIViewController {
+    var viewModel = MyPageViewModel()
+    
     private lazy var containerView: UIView = {
         let container = UIView()
         container.backgroundColor = .clear
@@ -62,15 +64,11 @@ class MyTabViewController: UIViewController {
         return underLineView.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor)
     }()
     
-    private let myTILVC = MyTILViewController()
-    
-    private lazy var myCodeListView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var myPostVC: MyPostViewController = {
+        return MyPostViewController(viewModel: self.viewModel)
     }()
     
-    private lazy var myTILListView: UIView = {
+    private lazy var myPostListView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -88,9 +86,8 @@ class MyTabViewController: UIViewController {
         underBackgroundLineView.addSubview(underLineView)
         containerView.addSubview(underBackgroundLineView)
         
-        view.addSubview(myCodeListView)
-        view.addSubview(myTILListView)
-        addChildViewController()
+        view.addSubview(myPostListView)
+        addChildViewController(isCode: viewModel.isCode)
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -112,15 +109,10 @@ class MyTabViewController: UIViewController {
             underBackgroundLineView.heightAnchor.constraint(equalToConstant: 2),
             underBackgroundLineView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
-            myCodeListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
-            myCodeListView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            myCodeListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            myCodeListView.heightAnchor.constraint(equalToConstant: 420),
-            
-            myTILListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
-            myTILListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            myTILListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            myTILListView.heightAnchor.constraint(equalToConstant: 420),
+            myPostListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
+            myPostListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            myPostListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            myPostListView.heightAnchor.constraint(equalToConstant: 420),
         ])
     }
     
@@ -138,25 +130,25 @@ class MyTabViewController: UIViewController {
     
     private func changeTabView() {
         if segmentControl.selectedSegmentIndex == 0 {
-            myCodeListView.isHidden = false
-            myTILListView.isHidden = true
+            viewModel.isCode = true
         } else {
-            myCodeListView.isHidden = true
-            myTILListView.isHidden = false
+            viewModel.isCode = false
         }
+        viewModel.fetchData()
     }
     
-    private func addChildViewController() {
-            addChild(myTILVC)
-        myTILListView.addSubview(myTILVC.view)
-            myTILVC.view.translatesAutoresizingMaskIntoConstraints = false
-            myTILVC.didMove(toParent: self)
-
-            NSLayoutConstraint.activate([
-                myTILVC.view.topAnchor.constraint(equalTo: myTILListView.topAnchor),
-                myTILVC.view.leadingAnchor.constraint(equalTo: myTILListView.leadingAnchor),
-                myTILVC.view.trailingAnchor.constraint(equalTo: myTILListView.trailingAnchor),
-                myTILVC.view.bottomAnchor.constraint(equalTo: myTILListView.bottomAnchor)
-            ])
-        }
+    private func addChildViewController(isCode: Bool) {
+        addChild(myPostVC)
+        myPostVC.view.translatesAutoresizingMaskIntoConstraints = false
+        myPostVC.didMove(toParent: self)
+        
+        myPostListView.addSubview(myPostVC.view)
+        
+        NSLayoutConstraint.activate([
+            myPostVC.view.topAnchor.constraint(equalTo: myPostListView.topAnchor),
+            myPostVC.view.leadingAnchor.constraint(equalTo: myPostListView.leadingAnchor),
+            myPostVC.view.trailingAnchor.constraint(equalTo: myPostListView.trailingAnchor),
+            myPostVC.view.bottomAnchor.constraint(equalTo: myPostListView.bottomAnchor)
+        ])
+    }
 }
