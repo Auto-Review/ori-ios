@@ -29,6 +29,8 @@
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
 		57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */; };
 		57DC2C5E2D617F2300DAE832 /* NotifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC2C5D2D617F0C00DAE832 /* NotifyViewModel.swift */; };
+		57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */; };
+		57DC453F2D7E866200E68B5A /* MyTILListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC453E2D7E865000E68B5A /* MyTILListViewController.swift */; };
 		57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E867DE2D6C9D4E00D87D8E /* MainNavigationBar.swift */; };
 		57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9DED2CAFADE60036E5D8 /* AppDelegate.swift */; };
 		57EB9DF02CAFADE60036E5D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9DEF2CAFADE60036E5D8 /* SceneDelegate.swift */; };
@@ -72,6 +74,8 @@
 		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
 		57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewModel.swift; sourceTree = "<group>"; };
 		57DC2C5D2D617F0C00DAE832 /* NotifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyViewModel.swift; sourceTree = "<group>"; };
+		57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNetwork.swift; sourceTree = "<group>"; };
+		57DC453E2D7E865000E68B5A /* MyTILListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTILListViewController.swift; sourceTree = "<group>"; };
 		57E867DE2D6C9D4E00D87D8E /* MainNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationBar.swift; sourceTree = "<group>"; };
 		57EB9DEA2CAFADE60036E5D8 /* ORI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EB9DED2CAFADE60036E5D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 		571F88232D75B85700188226 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				57DC453E2D7E865000E68B5A /* MyTILListViewController.swift */,
 				57EB9E112CB164480036E5D8 /* MyPageViewController.swift */,
 				571F88212D75B6ED00188226 /* MyTabViewController.swift */,
 			);
@@ -155,6 +160,7 @@
 		571F88252D773C7500188226 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */,
 				5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */,
 				5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */,
 				571F88262D773C8A00188226 /* TILNetwork.swift */,
@@ -361,6 +367,7 @@
 				57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */,
 				5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */,
 				571F881E2D759FC000188226 /* Extension+Font.swift in Sources */,
+				57DC453F2D7E866200E68B5A /* MyTILListViewController.swift in Sources */,
 				57DC2C5E2D617F2300DAE832 /* NotifyViewModel.swift in Sources */,
 				57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */,
 				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
@@ -374,6 +381,7 @@
 				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
+				57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,
 				5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */,
 				57EB9E0E2CB15DB70036E5D8 /* MainViewController.swift in Sources */,

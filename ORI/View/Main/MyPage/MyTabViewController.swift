@@ -62,14 +62,16 @@ class MyTabViewController: UIViewController {
         return underLineView.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor)
     }()
     
-    private lazy var firstTabView: UIView = {
+    private let myTILVC = MyTILViewController()
+    
+    private lazy var myCodeListView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var secondTabView: UIView = {
+    private lazy var myTILListView: UIView = {
         let view = UIView()
         view.backgroundColor = .yellow
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -88,8 +90,9 @@ class MyTabViewController: UIViewController {
         underBackgroundLineView.addSubview(underLineView)
         containerView.addSubview(underBackgroundLineView)
         
-        view.addSubview(firstTabView)
-        view.addSubview(secondTabView)
+        view.addSubview(myCodeListView)
+        view.addSubview(myTILListView)
+        addChildViewController()
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -111,15 +114,15 @@ class MyTabViewController: UIViewController {
             underBackgroundLineView.heightAnchor.constraint(equalToConstant: 2),
             underBackgroundLineView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
-            firstTabView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
-            firstTabView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            firstTabView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            firstTabView.heightAnchor.constraint(equalToConstant: 200),
+            myCodeListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
+            myCodeListView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            myCodeListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            myCodeListView.heightAnchor.constraint(equalToConstant: 200),
             
-            secondTabView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
-            secondTabView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            secondTabView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            secondTabView.heightAnchor.constraint(equalToConstant: 200),
+            myTILListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
+            myTILListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            myTILListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            myTILListView.heightAnchor.constraint(equalToConstant: 200),
         ])
     }
     
@@ -137,11 +140,25 @@ class MyTabViewController: UIViewController {
     
     private func changeTabView() {
         if segmentControl.selectedSegmentIndex == 0 {
-            firstTabView.isHidden = false
-            secondTabView.isHidden = true
+            myCodeListView.isHidden = false
+            myTILListView.isHidden = true
         } else {
-            firstTabView.isHidden = true
-            secondTabView.isHidden = false
+            myCodeListView.isHidden = true
+            myTILListView.isHidden = false
         }
     }
+    
+    private func addChildViewController() {
+            addChild(myTILVC)
+        myTILListView.addSubview(myTILVC.view)
+            myTILVC.view.translatesAutoresizingMaskIntoConstraints = false
+            myTILVC.didMove(toParent: self)
+
+            NSLayoutConstraint.activate([
+                myTILVC.view.topAnchor.constraint(equalTo: myTILListView.topAnchor),
+                myTILVC.view.leadingAnchor.constraint(equalTo: myTILListView.leadingAnchor),
+                myTILVC.view.trailingAnchor.constraint(equalTo: myTILListView.trailingAnchor),
+                myTILVC.view.bottomAnchor.constraint(equalTo: myTILListView.bottomAnchor)
+            ])
+        }
 }

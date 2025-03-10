@@ -8,7 +8,6 @@
 import UIKit
 
 class MyPageViewController: UIViewController {
-    var viewModel = MyPageViewModel()
     
     lazy var myPageMainTextLabel: UILabel = {
         let label = UILabel()
