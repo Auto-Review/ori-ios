@@ -16,6 +16,7 @@ class MyPageViewModel {
 
 
     var didUpdateData: (() -> Void)?
+    var didUpdateMyData: (() -> Void)?
     var didFailWithError: ((Error) -> Void)?
     
     func fetchData() {
@@ -45,7 +46,7 @@ class MyPageViewModel {
                 switch result {
                 case .success(let posts):
                     self?.myInfo = posts
-                    self?.didUpdateData?()
+                    self?.didUpdateMyData?()
                 case .failure(let error):
                     self?.didFailWithError?(error)
                 }

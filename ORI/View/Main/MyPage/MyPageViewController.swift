@@ -30,8 +30,8 @@ class MyPageViewController: UIViewController {
     lazy var nameLabel: UILabel = createLabel(text: "Name")
     lazy var bioLabel: UILabel = createLabel(text: "Bio")
     
-    lazy var emailTextField: UITextField = createTextField(text: "laplaya1411@gmail.com")
-    lazy var nameTextField: UITextField = createTextField(text: "치킨")
+    lazy var emailTextField: UITextField = createTextField(text: viewModel.myInfo.email)
+    lazy var nameTextField: UITextField = createTextField(text: viewModel.myInfo.nickname)
     lazy var bioTextField: UITextField = createTextField(text: "4월 20일까지 모든 것을 끝냅시다!")
     
     lazy var emailStackView: UIStackView = createStackView(label: emailLabel, textField: emailTextField)
@@ -66,6 +66,9 @@ class MyPageViewController: UIViewController {
         mainNavigationBar()
         setupConstraints()
         addMyTabView()
+        
+        setupViewModel()
+        viewModel.fetchMyData()
     }
     
     func setupConstraints() {
@@ -83,15 +86,20 @@ class MyPageViewController: UIViewController {
             infoStackView.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 20),
             infoStackView.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -20),
             
-            emailTextField.widthAnchor.constraint(equalToConstant: 270),
-            nameTextField.widthAnchor.constraint(equalToConstant: 270),
-            bioTextField.widthAnchor.constraint(equalToConstant: 270),
-            
             editButton.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 20),
             editButton.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -20),
             editButton.widthAnchor.constraint(equalToConstant: 15),
             editButton.heightAnchor.constraint(equalToConstant: 15),
         ])
+    }
+    
+    private func setupViewModel() {
+        viewModel.didUpdateMyData = { [weak self] in
+            DispatchQueue.main.async {
+                self?.nameTextField.text = self!.viewModel.myInfo.nickname
+                self?.emailTextField.text = self!.viewModel.myInfo.email
+            }
+        }
     }
     
     func createLabel(text: String) -> UILabel {
@@ -117,6 +125,12 @@ class MyPageViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.spacing = 8
+
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        textField.setContentHuggingPriority(.defaultLow, for: .horizontal) // 텍스트 필드가 남은 공간을 차지
+
         return stackView
     }
     
