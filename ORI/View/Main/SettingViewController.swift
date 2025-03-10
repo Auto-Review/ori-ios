@@ -12,18 +12,23 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
-        // Do any additional setup after loading the view.
+        
+        // 키체인에서 값을 불러오는 버튼 생성
+        let fetchButton = UIButton(type: .system)
+        fetchButton.setTitle("Fetch Tokens", for: .normal)
+        fetchButton.frame = CGRect(x: 100, y: 200, width: 200, height: 50)
+        fetchButton.addTarget(self, action: #selector(fetchTokensFromKeychain), for: .touchUpInside)
+        view.addSubview(fetchButton)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // 키체인에서 토큰을 불러오는 함수
+    @objc func fetchTokensFromKeychain() {
+        if let accessToken = KeychainManager.load(key: "accessToken"),
+           let refreshToken = KeychainManager.load(key: "refreshToken") {
+            print("Access Token: \(accessToken)")
+            print("Refresh Token: \(refreshToken)")
+        } else {
+            print("Tokens not found in Keychain")
+        }
     }
-    */
-
 }

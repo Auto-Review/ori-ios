@@ -9,11 +9,10 @@
 /* Begin PBXBuildFile section */
 		5719E7DD2D77E76500C3D9B8 /* CodeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */; };
 		5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DE2D77E77A00C3D9B8 /* Code.swift */; };
-		5719E7E22D77F17800C3D9B8 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */; };
-		5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */; };
 		5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */; };
-		5719E7E82D77F95E00C3D9B8 /* LogOutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */; };
 		5719E7EA2D78179B00C3D9B8 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */; };
+		5719E7EE2D7988B300C3D9B8 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7ED2D7988B300C3D9B8 /* KeychainManager.swift */; };
+		5719E7F02D79940800C3D9B8 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7EF2D7993CA00C3D9B8 /* NavigationManager.swift */; };
 		571F881C2D759F8000188226 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */; };
 		571F881E2D759FC000188226 /* Extension+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F881D2D759FC000188226 /* Extension+Font.swift */; };
 		571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571F88212D75B6ED00188226 /* MyTabViewController.swift */; };
@@ -55,11 +54,10 @@
 		5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNetwork.swift; sourceTree = "<group>"; };
 		5719E7DE2D77E77A00C3D9B8 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
-		5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
-		5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetwork.swift; sourceTree = "<group>"; };
-		5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutManager.swift; sourceTree = "<group>"; };
 		5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		5719E7ED2D7988B300C3D9B8 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		5719E7EF2D7993CA00C3D9B8 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		571F881D2D759FC000188226 /* Extension+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Font.swift"; sourceTree = "<group>"; };
 		571F88212D75B6ED00188226 /* MyTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
@@ -113,9 +111,8 @@
 		5719E7E02D77F15400C3D9B8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				5719E7E72D77F94500C3D9B8 /* LogOutManager.swift */,
-				5719E7E32D77F18C00C3D9B8 /* AuthManager.swift */,
-				5719E7E12D77F16A00C3D9B8 /* TokenManager.swift */,
+				5719E7EF2D7993CA00C3D9B8 /* NavigationManager.swift */,
+				5719E7ED2D7988B300C3D9B8 /* KeychainManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -149,7 +146,6 @@
 		571F88232D75B85700188226 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E112CB164480036E5D8 /* MyPageViewController.swift */,
 				571F88212D75B6ED00188226 /* MyTabViewController.swift */,
 			);
@@ -181,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				571F88232D75B85700188226 /* MyPage */,
+				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */,
 				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
 				57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */,
@@ -370,11 +367,10 @@
 				571F88272D773C8A00188226 /* TILNetwork.swift in Sources */,
 				57EB9E0A2CB15D9B0036E5D8 /* TILListViewController.swift in Sources */,
 				5729F6D62CDB91FC00FB9ADC /* DisplaySettingsViewController.swift in Sources */,
-				5719E7E82D77F95E00C3D9B8 /* LogOutManager.swift in Sources */,
 				57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */,
-				5719E7E42D77F19700C3D9B8 /* AuthManager.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
 				571F88292D773DBD00188226 /* TIL.swift in Sources */,
+				5719E7F02D79940800C3D9B8 /* NavigationManager.swift in Sources */,
 				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
@@ -382,10 +378,10 @@
 				5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */,
 				57EB9E0E2CB15DB70036E5D8 /* MainViewController.swift in Sources */,
 				57EB9E122CB164480036E5D8 /* MyPageViewController.swift in Sources */,
+				5719E7EE2D7988B300C3D9B8 /* KeychainManager.swift in Sources */,
 				5719E7EA2D78179B00C3D9B8 /* NetworkConstants.swift in Sources */,
 				57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */,
 				5729F6D42CDB91E500FB9ADC /* AccountViewController.swift in Sources */,
-				5719E7E22D77F17800C3D9B8 /* TokenManager.swift in Sources */,
 				5729F6CD2CDB095400FB9ADC /* MyPageViewModel.swift in Sources */,
 				5719E7DD2D77E76500C3D9B8 /* CodeNetwork.swift in Sources */,
 				57EB9E222CB528230036E5D8 /* LoginViewController.swift in Sources */,
