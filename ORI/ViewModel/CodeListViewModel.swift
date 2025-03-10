@@ -13,7 +13,7 @@ class CodeListViewModel {
     let tableView = UITableView()
     
     func loadCodeList() {
-        fetchCodeList(page: 0, size: 5) { [weak self] result in
+        fetchCodeList(page: 0, size: 10) { [weak self] result in
             switch result {
             case .success(let posts):
                 self?.posts = posts
