@@ -71,3 +71,33 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
             }
         }
 }
+
+func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
+    let url = "http://\(NetworkConstants.baseURL)/profile/info"
+    guard let token = KeychainManager.load(key: "accessToken"), !token.isEmpty else {
+        print("❌ Access Token이 없습니다.")
+        completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
+        return
+    }
+    
+    let headers: HTTPHeaders = [
+        "Authorization": "\(token)",
+        "Content-Type": "application/json"
+    ]
+    
+    AF.request(url, method: .get, encoding: URLEncoding.default, headers: headers)
+        .validate(statusCode: 200..<300)
+        .responseDecodable(of: MemberResponse.self) { response in
+            switch response.result {
+            case .success(let data):
+                completion(.success(data.data))
+            case .failure(let error):
+                if let responseCode = response.response?.statusCode, responseCode == 401 {
+                    print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
+                } else {
+                    print("❌ Error fetching posts: \(error)")
+                    completion(.failure(error))
+                }
+            }
+        }
+}

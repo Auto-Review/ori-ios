@@ -12,7 +12,9 @@ class MyPageViewModel {
     var isCode = true
     private var myTILPosts: [TIL] = []
     private var myCodePosts: [Code] = []
-    
+    var myInfo: Member = Member(id: 0, email: "", nickname: "")
+
+
     var didUpdateData: (() -> Void)?
     var didFailWithError: ((Error) -> Void)?
     
@@ -36,6 +38,18 @@ class MyPageViewModel {
                 self?.didFailWithError?(error)
             }
         }
+    }
+    
+    func fetchMyData() {
+        fetchMyInfo() { [weak self] result in
+                switch result {
+                case .success(let posts):
+                    self?.myInfo = posts
+                    self?.didUpdateData?()
+                case .failure(let error):
+                    self?.didFailWithError?(error)
+                }
+            }
     }
     
     func numberOfPosts() -> Int {

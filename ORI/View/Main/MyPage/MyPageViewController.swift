@@ -8,6 +8,7 @@
 import UIKit
 
 class MyPageViewController: UIViewController {
+    var viewModel = MyPageViewModel()
     
     lazy var myPageMainTextLabel: UILabel = {
         let label = UILabel()
@@ -134,7 +135,7 @@ class MyPageViewController: UIViewController {
     }
     
     func addMyTabView() {
-        let myTabVC = MyTabViewController()
+        let myTabVC = MyTabViewController(viewModel: viewModel)
         addChild(myTabVC)
         myTabVC.view.translatesAutoresizingMaskIntoConstraints = false
 
