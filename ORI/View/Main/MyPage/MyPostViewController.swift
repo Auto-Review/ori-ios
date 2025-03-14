@@ -107,10 +107,9 @@ class CustomTableViewCell: UITableViewCell {
             
             reviewCntLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             reviewCntLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10),
-            reviewCntLabel.trailingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: -30),
             
             dateLabel.centerYAnchor.constraint(equalTo: reviewCntLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor, constant: 30),
             dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2)
         ])
     }
