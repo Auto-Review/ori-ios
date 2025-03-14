@@ -32,6 +32,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
             case .failure(let error):
                 if let responseCode = response.response?.statusCode, responseCode == 401 {
                     print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
+                    TokenNetwork.reissuedTokenFromServer()
                 } else {
                     print("❌ Error fetching posts: \(error)")
                     completion(.failure(error))
@@ -64,6 +65,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
             case .failure(let error):
                 if let responseCode = response.response?.statusCode, responseCode == 401 {
                     print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
+                    TokenNetwork.reissuedTokenFromServer()
                 } else {
                     print("❌ Error fetching posts: \(error)")
                     completion(.failure(error))
@@ -94,6 +96,7 @@ func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
             case .failure(let error):
                 if let responseCode = response.response?.statusCode, responseCode == 401 {
                     print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
+                    TokenNetwork.reissuedTokenFromServer()
                 } else {
                     print("❌ Error fetching posts: \(error)")
                     completion(.failure(error))

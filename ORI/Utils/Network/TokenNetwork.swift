@@ -48,7 +48,7 @@ class TokenNetwork {
     
     static func reissuedTokenFromServer() {
         let url = "http://\(NetworkConstants.baseURL)/auth/reissued"
-
+        
         guard let accessToken = KeychainManager.load(key: "accessToken") else {
             print("❌ Access Token이 없습니다.")
             return
@@ -80,11 +80,7 @@ class TokenNetwork {
                         }
                     }
                 case .failure(let error):
-                    if let responseCode = response.response?.statusCode, responseCode == 401 {
-                        print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
-                    } else {
-                        print("❌ Error fetching token: \(error)")
-                    }
+                    print("❌ Error fetching token: \(error)")
                 }
             }
     }

@@ -11,7 +11,6 @@ class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
         
         // 키체인에서 값을 불러오는 버튼 생성
         let fetchButton = UIButton(type: .system)
@@ -19,6 +18,18 @@ class SettingViewController: UIViewController {
         fetchButton.frame = CGRect(x: 100, y: 200, width: 200, height: 50)
         fetchButton.addTarget(self, action: #selector(fetchTokensFromKeychain), for: .touchUpInside)
         view.addSubview(fetchButton)
+        
+        let reissued = UIButton(type: .system)
+        reissued.setTitle("reissued", for: .normal)
+        reissued.frame = CGRect(x: 100, y: 300, width: 200, height: 50)
+        reissued.addTarget(self, action: #selector(reissuedKeychain), for: .touchUpInside)
+        view.addSubview(reissued)
+        
+        let logout = UIButton(type: .system)
+        logout.setTitle("logout", for: .normal)
+        logout.frame = CGRect(x: 100, y: 100, width: 200, height: 50)
+        logout.addTarget(self, action: #selector(logoutk), for: .touchUpInside)
+        view.addSubview(logout)
     }
     
     // 키체인에서 토큰을 불러오는 함수
@@ -30,5 +41,17 @@ class SettingViewController: UIViewController {
         } else {
             print("Tokens not found in Keychain")
         }
+    }
+    
+    @objc func reissuedKeychain() {
+        if let accessToken = KeychainManager.load(key: "accessToken") {
+           TokenNetwork.reissuedTokenFromServer()
+        } else {
+            print("Tokens not found in Keychain")
+        }
+    }
+    
+    @objc func logoutk() {
+        LogoutManager.logout()
     }
 }
