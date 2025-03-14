@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5719E7DD2D77E76500C3D9B8 /* CodeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */; };
 		5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7DE2D77E77A00C3D9B8 /* Code.swift */; };
-		5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */; };
+		5719E7E62D77F59400C3D9B8 /* TokenNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E52D77F58800C3D9B8 /* TokenNetwork.swift */; };
 		5719E7EA2D78179B00C3D9B8 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */; };
 		5719E7EE2D7988B300C3D9B8 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7ED2D7988B300C3D9B8 /* KeychainManager.swift */; };
 		5719E7F02D79940800C3D9B8 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5719E7EF2D7993CA00C3D9B8 /* NavigationManager.swift */; };
@@ -56,7 +56,7 @@
 		5719E7DB2D77D98C00C3D9B8 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeNetwork.swift; sourceTree = "<group>"; };
 		5719E7DE2D77E77A00C3D9B8 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
-		5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetwork.swift; sourceTree = "<group>"; };
+		5719E7E52D77F58800C3D9B8 /* TokenNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenNetwork.swift; sourceTree = "<group>"; };
 		5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		5719E7ED2D7988B300C3D9B8 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		5719E7EF2D7993CA00C3D9B8 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */,
-				5719E7E52D77F58800C3D9B8 /* LoginNetwork.swift */,
+				5719E7E52D77F58800C3D9B8 /* TokenNetwork.swift */,
 				5719E7DC2D77E75900C3D9B8 /* CodeNetwork.swift */,
 				571F88262D773C8A00188226 /* TILNetwork.swift */,
 				5719E7E92D78179B00C3D9B8 /* NetworkConstants.swift */,
@@ -363,7 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5719E7E62D77F59400C3D9B8 /* LoginNetwork.swift in Sources */,
+				5719E7E62D77F59400C3D9B8 /* TokenNetwork.swift in Sources */,
 				57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */,
 				5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */,
 				571F881E2D759FC000188226 /* Extension+Font.swift in Sources */,
