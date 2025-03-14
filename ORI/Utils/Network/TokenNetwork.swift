@@ -45,4 +45,47 @@ class TokenNetwork {
                 }
             }
     }
+    
+    static func reissuedTokenFromServer() {
+        let url = "http://\(NetworkConstants.baseURL)/auth/reissued"
+
+        guard let accessToken = KeychainManager.load(key: "accessToken") else {
+            print("❌ Access Token이 없습니다.")
+            return
+        }
+        guard let refreshToken = KeychainManager.load(key: "refreshToken") else {
+            print("❌ Refresh Token이 없습니다.")
+            return
+        }
+        
+        let headers: HTTPHeaders = [
+            "Authorization": accessToken,
+            "refreshToken": refreshToken,
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(url, method: .get, encoding: URLEncoding.default, headers: headers)
+            .validate(statusCode: 200..<300)
+            .response { response in
+                switch response.result {
+                case .success( _):
+                    if let newAccessToken = response.response?.headers["accesstoken"],
+                       let newRefreshToken = response.response?.headers["refreshtoken"] {
+                        print("새로운 Access Token: \(newAccessToken)")
+                        print("새로운 Refresh Token: \(newRefreshToken)")
+                        
+                        if KeychainManager.save("accessToken", newAccessToken) &&
+                            KeychainManager.save("refreshToken", newRefreshToken) {
+                            print("새로운 키체인 저장완료")
+                        }
+                    }
+                case .failure(let error):
+                    if let responseCode = response.response?.statusCode, responseCode == 401 {
+                        print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
+                    } else {
+                        print("❌ Error fetching token: \(error)")
+                    }
+                }
+            }
+    }
 }
