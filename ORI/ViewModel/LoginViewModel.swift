@@ -51,7 +51,13 @@ class LoginViewModel {
                        let refreshToken = httpResponse.headers["refreshtoken"] {
                         print("Access Token: \(accessToken)")
                         print("Refresh Token: \(refreshToken)")
-                        if KeychainManager.save("accessToken", accessToken) && KeychainManager.save("refreshToken", refreshToken) {
+                        
+                        // 리프레시 토큰 만료시간 저장
+                        let expiresIn: TimeInterval = 21600
+                        let expirationDate = Date().addingTimeInterval(expiresIn)
+                        let expirationTimestamp = expirationDate.timeIntervalSince1970
+                        
+                        if KeychainManager.save("accessToken", accessToken) && KeychainManager.save("refreshToken", refreshToken) && KeychainManager.save("refreshTokenExpiration", "\(expirationTimestamp)") {
                             print("키체인 저장완료")
                         }
                     } else {
