@@ -8,7 +8,7 @@
 import UIKit
 
 class NavigationManager {
-    func navigateToLogin() {
+    static func navigateToLogin() {
         DispatchQueue.main.async {
             let tabBarController = LoginViewController()
             
@@ -21,7 +21,7 @@ class NavigationManager {
         }
     }
 
-    func navigateToTabView() {
+    static func navigateToTabView() {
         DispatchQueue.main.async {
             let tabBarController = TabViewController()
             

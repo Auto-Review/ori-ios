@@ -26,6 +26,7 @@
 		5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */; };
 		5760BEFE2CB8E67300A94068 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BEFD2CB8E67300A94068 /* NaverThirdPartyLogin */; };
 		5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BF012CBD087500A94068 /* KeychainSwift */; };
+		577758892D83B02A00EB464F /* LogoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577758882D83B02900EB464F /* LogoutManager.swift */; };
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
 		57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */; };
 		57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */; };
@@ -70,6 +71,7 @@
 		5729F6D52CDB91FC00FB9ADC /* DisplaySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsViewController.swift; sourceTree = "<group>"; };
 		5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		577758882D83B02900EB464F /* LogoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutManager.swift; sourceTree = "<group>"; };
 		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
 		57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewModel.swift; sourceTree = "<group>"; };
 		57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNetwork.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		5719E7E02D77F15400C3D9B8 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				577758882D83B02900EB464F /* LogoutManager.swift */,
 				5719E7EF2D7993CA00C3D9B8 /* NavigationManager.swift */,
 				5719E7ED2D7988B300C3D9B8 /* KeychainManager.swift */,
 			);
@@ -375,6 +378,7 @@
 				571F88292D773DBD00188226 /* TIL.swift in Sources */,
 				5719E7F02D79940800C3D9B8 /* NavigationManager.swift in Sources */,
 				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
+				577758892D83B02A00EB464F /* LogoutManager.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */,

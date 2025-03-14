@@ -21,5 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        LogoutManager.checkAndHandleTokenExpiration()
+    }
 }
 
