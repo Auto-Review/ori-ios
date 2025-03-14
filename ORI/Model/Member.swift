@@ -18,3 +18,9 @@ struct Member: Decodable {
     let email: String
     let nickname: String
 }
+
+struct TokenResponse: Decodable {
+    let status: String
+    let data: String
+    let message: String
+}

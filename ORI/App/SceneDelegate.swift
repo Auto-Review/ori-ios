@@ -21,5 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        if KeychainManager.load(key: "refreshToken") != nil {
+            LogoutManager.checkAndHandleTokenExpiration()
+        }
+    }
+
 }
 
