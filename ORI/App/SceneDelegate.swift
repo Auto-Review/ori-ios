@@ -23,7 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        LogoutManager.checkAndHandleTokenExpiration()
+        if KeychainManager.load(key: "refreshToken") != nil {
+            LogoutManager.checkAndHandleTokenExpiration()
+        }
     }
+
 }
 
