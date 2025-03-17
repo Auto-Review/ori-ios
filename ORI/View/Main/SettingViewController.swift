@@ -36,8 +36,6 @@ class SettingViewController: UIViewController {
     @objc func fetchTokensFromKeychain() {
         if let accessToken = KeychainManager.load(key: "accessToken"),
            let refreshToken = KeychainManager.load(key: "refreshToken") {
-            print("Access Token: \(accessToken)")
-            print("Refresh Token: \(refreshToken)")
         } else {
             print("Tokens not found in Keychain")
         }
