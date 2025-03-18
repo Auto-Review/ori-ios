@@ -10,27 +10,44 @@ import UIKit
 class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let viewModel = TILListViewModel()
     
+    private let noPostsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "작성된 게시글이 없습니다."
+        label.textColor = .gray
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mainNavigationBar()
         setupTableView()
         setupRefreshControl()
+        view.addSubview(noPostsLabel)
+        
+        NSLayoutConstraint.activate([
+            noPostsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        loadDataAndUpdateUI()
     }
-
+    
     func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         viewModel.tableView.refreshControl = refreshControl
     }
-
+    
     @objc func refreshData() {
-        viewModel.loadTILList()
-        viewModel.tableView.refreshControl?.endRefreshing()
+        loadDataAndUpdateUI()
     }
     
     func setupTableView() {
-        viewModel.loadTILList()
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
         viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
@@ -46,5 +63,18 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         let post = viewModel.posts[indexPath.row]
         cell.textLabel?.text = post.title
         return cell
+    }
+    
+    private func updateNoPostsLabelVisibility() {
+        noPostsLabel.isHidden = !viewModel.posts.isEmpty
+    }
+    
+    private func loadDataAndUpdateUI() {
+        viewModel.loadTILList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.viewModel.tableView.reloadData()
+            }
+        }
     }
 }
