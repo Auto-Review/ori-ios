@@ -86,3 +86,30 @@ func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
             }
         }
 }
+
+func updateMyInfo(id: Int, nickname: String) {
+    let url = "http://\(NetworkConstants.baseURL)/profile"
+    
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
+        print("❌ Access Token이 없습니다.")
+        return
+    }
+    
+    let headers: HTTPHeaders = [
+        "Authorization": accessToken,
+        "Content-Type": "application/json"
+    ]
+    
+    let parameters: [String: Any] = ["id": id, "nickname": nickname]
+    
+    AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        .validate(statusCode: 200..<300)
+        .responseDecodable(of: ProfileResponse.self) { response in
+            switch response.result {
+            case .success(let data):
+                print("✅ 프로필 업데이트 성공: \(data)")
+            case .failure(let error):
+                print("❌ 업데이트 실패: \(error.localizedDescription)")
+            }
+        }
+}

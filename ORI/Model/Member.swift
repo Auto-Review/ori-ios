@@ -24,3 +24,9 @@ struct TokenResponse: Decodable {
     let data: String
     let message: String
 }
+
+struct ProfileResponse: Decodable {
+    let status: String
+    let data: Int
+    let message: String
+}
