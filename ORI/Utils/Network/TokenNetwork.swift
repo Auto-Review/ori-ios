@@ -26,12 +26,17 @@ class TokenNetwork {
                     if let accessToken = httpResponse.headers["accesstoken"],
                        let refreshToken = httpResponse.headers["refreshtoken"] {
                         
+                        let cleanedAccessToken = accessToken.replacingOccurrences(of: "Bearer ", with: "")
+                        
+                        print("Access Token: \(cleanedAccessToken)")
+                        print("Refresh Token: \(refreshToken)")
+                        
                         // 리프레시 토큰 만료시간 저장
                         let expiresIn: TimeInterval = 21600
                         let expirationDate = Date().addingTimeInterval(expiresIn)
                         let expirationTimestamp = expirationDate.timeIntervalSince1970
                         
-                        if KeychainManager.save("accessToken", accessToken) && KeychainManager.save("refreshToken", refreshToken) && KeychainManager.save("refreshTokenExpiration", "\(expirationTimestamp)") {
+                        if KeychainManager.save("accessToken", cleanedAccessToken) && KeychainManager.save("refreshToken", refreshToken) && KeychainManager.save("refreshTokenExpiration", "\(expirationTimestamp)") {
                             print("키체인 저장완료")
                         }
                     } else {
@@ -70,7 +75,9 @@ class TokenNetwork {
                     if let newAccessToken = response.response?.headers["accesstoken"],
                        let newRefreshToken = response.response?.headers["refreshtoken"] {
                         
-                        if KeychainManager.save("accessToken", newAccessToken) &&
+                        let cleanedAccessToken = newAccessToken.replacingOccurrences(of: "Bearer ", with: "")
+                        
+                        if KeychainManager.save("accessToken", cleanedAccessToken) &&
                             KeychainManager.save("refreshToken", newRefreshToken) {
                             print("새로운 키체인 저장완료")
                         }

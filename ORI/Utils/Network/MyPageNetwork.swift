@@ -19,7 +19,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
     let parameters: [String: Any] = ["page": page, "size": size]
     
     let headers: HTTPHeaders = [
-        "Authorization": "\(token)",
+        "Authorization": "Bearer \(token)",
         "Content-Type": "application/json"
     ]
     
@@ -52,7 +52,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
     let parameters: [String: Any] = ["page": page, "size": size]
     
     let headers: HTTPHeaders = [
-        "Authorization": "\(token)",
+        "Authorization": "Bearer \(token)",
         "Content-Type": "application/json"
     ]
     
@@ -83,7 +83,7 @@ func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
     }
     
     let headers: HTTPHeaders = [
-        "Authorization": "\(token)",
+        "Authorization": "Bearer \(token)",
         "Content-Type": "application/json"
     ]
     
