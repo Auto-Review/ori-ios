@@ -29,14 +29,8 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
             switch response.result {
             case .success(let data):
                 completion(.success(data.data.dtoList))
-            case .failure(let error):
-                if let responseCode = response.response?.statusCode, responseCode == 401 {
-                    print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
-                    TokenNetwork.reissuedTokenFromServer()
-                } else {
-                    print("❌ Error fetching posts: \(error)")
-                    completion(.failure(error))
-                }
+            case .failure:
+                NetworkConstants.handleError(response: response, completion: completion)
             }
         }
 }
@@ -62,14 +56,8 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
             switch response.result {
             case .success(let data):
                 completion(.success(data.data.dtoList))
-            case .failure(let error):
-                if let responseCode = response.response?.statusCode, responseCode == 401 {
-                    print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
-                    TokenNetwork.reissuedTokenFromServer()
-                } else {
-                    print("❌ Error fetching posts: \(error)")
-                    completion(.failure(error))
-                }
+            case .failure:
+                NetworkConstants.handleError(response: response, completion: completion)
             }
         }
 }
@@ -93,14 +81,8 @@ func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
             switch response.result {
             case .success(let data):
                 completion(.success(data.data))
-            case .failure(let error):
-                if let responseCode = response.response?.statusCode, responseCode == 401 {
-                    print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
-                    TokenNetwork.reissuedTokenFromServer()
-                } else {
-                    print("❌ Error fetching posts: \(error)")
-                    completion(.failure(error))
-                }
+            case .failure:
+                NetworkConstants.handleError(response: response, completion: completion)
             }
         }
 }
