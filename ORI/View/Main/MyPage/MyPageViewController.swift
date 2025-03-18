@@ -143,6 +143,7 @@ class MyPageViewController: UIViewController {
         if isEditing {
             view.endEditing(true) // 키보드 닫기
             editButton.setImage(UIImage(systemName: "pencil"), for: .normal)
+            updateMyInfo(id: viewModel.myInfo.id, nickname: nameTextField.text ?? "user")
         } else {
             editButton.setImage(UIImage(systemName: "tray.and.arrow.down.fill"), for: .normal)
         }

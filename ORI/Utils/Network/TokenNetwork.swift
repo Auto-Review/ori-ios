@@ -26,7 +26,9 @@ class TokenNetwork {
                     if let accessToken = httpResponse.headers["accesstoken"],
                        let refreshToken = httpResponse.headers["refreshtoken"] {
                         
-                        // 리프레시 토큰 만료시간 저장
+                        print("Access Token: \(accessToken)")
+                        print("Refresh Token: \(refreshToken)")
+                        
                         let expiresIn: TimeInterval = 21600
                         let expirationDate = Date().addingTimeInterval(expiresIn)
                         let expirationTimestamp = expirationDate.timeIntervalSince1970
@@ -70,9 +72,12 @@ class TokenNetwork {
                     if let newAccessToken = response.response?.headers["accesstoken"],
                        let newRefreshToken = response.response?.headers["refreshtoken"] {
                         
-                        if KeychainManager.save("accessToken", newAccessToken) &&
-                            KeychainManager.save("refreshToken", newRefreshToken) {
-                            print("새로운 키체인 저장완료")
+                        let expiresIn: TimeInterval = 21600
+                        let expirationDate = Date().addingTimeInterval(expiresIn)
+                        let newExpirationTimestamp = expirationDate.timeIntervalSince1970
+                        
+                        if KeychainManager.save("accessToken", newAccessToken) && KeychainManager.save("refreshToken", newRefreshToken) && KeychainManager.save("refreshTokenExpiration", "\(newExpirationTimestamp)") {
+                            print("new 키체인 저장완료")
                         }
                     }
                 case .failure(let error):

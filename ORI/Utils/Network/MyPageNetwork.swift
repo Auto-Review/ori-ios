@@ -10,7 +10,7 @@ import Alamofire
 
 func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/til/own"
-    guard let token = KeychainManager.load(key: "accessToken"), !token.isEmpty else {
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
         return
@@ -19,7 +19,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
     let parameters: [String: Any] = ["page": page, "size": size]
     
     let headers: HTTPHeaders = [
-        "Authorization": "\(token)",
+        "Authorization": accessToken,
         "Content-Type": "application/json"
     ]
     
@@ -29,21 +29,15 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
             switch response.result {
             case .success(let data):
                 completion(.success(data.data.dtoList))
-            case .failure(let error):
-                if let responseCode = response.response?.statusCode, responseCode == 401 {
-                    print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
-                    TokenNetwork.reissuedTokenFromServer()
-                } else {
-                    print("❌ Error fetching posts: \(error)")
-                    completion(.failure(error))
-                }
+            case .failure:
+                NetworkConstants.handleError(response: response, completion: completion)
             }
         }
 }
 
 func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/code/own"
-    guard let token = KeychainManager.load(key: "accessToken"), !token.isEmpty else {
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
         return
@@ -52,7 +46,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
     let parameters: [String: Any] = ["page": page, "size": size]
     
     let headers: HTTPHeaders = [
-        "Authorization": "\(token)",
+        "Authorization": accessToken,
         "Content-Type": "application/json"
     ]
     
@@ -62,28 +56,22 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
             switch response.result {
             case .success(let data):
                 completion(.success(data.data.dtoList))
-            case .failure(let error):
-                if let responseCode = response.response?.statusCode, responseCode == 401 {
-                    print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
-                    TokenNetwork.reissuedTokenFromServer()
-                } else {
-                    print("❌ Error fetching posts: \(error)")
-                    completion(.failure(error))
-                }
+            case .failure:
+                NetworkConstants.handleError(response: response, completion: completion)
             }
         }
 }
 
 func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/profile/info"
-    guard let token = KeychainManager.load(key: "accessToken"), !token.isEmpty else {
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
         return
     }
     
     let headers: HTTPHeaders = [
-        "Authorization": "\(token)",
+        "Authorization": accessToken,
         "Content-Type": "application/json"
     ]
     
@@ -93,14 +81,35 @@ func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
             switch response.result {
             case .success(let data):
                 completion(.success(data.data))
+            case .failure:
+                NetworkConstants.handleError(response: response, completion: completion)
+            }
+        }
+}
+
+func updateMyInfo(id: Int, nickname: String) {
+    let url = "http://\(NetworkConstants.baseURL)/profile"
+    
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
+        print("❌ Access Token이 없습니다.")
+        return
+    }
+    
+    let headers: HTTPHeaders = [
+        "Authorization": accessToken,
+        "Content-Type": "application/json"
+    ]
+    
+    let parameters: [String: Any] = ["id": id, "nickname": nickname]
+    
+    AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        .validate(statusCode: 200..<300)
+        .responseDecodable(of: ProfileResponse.self) { response in
+            switch response.result {
+            case .success(let data):
+                print("✅ 프로필 업데이트 성공: \(data)")
             case .failure(let error):
-                if let responseCode = response.response?.statusCode, responseCode == 401 {
-                    print("🔄 401 Unauthorized 발생 → Access Token 갱신 시도")
-                    TokenNetwork.reissuedTokenFromServer()
-                } else {
-                    print("❌ Error fetching posts: \(error)")
-                    completion(.failure(error))
-                }
+                print("❌ 업데이트 실패: \(error.localizedDescription)")
             }
         }
 }
