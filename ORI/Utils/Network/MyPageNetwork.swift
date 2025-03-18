@@ -10,7 +10,7 @@ import Alamofire
 
 func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/til/own"
-    guard let token = KeychainManager.load(key: "accessToken"), !token.isEmpty else {
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
         return
@@ -19,7 +19,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
     let parameters: [String: Any] = ["page": page, "size": size]
     
     let headers: HTTPHeaders = [
-        "Authorization": "Bearer \(token)",
+        "Authorization": accessToken,
         "Content-Type": "application/json"
     ]
     
@@ -43,7 +43,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
 
 func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/code/own"
-    guard let token = KeychainManager.load(key: "accessToken"), !token.isEmpty else {
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
         return
@@ -52,7 +52,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
     let parameters: [String: Any] = ["page": page, "size": size]
     
     let headers: HTTPHeaders = [
-        "Authorization": "Bearer \(token)",
+        "Authorization": accessToken,
         "Content-Type": "application/json"
     ]
     
@@ -76,14 +76,14 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
 
 func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/profile/info"
-    guard let token = KeychainManager.load(key: "accessToken"), !token.isEmpty else {
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
         return
     }
     
     let headers: HTTPHeaders = [
-        "Authorization": "Bearer \(token)",
+        "Authorization": accessToken,
         "Content-Type": "application/json"
     ]
     
