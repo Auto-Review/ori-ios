@@ -46,6 +46,7 @@ class SettingViewController: UIViewController {
     @objc func reissuedKeychain() {
         if let accessToken = KeychainManager.load(key: "accessToken") {
            TokenNetwork.reissuedTokenFromServer()
+            print("성공 \(accessToken)")
         } else {
             print("Tokens not found in Keychain")
         }

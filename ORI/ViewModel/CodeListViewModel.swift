@@ -10,7 +10,7 @@ import UIKit
 
 class CodeListViewModel {
     var posts: [Code] = []
-    let tableView = UITableView()
+    var tableView = UITableView()
     
     func loadCodeList() {
         fetchCodeList(page: 0, size: 10) { [weak self] result in

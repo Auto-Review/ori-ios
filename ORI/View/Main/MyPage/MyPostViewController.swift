@@ -61,6 +61,10 @@ class MyPostViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfPosts()
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = CustomTableViewCell()
@@ -107,10 +111,9 @@ class CustomTableViewCell: UITableViewCell {
             
             reviewCntLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             reviewCntLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10),
-            reviewCntLabel.trailingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: -30),
             
             dateLabel.centerYAnchor.constraint(equalTo: reviewCntLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor, constant: 30),
             dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2)
         ])
     }

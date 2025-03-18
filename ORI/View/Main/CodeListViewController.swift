@@ -15,13 +15,25 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         
         mainNavigationBar()
         setupTableView()
-        viewModel.loadCodeList()
+        setupRefreshControl()
     }
-    
+
+    func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        viewModel.tableView.refreshControl = refreshControl
+    }
+
+    @objc func refreshData() {
+        viewModel.loadCodeList()
+        viewModel.tableView.refreshControl?.endRefreshing()
+    }
+
     func setupTableView() {
+        viewModel.loadCodeList()
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PostCell")
+        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
         view.addSubview(viewModel.tableView)
     }
     
@@ -30,7 +42,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CodePostCell", for: indexPath)
         let post = viewModel.posts[indexPath.row]
         cell.textLabel?.text = post.title
         return cell
