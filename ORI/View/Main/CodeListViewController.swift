@@ -74,6 +74,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.viewModel.tableView.reloadData()
+                self?.viewModel.tableView.refreshControl?.endRefreshing()
             }
         }
     }

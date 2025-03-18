@@ -74,6 +74,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.viewModel.tableView.reloadData()
+                self?.viewModel.tableView.refreshControl?.endRefreshing()
             }
         }
     }
