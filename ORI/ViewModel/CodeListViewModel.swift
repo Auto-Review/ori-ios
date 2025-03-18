@@ -10,7 +10,9 @@ import UIKit
 
 class CodeListViewModel {
     var posts: [Code] = []
-    let tableView = UITableView()
+    var tableView = UITableView()
+    
+    var didUpdateData: (() -> Void)?
     
     func loadCodeList() {
         fetchCodeList(page: 0, size: 10) { [weak self] result in
@@ -18,6 +20,7 @@ class CodeListViewModel {
             case .success(let posts):
                 self?.posts = posts
                 self?.tableView.reloadData()
+                self?.didUpdateData?()
             case .failure(let error):
                 print("Error fetching posts: \(error)")
             }

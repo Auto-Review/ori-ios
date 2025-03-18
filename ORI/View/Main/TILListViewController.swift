@@ -15,13 +15,25 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         mainNavigationBar()
         setupTableView()
+        setupRefreshControl()
+    }
+
+    func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        viewModel.tableView.refreshControl = refreshControl
+    }
+
+    @objc func refreshData() {
         viewModel.loadTILList()
+        viewModel.tableView.refreshControl?.endRefreshing()
     }
     
     func setupTableView() {
+        viewModel.loadTILList()
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PostCell")
+        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
         view.addSubview(viewModel.tableView)
     }
     
@@ -30,7 +42,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TILPostCell", for: indexPath)
         let post = viewModel.posts[indexPath.row]
         cell.textLabel?.text = post.title
         return cell
