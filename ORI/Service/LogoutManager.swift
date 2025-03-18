@@ -28,7 +28,7 @@ class LogoutManager {
     }
     
     static func logout() {
-        KeychainManager.delete(key: "accesstoken")
+        KeychainManager.delete(key: "accessToken")
         KeychainManager.delete(key: "refreshToken")
         KeychainManager.delete(key: "refreshTokenExpiration")
         
