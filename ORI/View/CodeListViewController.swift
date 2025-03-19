@@ -51,10 +51,6 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
         viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
-
-        viewModel.tableView.layoutMargins = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50)
-        viewModel.tableView.separatorInset = viewModel.tableView.layoutMargins
-
         view.addSubview(viewModel.tableView)
     }
     

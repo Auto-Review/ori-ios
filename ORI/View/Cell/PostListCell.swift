@@ -33,7 +33,7 @@ class PostListCell: UITableViewCell {
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 45),
             
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             reviewCntLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             reviewCntLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10),
@@ -41,7 +41,7 @@ class PostListCell: UITableViewCell {
             
             dateLabel.centerYAnchor.constraint(equalTo: reviewCntLabel.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor, constant: 20),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             dateLabel.widthAnchor.constraint(equalToConstant: 90)
         ])
     }
