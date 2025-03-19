@@ -13,7 +13,7 @@ extension UIViewController {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = text
-            label.font = UIFont.blackhansans(ofSize: 30)
+            label.font = UIFont.blackhansans(ofSize: 25)
             return label
         }()
         navigationItem.titleView = titleLabel
