@@ -59,9 +59,10 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TILPostCell", for: indexPath)
-        let post = viewModel.posts[indexPath.row]
-        cell.textLabel?.text = post.title
+        let cell = PostListCell()
+        cell.titleLabel.text = viewModel.posts[indexPath.row].title
+        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
+        cell.reviewCntLabel.text = "RE: 3"
         return cell
     }
     
