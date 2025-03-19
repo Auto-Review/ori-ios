@@ -129,22 +129,23 @@ class MyViewController: UIViewController {
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
-        textField.setContentHuggingPriority(.defaultLow, for: .horizontal) // 텍스트 필드가 남은 공간을 차지
+        textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
         return stackView
     }
     
     @objc func toggleEditMode() {
-        let isEditing = emailTextField.isUserInteractionEnabled
-        emailTextField.isUserInteractionEnabled.toggle()
+        let isEditing = nameTextField.isUserInteractionEnabled
         nameTextField.isUserInteractionEnabled.toggle()
         bioTextField.isUserInteractionEnabled.toggle()
         
         if isEditing {
             view.endEditing(true) // 키보드 닫기
             editButton.setImage(UIImage(systemName: "pencil"), for: .normal)
+            nameTextField.backgroundColor = .clear
             updateMyProfile(id: viewModel.myInfo.id, nickname: nameTextField.text ?? "user")
         } else {
+            nameTextField.backgroundColor = .white
             editButton.setImage(UIImage(systemName: "tray.and.arrow.down.fill"), for: .normal)
         }
     }
