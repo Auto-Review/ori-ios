@@ -106,8 +106,6 @@ class MyPostViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
-
-
 class CustomTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let dateLabel = UILabel()
@@ -133,14 +131,15 @@ class CustomTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            titleLabel.widthAnchor.constraint(equalToConstant: 200),
             
             reviewCntLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             reviewCntLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10),
+            reviewCntLabel.widthAnchor.constraint(equalToConstant: 40),
             
             dateLabel.centerYAnchor.constraint(equalTo: reviewCntLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor, constant: 30),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2)
+            dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor, constant: 20),
+            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            dateLabel.widthAnchor.constraint(equalToConstant: 90)
         ])
     }
     

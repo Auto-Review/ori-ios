@@ -42,7 +42,7 @@ class MyPageViewModel {
     }
     
     func fetchMyData() {
-        fetchMyInfo() { [weak self] result in
+        fetchMyProfile() { [weak self] result in
                 switch result {
                 case .success(let posts):
                     self?.myInfo = posts
