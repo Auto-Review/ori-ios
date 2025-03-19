@@ -19,7 +19,7 @@ class MyPageViewModel {
     var didUpdateMyData: (() -> Void)?
     var didFailWithError: ((Error) -> Void)?
     
-    func fetchData() {
+    func fetchPostData() {
         fetchMyTILList(page: 0, size: 10) { [weak self] result in
             switch result {
             case .success(let posts):

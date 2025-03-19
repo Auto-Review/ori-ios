@@ -43,7 +43,7 @@ class MyPostListViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         setupUI()
         setupViewModel()
-        viewModel.fetchData()
+        viewModel.fetchPostData()
     }
 
     private func setupUI() {

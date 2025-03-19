@@ -143,7 +143,7 @@ class MyTabViewController: UIViewController {
         } else {
             viewModel.isCode = false
         }
-        viewModel.fetchData()
+        viewModel.fetchPostData()
     }
     
     private func addChildViewController(isCode: Bool) {
