@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  MyViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 10/5/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+class MyViewController: UIViewController {
     var viewModel = MyPageViewModel()
     
     lazy var myPageMainTextLabel: UILabel = {

@@ -19,12 +19,6 @@ struct Member: Decodable {
     let nickname: String
 }
 
-struct TokenResponse: Decodable {
-    let status: String
-    let data: String
-    let message: String
-}
-
 struct ProfileResponse: Decodable {
     let status: String
     let data: Int

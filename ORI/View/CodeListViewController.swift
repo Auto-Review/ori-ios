@@ -34,7 +34,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-        loadDataAndUpdateUI() // 데이터 로딩 후 UI 업데이트
+        loadDataAndUpdateUI()
     }
     
     func setupRefreshControl() {
@@ -51,6 +51,10 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
         viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
+
+        viewModel.tableView.layoutMargins = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50)
+        viewModel.tableView.separatorInset = viewModel.tableView.layoutMargins
+
         view.addSubview(viewModel.tableView)
     }
     
@@ -59,9 +63,10 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CodePostCell", for: indexPath)
-        let post = viewModel.posts[indexPath.row]
-        cell.textLabel?.text = post.title
+        let cell = PostListCell()
+        cell.titleLabel.text = viewModel.posts[indexPath.row].title
+        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
+        cell.reviewCntLabel.text = "RE: 3"
         return cell
     }
     
