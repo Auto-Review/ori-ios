@@ -73,8 +73,8 @@ class MyTabViewController: UIViewController {
         return underLineView.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor)
     }()
     
-    private lazy var myPostVC: MyPostViewController = {
-        return MyPostViewController(viewModel: self.viewModel)
+    private lazy var myPostVC: MyPostListViewController = {
+        return MyPostListViewController(viewModel: self.viewModel)
     }()
     
     private lazy var myPostListView: UIView = {
@@ -119,8 +119,8 @@ class MyTabViewController: UIViewController {
             underBackgroundLineView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
             myPostListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
-            myPostListView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            myPostListView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            myPostListView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            myPostListView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             myPostListView.heightAnchor.constraint(equalToConstant: 420),
         ])
     }
@@ -143,7 +143,7 @@ class MyTabViewController: UIViewController {
         } else {
             viewModel.isCode = false
         }
-        viewModel.fetchData()
+        viewModel.fetchPostData()
     }
     
     private func addChildViewController(isCode: Bool) {

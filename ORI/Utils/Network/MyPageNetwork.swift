@@ -62,7 +62,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
         }
 }
 
-func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
+func fetchMyProfile(completion: @escaping (Result<Member, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/profile/info"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
@@ -87,7 +87,7 @@ func fetchMyInfo(completion: @escaping (Result<Member, Error>) -> Void) {
         }
 }
 
-func updateMyInfo(id: Int, nickname: String) {
+func updateMyProfile(id: Int, nickname: String) {
     let url = "http://\(NetworkConstants.baseURL)/profile"
     
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {

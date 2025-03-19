@@ -14,14 +14,11 @@ class TabViewController: UIViewController {
     let vc1 = UINavigationController(rootViewController: CodeListViewController())
     let vc2 = UINavigationController(rootViewController: TILListViewController())
     let vc3 = UINavigationController(rootViewController: MainViewController())
-    let vc4 = UINavigationController(rootViewController: MyPageViewController())
+    let vc4 = UINavigationController(rootViewController: MyViewController())
     let vc5 = UINavigationController(rootViewController: SettingViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // ✅ 네비게이션 바 설정은 viewDidLoad에서 직접 하지 않고, 네비게이션 컨트롤러 내부에서 처리
-        setupNavigationBar()
         
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen

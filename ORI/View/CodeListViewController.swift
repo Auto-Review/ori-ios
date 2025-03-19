@@ -1,5 +1,5 @@
 //
-//  TILListViewController.swift
+//  CodeListViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 10/5/24.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let viewModel = TILListViewModel()
+class CodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    let viewModel = CodeListViewModel()
     
     private let noPostsLabel: UILabel = {
         let label = UILabel()
@@ -50,7 +50,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     func setupTableView() {
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
+        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
         view.addSubview(viewModel.tableView)
     }
     
@@ -59,9 +59,10 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TILPostCell", for: indexPath)
-        let post = viewModel.posts[indexPath.row]
-        cell.textLabel?.text = post.title
+        let cell = PostListCell()
+        cell.titleLabel.text = viewModel.posts[indexPath.row].title
+        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
+        cell.reviewCntLabel.text = "RE: 3"
         return cell
     }
     
@@ -70,7 +71,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadTILList { [weak self] in
+        viewModel.loadCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.viewModel.tableView.reloadData()
