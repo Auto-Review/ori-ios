@@ -73,8 +73,8 @@ class MyTabViewController: UIViewController {
         return underLineView.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor)
     }()
     
-    private lazy var myPostVC: MyPostViewController = {
-        return MyPostViewController(viewModel: self.viewModel)
+    private lazy var myPostVC: MyPostListViewController = {
+        return MyPostListViewController(viewModel: self.viewModel)
     }()
     
     private lazy var myPostListView: UIView = {

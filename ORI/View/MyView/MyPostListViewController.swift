@@ -1,5 +1,5 @@
 //
-//  MyPostViewController.swift
+//  MyPostListViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 3/10/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyPostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyPostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var viewModel: MyPageViewModel
     
     private let noPostsLabel: UILabel = {
