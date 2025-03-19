@@ -143,7 +143,9 @@ class MyViewController: UIViewController {
             view.endEditing(true) // 키보드 닫기
             editButton.setImage(UIImage(systemName: "pencil"), for: .normal)
             nameTextField.backgroundColor = .clear
-            updateMyProfile(id: viewModel.myInfo.id, nickname: nameTextField.text ?? "user")
+            if viewModel.myInfo.nickname != nameTextField.text {
+                updateMyProfile(id: viewModel.myInfo.id, nickname: nameTextField.text ?? "user")
+            }
         } else {
             nameTextField.backgroundColor = .white
             editButton.setImage(UIImage(systemName: "tray.and.arrow.down.fill"), for: .normal)
