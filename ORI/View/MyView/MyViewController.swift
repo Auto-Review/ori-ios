@@ -66,7 +66,6 @@ class MyViewController: UIViewController {
         mainNavigationBar()
         setupConstraints()
         addMyTabView()
-        
         setupViewModel()
         viewModel.fetchMyData()
     }
@@ -125,12 +124,12 @@ class MyViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.spacing = 8
-
+        
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
-
+        
         return stackView
     }
     
@@ -156,16 +155,16 @@ class MyViewController: UIViewController {
         let myTabVC = MyTabViewController(viewModel: viewModel)
         addChild(myTabVC)
         myTabVC.view.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(myTabVC.view)
-
+        
         NSLayoutConstraint.activate([
             myTabVC.view.topAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor, constant: 40),
             myTabVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             myTabVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             myTabVC.view.heightAnchor.constraint(equalToConstant: 200)
         ])
-
+        
         myTabVC.didMove(toParent: self)
     }
 }

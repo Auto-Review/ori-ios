@@ -28,11 +28,12 @@
 		576353B72D8A487000910917 /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353B62D8A487000910917 /* PostListCell.swift */; };
 		576353BB2D8A5D2100910917 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353BA2D8A5D2100910917 /* UIImage+Extension.swift */; };
 		576353BD2D8A5D9B00910917 /* ModalNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353BC2D8A5D9B00910917 /* ModalNavigationBar.swift */; };
+		576353D32D8A975500910917 /* MyCodeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353D22D8A975500910917 /* MyCodeListViewController.swift */; };
+		576353D52D8A976700910917 /* MyTILListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353D42D8A976700910917 /* MyTILListViewController.swift */; };
 		577758892D83B02A00EB464F /* LogoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577758882D83B02900EB464F /* LogoutManager.swift */; };
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
 		57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */; };
 		57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */; };
-		57DC453F2D7E866200E68B5A /* MyPostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC453E2D7E865000E68B5A /* MyPostListViewController.swift */; };
 		57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E867DE2D6C9D4E00D87D8E /* MainNavigationBar.swift */; };
 		57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9DED2CAFADE60036E5D8 /* AppDelegate.swift */; };
 		57EB9DF02CAFADE60036E5D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9DEF2CAFADE60036E5D8 /* SceneDelegate.swift */; };
@@ -75,11 +76,12 @@
 		576353B62D8A487000910917 /* PostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
 		576353BA2D8A5D2100910917 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		576353BC2D8A5D9B00910917 /* ModalNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalNavigationBar.swift; sourceTree = "<group>"; };
+		576353D22D8A975500910917 /* MyCodeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCodeListViewController.swift; sourceTree = "<group>"; };
+		576353D42D8A976700910917 /* MyTILListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTILListViewController.swift; sourceTree = "<group>"; };
 		577758882D83B02900EB464F /* LogoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutManager.swift; sourceTree = "<group>"; };
 		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
 		57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewModel.swift; sourceTree = "<group>"; };
 		57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNetwork.swift; sourceTree = "<group>"; };
-		57DC453E2D7E865000E68B5A /* MyPostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostListViewController.swift; sourceTree = "<group>"; };
 		57E867DE2D6C9D4E00D87D8E /* MainNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationBar.swift; sourceTree = "<group>"; };
 		57EB9DEA2CAFADE60036E5D8 /* ORI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57EB9DED2CAFADE60036E5D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -156,9 +158,10 @@
 		571F88232D75B85700188226 /* MyView */ = {
 			isa = PBXGroup;
 			children = (
-				57DC453E2D7E865000E68B5A /* MyPostListViewController.swift */,
 				57EB9E112CB164480036E5D8 /* MyViewController.swift */,
 				571F88212D75B6ED00188226 /* MyTabViewController.swift */,
+				576353D22D8A975500910917 /* MyCodeListViewController.swift */,
+				576353D42D8A976700910917 /* MyTILListViewController.swift */,
 			);
 			path = MyView;
 			sourceTree = "<group>";
@@ -373,7 +376,6 @@
 				57E867DF2D6C9D5900D87D8E /* MainNavigationBar.swift in Sources */,
 				5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */,
 				571F881E2D759FC000188226 /* Extension+Font.swift in Sources */,
-				57DC453F2D7E866200E68B5A /* MyPostListViewController.swift in Sources */,
 				57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */,
 				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
 				571F88272D773C8A00188226 /* TILNetwork.swift in Sources */,
@@ -382,10 +384,12 @@
 				576353BD2D8A5D9B00910917 /* ModalNavigationBar.swift in Sources */,
 				57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */,
 				571F88292D773DBD00188226 /* TIL.swift in Sources */,
+				576353D32D8A975500910917 /* MyCodeListViewController.swift in Sources */,
 				5719E7F02D79940800C3D9B8 /* NavigationManager.swift in Sources */,
 				571F88222D75B6ED00188226 /* MyTabViewController.swift in Sources */,
 				577758892D83B02A00EB464F /* LogoutManager.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
+				576353D52D8A976700910917 /* MyTILListViewController.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,

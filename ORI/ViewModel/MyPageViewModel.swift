@@ -10,33 +10,36 @@ import UIKit
 
 class MyPageViewModel {
     var isCode = true
-    private var myTILPosts: [TIL] = []
-    private var myCodePosts: [Code] = []
+    
+    var myTILPosts: [TIL] = []
+    var myCodePosts: [Code] = []
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
-
-
-    var didUpdateData: (() -> Void)?
+    
+    var tableView = UITableView()
+    
     var didUpdateMyData: (() -> Void)?
     var didFailWithError: ((Error) -> Void)?
-    
-    func fetchPostData() {
-        fetchMyTILList(page: 0, size: 10) { [weak self] result in
-            switch result {
-            case .success(let posts):
-                self?.myTILPosts = posts
-                self?.didUpdateData?()
-            case .failure(let error):
-                self?.didFailWithError?(error)
-            }
-        }
         
+    func loadMyCodeList(completion: @escaping () -> Void) {
         fetchMyCodeList(page: 0, size: 10) { [weak self] result in
             switch result {
             case .success(let posts):
                 self?.myCodePosts = posts
-                self?.didUpdateData?()
+                completion()
             case .failure(let error):
-                self?.didFailWithError?(error)
+                completion()
+            }
+        }
+    }
+    
+    func loadMyTILList(completion: @escaping () -> Void) {
+        fetchMyTILList(page: 0, size: 10) { [weak self] result in
+            switch result {
+            case .success(let posts):
+                self?.myTILPosts = posts
+                completion()
+            case .failure(_):
+                completion()
             }
         }
     }
