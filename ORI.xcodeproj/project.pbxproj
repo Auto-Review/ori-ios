@@ -243,6 +243,17 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		576354E42D8D0B9700910917 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */,
+				57C35C682CCA228D0083A346 /* TILListViewModel.swift */,
+				57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */,
+				5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		57C35C6A2CCA23240083A346 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,10 +302,10 @@
 		57EB9E012CAFB54A0036E5D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5729F6D22CDB591700FB9ADC /* Components */,
 				57EB9E212CB528230036E5D8 /* LoginViewController.swift */,
 				576354B62D8CF54600910917 /* Navigaion */,
 				576354E32D8D0B2400910917 /* Main */,
-				5729F6D22CDB591700FB9ADC /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,10 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				576354B72D8CF56800910917 /* Navigation */,
-				5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */,
-				57C35C682CCA228D0083A346 /* TILListViewModel.swift */,
-				57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */,
-				5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */,
+				576354E42D8D0B9700910917 /* Main */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
