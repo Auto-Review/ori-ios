@@ -62,9 +62,18 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = NotificationCell()
+        cell.separatorInset = .zero
+        cell.layoutMargins = .zero
         cell.subtitleLabel.text = viewModel.lists[indexPath.row].content
         cell.titleLabel.text = "REVIEW AL \(viewModel.lists[indexPath.row].executeTime.prefix(10).description)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            viewModel.lists.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     private func updateNoPostsLabelVisibility() {

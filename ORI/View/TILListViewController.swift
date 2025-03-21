@@ -60,6 +60,8 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PostListCell()
+        cell.separatorInset = .zero
+        cell.layoutMargins = .zero
         cell.titleLabel.text = viewModel.posts[indexPath.row].title
         cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
         cell.reviewCntLabel.text = "RE: 3"
