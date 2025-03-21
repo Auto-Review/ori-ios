@@ -26,7 +26,7 @@ class MyPageViewModel {
             case .success(let posts):
                 self?.myCodePosts = posts
                 completion()
-            case .failure(let error):
+            case .failure( _):
                 completion()
             }
         }
