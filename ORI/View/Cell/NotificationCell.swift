@@ -8,8 +8,8 @@
 import UIKit
 
 class NotificationCell: UITableViewCell {
-    let titleLabel = UILabel() // 날짜 + 리뷰
-    let subtitleLabel = UILabel() // 제목 (내용)
+    let titleLabel = UILabel()
+    let subtitleLabel = UILabel()
     let iconImage = UIImageView(image: UIImage(systemName: "archivebox"))
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
