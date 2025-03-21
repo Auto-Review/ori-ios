@@ -1,18 +1,18 @@
 //
-//  CodeListViewController.swift
+//  NotificationsViewController.swift
 //  ORI
 //
-//  Created by Song Kim on 10/5/24.
+//  Created by Song Kim on 11/6/24.
 //
 
 import UIKit
 
-class CodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let viewModel = CodeListViewModel()
+class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    let viewModel = NotificationViewModel()
     
     private let noPostsLabel: UILabel = {
         let label = UILabel()
-        label.text = "작성된 게시글이 없습니다."
+        label.text = "받은 알람이 없습니다."
         label.textColor = .gray
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
@@ -24,7 +24,9 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainNavigationBar()
+        view.backgroundColor = .white
+        modalNavigationBar(text: "// AL")
+        
         setupTableView()
         setupRefreshControl()
         view.addSubview(noPostsLabel)
@@ -50,28 +52,36 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     func setupTableView() {
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
+        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
         view.addSubview(viewModel.tableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.posts.count
+        return viewModel.lists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = PostListCell()
-        cell.titleLabel.text = viewModel.posts[indexPath.row].title
-        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+        let cell = NotificationCell()
+        cell.separatorInset = .zero
+        cell.layoutMargins = .zero
+        cell.subtitleLabel.text = viewModel.lists[indexPath.row].content
+        cell.titleLabel.text = "REVIEW AL \(viewModel.lists[indexPath.row].executeTime.prefix(10).description)"
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            viewModel.lists.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     private func updateNoPostsLabelVisibility() {
-        noPostsLabel.isHidden = !viewModel.posts.isEmpty
+        noPostsLabel.isHidden = !viewModel.lists.isEmpty
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadCodeList { [weak self] in
+        viewModel.loadNotiList() { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.viewModel.tableView.reloadData()

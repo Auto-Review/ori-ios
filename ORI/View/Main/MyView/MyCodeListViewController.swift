@@ -1,14 +1,23 @@
 //
-//  TILListViewController.swift
+//  MyCodeListViewController.swift
 //  ORI
 //
-//  Created by Song Kim on 10/5/24.
+//  Created by Song Kim on 3/19/25.
 //
 
 import UIKit
 
-class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let viewModel = TILListViewModel()
+class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var viewModel: MyPageViewModel
+    
+    init(viewModel: MyPageViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let noPostsLabel: UILabel = {
         let label = UILabel()
@@ -50,28 +59,28 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     func setupTableView() {
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
+        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
         view.addSubview(viewModel.tableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.posts.count
+        return viewModel.myCodePosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PostListCell()
-        cell.titleLabel.text = viewModel.posts[indexPath.row].title
-        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
+        cell.titleLabel.text = viewModel.myCodePosts[indexPath.row].title
+        cell.dateLabel.text = viewModel.myCodePosts[indexPath.row].createdDate.prefix(10).description
         cell.reviewCntLabel.text = "RE: 3"
         return cell
     }
     
     private func updateNoPostsLabelVisibility() {
-        noPostsLabel.isHidden = !viewModel.posts.isEmpty
+        noPostsLabel.isHidden = !viewModel.myCodePosts.isEmpty
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadTILList { [weak self] in
+        viewModel.loadMyCodeList() { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.viewModel.tableView.reloadData()

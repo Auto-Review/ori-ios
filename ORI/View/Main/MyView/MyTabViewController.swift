@@ -73,10 +73,6 @@ class MyTabViewController: UIViewController {
         return underLineView.leadingAnchor.constraint(equalTo: segmentControl.leadingAnchor)
     }()
     
-    private lazy var myPostVC: MyPostListViewController = {
-        return MyPostListViewController(viewModel: self.viewModel)
-    }()
-    
     private lazy var myPostListView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +82,7 @@ class MyTabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        changeTabView()
+        addChildViewController(isCode: viewModel.isCode)
     }
     
     func configure() {
@@ -94,9 +90,7 @@ class MyTabViewController: UIViewController {
         containerView.addSubview(segmentControl)
         underBackgroundLineView.addSubview(underLineView)
         containerView.addSubview(underBackgroundLineView)
-        
         view.addSubview(myPostListView)
-        addChildViewController(isCode: viewModel.isCode)
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -118,7 +112,7 @@ class MyTabViewController: UIViewController {
             underBackgroundLineView.heightAnchor.constraint(equalToConstant: 2),
             underBackgroundLineView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
-            myPostListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10),
+            myPostListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 5),
             myPostListView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             myPostListView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             myPostListView.heightAnchor.constraint(equalToConstant: 420),
@@ -143,10 +137,22 @@ class MyTabViewController: UIViewController {
         } else {
             viewModel.isCode = false
         }
-        viewModel.fetchPostData()
+        addChildViewController(isCode: viewModel.isCode)
     }
     
     private func addChildViewController(isCode: Bool) {
+        if let currentVC = children.first {
+            currentVC.view.removeFromSuperview()
+            currentVC.removeFromParent()
+        }
+        
+        let myPostVC: UIViewController
+        if isCode {
+            myPostVC = MyCodeListViewController(viewModel: self.viewModel)
+        } else {
+            myPostVC = MyTILListViewController(viewModel: self.viewModel)
+        }
+        
         addChild(myPostVC)
         myPostVC.view.translatesAutoresizingMaskIntoConstraints = false
         myPostVC.didMove(toParent: self)

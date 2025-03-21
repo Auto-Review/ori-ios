@@ -55,7 +55,8 @@ extension UIViewController {
     }
     
     @objc func notificationButtonTapped() {
-        print("알림 버튼 클릭됨")
+        let notificationVC = UINavigationController(rootViewController: NotificationsViewController())
+        notificationVC.modalPresentationStyle = .overFullScreen
+        present(notificationVC, animated: true, completion: nil)
     }
 }
-
