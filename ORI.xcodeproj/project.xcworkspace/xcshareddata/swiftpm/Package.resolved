@@ -1,13 +1,13 @@
 {
-  "originHash" : "b7c11d8839de52cf8dbe357d9424ef087883cdc2a98cd15cac7f442fcb713145",
+  "originHash" : "36c338386b32d1a00f335e556d19a2382f6cb5243ddb995c4bf0566f1d5baad5",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
-        "version" : "5.9.1"
+        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
+        "version" : "5.10.2"
       }
     },
     {
@@ -65,30 +65,12 @@
       }
     },
     {
-      "identity" : "kakao-ios-sdk",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kakao/kakao-ios-sdk",
-      "state" : {
-        "revision" : "5fcd519edd8ecfa134017fff90cf0d30e0a90919",
-        "version" : "2.22.7"
-      }
-    },
-    {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/evgenyneu/keychain-swift.git",
       "state" : {
         "revision" : "5e1b02b6a9dac2a759a1d5dbc175c86bd192a608",
         "version" : "24.0.0"
-      }
-    },
-    {
-      "identity" : "naveridlogin-sdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/naver/naveridlogin-sdk-ios",
-      "state" : {
-        "branch" : "master",
-        "revision" : "0d89660344926a625824387a130f7e38e0fad2d7"
       }
     },
     {
