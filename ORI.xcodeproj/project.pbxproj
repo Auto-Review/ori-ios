@@ -22,7 +22,6 @@
 		5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6CE2CDB096000FB9ADC /* Member.swift */; };
 		5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */; };
 		5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */; };
-		5760BEFE2CB8E67300A94068 /* NaverThirdPartyLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BEFD2CB8E67300A94068 /* NaverThirdPartyLogin */; };
 		5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BF012CBD087500A94068 /* KeychainSwift */; };
 		576353B32D8A473900910917 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353B22D8A473900910917 /* Token.swift */; };
 		576353B72D8A487000910917 /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353B62D8A487000910917 /* PostListCell.swift */; };
@@ -35,6 +34,7 @@
 		576354B92D8CF57900910917 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576354B82D8CF57100910917 /* NotificationViewModel.swift */; };
 		576354BB2D8CFAFF00910917 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576354BA2D8CFAFF00910917 /* NotificationCell.swift */; };
 		577758892D83B02A00EB464F /* LogoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577758882D83B02900EB464F /* LogoutManager.swift */; };
+		57A295632D9153CD0057BF28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57A295622D9153CD0057BF28 /* Alamofire */; };
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
 		57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */; };
 		57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */; };
@@ -49,11 +49,6 @@
 		57EB9E0E2CB15DB70036E5D8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */; };
 		57EB9E102CB164170036E5D8 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */; };
 		57EB9E122CB164480036E5D8 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E112CB164480036E5D8 /* MyViewController.swift */; };
-		57EB9E182CB527960036E5D8 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E172CB527960036E5D8 /* KakaoSDK */; };
-		57EB9E1A2CB527960036E5D8 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E192CB527960036E5D8 /* KakaoSDKAuth */; };
-		57EB9E1C2CB527960036E5D8 /* KakaoSDKFriend in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E1B2CB527960036E5D8 /* KakaoSDKFriend */; };
-		57EB9E1E2CB527960036E5D8 /* KakaoSDKFriendCore in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E1D2CB527960036E5D8 /* KakaoSDKFriendCore */; };
-		57EB9E202CB527960036E5D8 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E1F2CB527960036E5D8 /* KakaoSDKUser */; };
 		57EB9E222CB528230036E5D8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E212CB528230036E5D8 /* LoginViewController.swift */; };
 		57EB9E292CB782D50036E5D8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E282CB782D50036E5D8 /* GoogleSignIn */; };
 		57EB9E2B2CB782D50036E5D8 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E2A2CB782D50036E5D8 /* GoogleSignInSwift */; };
@@ -111,14 +106,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57A295632D9153CD0057BF28 /* Alamofire in Frameworks */,
 				5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */,
-				57EB9E1E2CB527960036E5D8 /* KakaoSDKFriendCore in Frameworks */,
-				57EB9E182CB527960036E5D8 /* KakaoSDK in Frameworks */,
 				57EB9E2B2CB782D50036E5D8 /* GoogleSignInSwift in Frameworks */,
-				57EB9E1A2CB527960036E5D8 /* KakaoSDKAuth in Frameworks */,
-				5760BEFE2CB8E67300A94068 /* NaverThirdPartyLogin in Frameworks */,
-				57EB9E202CB527960036E5D8 /* KakaoSDKUser in Frameworks */,
-				57EB9E1C2CB527960036E5D8 /* KakaoSDKFriend in Frameworks */,
 				57EB9E292CB782D50036E5D8 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,15 +335,10 @@
 			);
 			name = ORI;
 			packageProductDependencies = (
-				57EB9E172CB527960036E5D8 /* KakaoSDK */,
-				57EB9E192CB527960036E5D8 /* KakaoSDKAuth */,
-				57EB9E1B2CB527960036E5D8 /* KakaoSDKFriend */,
-				57EB9E1D2CB527960036E5D8 /* KakaoSDKFriendCore */,
-				57EB9E1F2CB527960036E5D8 /* KakaoSDKUser */,
 				57EB9E282CB782D50036E5D8 /* GoogleSignIn */,
 				57EB9E2A2CB782D50036E5D8 /* GoogleSignInSwift */,
-				5760BEFD2CB8E67300A94068 /* NaverThirdPartyLogin */,
 				5760BF012CBD087500A94068 /* KeychainSwift */,
+				57A295622D9153CD0057BF28 /* Alamofire */,
 			);
 			productName = ORI;
 			productReference = 57EB9DEA2CAFADE60036E5D8 /* ORI.app */;
@@ -384,10 +369,9 @@
 			);
 			mainGroup = 57EB9DE12CAFADE50036E5D8;
 			packageReferences = (
-				57EB9E162CB527960036E5D8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				57EB9E272CB782D50036E5D8 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				5760BEFC2CB8E67300A94068 /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios" */,
 				5760BF002CBD087500A94068 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				57A295612D9153CD0057BF28 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 57EB9DEB2CAFADE60036E5D8 /* Products */;
 			projectDirPath = "";
@@ -682,14 +666,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5760BEFC2CB8E67300A94068 /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/naver/naveridlogin-sdk-ios";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		5760BF002CBD087500A94068 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -698,12 +674,12 @@
 				minimumVersion = 24.0.0;
 			};
 		};
-		57EB9E162CB527960036E5D8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+		57A295612D9153CD0057BF28 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.22.7;
+				minimumVersion = 5.10.2;
 			};
 		};
 		57EB9E272CB782D50036E5D8 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
@@ -717,40 +693,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5760BEFD2CB8E67300A94068 /* NaverThirdPartyLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5760BEFC2CB8E67300A94068 /* XCRemoteSwiftPackageReference "naveridlogin-sdk-ios" */;
-			productName = NaverThirdPartyLogin;
-		};
 		5760BF012CBD087500A94068 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5760BF002CBD087500A94068 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
 		};
-		57EB9E172CB527960036E5D8 /* KakaoSDK */ = {
+		57A295622D9153CD0057BF28 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 57EB9E162CB527960036E5D8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDK;
-		};
-		57EB9E192CB527960036E5D8 /* KakaoSDKAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57EB9E162CB527960036E5D8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKAuth;
-		};
-		57EB9E1B2CB527960036E5D8 /* KakaoSDKFriend */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57EB9E162CB527960036E5D8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKFriend;
-		};
-		57EB9E1D2CB527960036E5D8 /* KakaoSDKFriendCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57EB9E162CB527960036E5D8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKFriendCore;
-		};
-		57EB9E1F2CB527960036E5D8 /* KakaoSDKUser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57EB9E162CB527960036E5D8 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
-			productName = KakaoSDKUser;
+			package = 57A295612D9153CD0057BF28 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		57EB9E282CB782D50036E5D8 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
