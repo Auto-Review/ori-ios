@@ -82,6 +82,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         contentView.addSubview(grayBackgroundView)
         contentView.addSubview(todayListLabel)
         
+        mainNavigationBar()
         setupConstraints()
         loadDataAndUpdateUI()
     }
