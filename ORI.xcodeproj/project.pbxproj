@@ -34,6 +34,7 @@
 		576354B92D8CF57900910917 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576354B82D8CF57100910917 /* NotificationViewModel.swift */; };
 		576354BB2D8CFAFF00910917 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576354BA2D8CFAFF00910917 /* NotificationCell.swift */; };
 		577758892D83B02A00EB464F /* LogoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577758882D83B02900EB464F /* LogoutManager.swift */; };
+		579F0D7C2D9BB4A40076F9A9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F0D7B2D9BB49F0076F9A9 /* MainViewModel.swift */; };
 		57A295632D9153CD0057BF28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57A295622D9153CD0057BF28 /* Alamofire */; };
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
 		57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */; };
@@ -85,6 +86,7 @@
 		576354B82D8CF57100910917 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		576354BA2D8CFAFF00910917 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		577758882D83B02900EB464F /* LogoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutManager.swift; sourceTree = "<group>"; };
+		579F0D7B2D9BB49F0076F9A9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
 		57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewModel.swift; sourceTree = "<group>"; };
 		57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNetwork.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */,
 				57C35C682CCA228D0083A346 /* TILListViewModel.swift */,
 				57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */,
+				579F0D7B2D9BB49F0076F9A9 /* MainViewModel.swift */,
 				5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */,
 			);
 			path = Main;
@@ -417,6 +420,7 @@
 				5719E7DF2D77E77D00C3D9B8 /* Code.swift in Sources */,
 				571F881E2D759FC000188226 /* Extension+Font.swift in Sources */,
 				57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */,
+				579F0D7C2D9BB4A40076F9A9 /* MainViewModel.swift in Sources */,
 				576354B32D8CEC7700910917 /* NotificationNetwork.swift in Sources */,
 				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
 				571F88272D773C8A00188226 /* TILNetwork.swift in Sources */,

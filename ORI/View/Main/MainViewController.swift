@@ -9,10 +9,7 @@ import UIKit
 import FSCalendar
 
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelegateAppearance {
-    let highlightedDates: [String] = [
-        "2025-04-03", "2025-04-07", "2025-04-15", "2025-04-21", "2025-04-30",
-        "2025-10-11"
-    ]
+    let viewModel = MainViewModel()
     
     let imageView = UIImageView(image: UIImage(named: "mainimage"))
     
@@ -35,7 +32,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         let button = UIButton()
         button.setTitle("〈", for: .normal)
         button.setTitleColor(.gray, for: .normal)
-        button.addTarget(self, action: #selector(prevMonth), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -44,7 +40,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         let button = UIButton()
         button.setTitle("〉", for: .normal)
         button.setTitleColor(.gray, for: .normal)
-        button.addTarget(self, action: #selector(nextMonth), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -69,6 +64,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.loadNotiList { [weak self] in
+            self!.calendarView.reloadData()
+        }
+
         view.addSubview(imageView)
         view.addSubview(calendarView)
         view.addSubview(mainpageTextLabel)
@@ -77,6 +77,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         view.addSubview(nextButton)
         
         calendarView.delegate = self
+        
+        prevButton.addTarget(self, action: #selector(prevMonth), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextMonth), for: .touchUpInside)
         
         mainNavigationBar()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,7 +128,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: date)
 
-        if highlightedDates.contains(dateString) {
+        if viewModel.highlightedDates.contains(dateString) {
             return .baseYellow
         }
         return nil
