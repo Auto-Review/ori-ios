@@ -62,11 +62,22 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return view
     }()
     
+    // todayList를 표시할 UI 요소
+    lazy var todayListLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0 // 여러 줄로 표시되도록 설정
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.loadNotiList { [weak self] in
             self!.calendarView.reloadData()
+            self?.updateTodayList()  // todayList를 갱신
         }
 
         view.addSubview(imageView)
@@ -75,6 +86,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         view.addSubview(grayBackgroundView)
         view.addSubview(prevButton)
         view.addSubview(nextButton)
+        view.addSubview(todayListLabel)  // todayListLabel 추가
         
         calendarView.delegate = self
         
@@ -107,8 +119,18 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             grayBackgroundView.topAnchor.constraint(equalTo: mainpageTextLabel.bottomAnchor, constant: 14),
             grayBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
             grayBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            grayBackgroundView.heightAnchor.constraint(equalToConstant: 130)
+            grayBackgroundView.heightAnchor.constraint(equalToConstant: 130),
+            
+            todayListLabel.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 10),
+            todayListLabel.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 10),
+            todayListLabel.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -10)
         ])
+    }
+    
+    // todayList 업데이트
+    func updateTodayList() {
+        let todayDates = viewModel.todayList.joined(separator: "\n") // 날짜 목록을 한 줄씩 나열
+        todayListLabel.text = todayDates  // todayList 텍스트 업데이트
     }
     
     @objc private func prevMonth() {
