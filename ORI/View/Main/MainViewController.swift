@@ -6,10 +6,44 @@
 //
 
 import UIKit
+import FSCalendar
 
 class MainViewController: UIViewController {
     let imageView = UIImageView(image: UIImage(named: "mainimage"))
-    let calendarView = UICalendarView()
+    
+    private let calendarView: FSCalendar = {
+        let calendar = FSCalendar()
+        calendar.translatesAutoresizingMaskIntoConstraints = false
+        calendar.placeholderType = .none
+        calendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        calendar.appearance.todayColor = .baseYellow
+        calendar.appearance.headerTitleColor = .black
+        calendar.appearance.weekdayTextColor = .gray
+        calendar.weekdayHeight = 55
+        calendar.appearance.titleFont = UIFont.kopubBold(ofSize: 15)
+        calendar.appearance.weekdayFont = UIFont.kopubBold(ofSize: 14)
+        calendar.appearance.headerTitleFont = UIFont.kopubBold(ofSize: 15)
+        return calendar
+    }()
+    
+    private let prevButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("〈", for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(prevMonth), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("〉", for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(nextMonth), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let gregorianCalendar = Calendar(identifier: .gregorian)
     
     lazy var mainpageTextLabel: UILabel = {
@@ -27,19 +61,19 @@ class MainViewController: UIViewController {
         view.layer.cornerRadius = 10
         return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendarView.calendar = gregorianCalendar
         
         view.addSubview(imageView)
         view.addSubview(calendarView)
         view.addSubview(mainpageTextLabel)
         view.addSubview(grayBackgroundView)
+        view.addSubview(prevButton)  // calendarView 위에 배치
+        view.addSubview(nextButton)  // calendarView 위에 배치
         
         mainNavigationBar()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -50,7 +84,13 @@ class MainViewController: UIViewController {
             calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             calendarView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            calendarView.heightAnchor.constraint(equalToConstant: 350),
+            calendarView.heightAnchor.constraint(equalToConstant: 330),
+            
+            prevButton.centerYAnchor.constraint(equalTo: calendarView.topAnchor, constant: 25),
+            prevButton.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor),
+            
+            nextButton.centerYAnchor.constraint(equalTo: calendarView.topAnchor, constant: 25),
+            nextButton.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
             
             mainpageTextLabel.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 30),
             mainpageTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
@@ -60,5 +100,17 @@ class MainViewController: UIViewController {
             grayBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
             grayBackgroundView.heightAnchor.constraint(equalToConstant: 130)
         ])
+    }
+    
+    @objc private func prevMonth() {
+        let currentPage = calendarView.currentPage
+        let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentPage)!
+        calendarView.setCurrentPage(previousMonth, animated: true)
+    }
+    
+    @objc private func nextMonth() {
+        let currentPage = calendarView.currentPage
+        let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentPage)!
+        calendarView.setCurrentPage(nextMonth, animated: true)
     }
 }

@@ -52,6 +52,9 @@
 		57EB9E222CB528230036E5D8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB9E212CB528230036E5D8 /* LoginViewController.swift */; };
 		57EB9E292CB782D50036E5D8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E282CB782D50036E5D8 /* GoogleSignIn */; };
 		57EB9E2B2CB782D50036E5D8 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57EB9E2A2CB782D50036E5D8 /* GoogleSignInSwift */; };
+		57F7A6822D9B666A002E1209 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 57F7A6812D9B666A002E1209 /* FSCalendar */; };
+		57F7A6862D9B7003002E1209 /* KoPubWorld Dotum Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57F7A6852D9B7003002E1209 /* KoPubWorld Dotum Bold.ttf */; };
+		57F7A6882D9B7019002E1209 /* KoPubWorld Dotum Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57F7A6872D9B7019002E1209 /* KoPubWorld Dotum Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +102,8 @@
 		57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		57EB9E112CB164480036E5D8 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		57EB9E212CB528230036E5D8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		57F7A6852D9B7003002E1209 /* KoPubWorld Dotum Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPubWorld Dotum Bold.ttf"; sourceTree = "<group>"; };
+		57F7A6872D9B7019002E1209 /* KoPubWorld Dotum Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KoPubWorld Dotum Light.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +114,7 @@
 				57A295632D9153CD0057BF28 /* Alamofire in Frameworks */,
 				5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */,
 				57EB9E2B2CB782D50036E5D8 /* GoogleSignInSwift in Frameworks */,
+				57F7A6822D9B666A002E1209 /* FSCalendar in Frameworks */,
 				57EB9E292CB782D50036E5D8 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +154,8 @@
 		571F88202D75A0BA00188226 /* File */ = {
 			isa = PBXGroup;
 			children = (
+				57F7A6872D9B7019002E1209 /* KoPubWorld Dotum Light.ttf */,
+				57F7A6852D9B7003002E1209 /* KoPubWorld Dotum Bold.ttf */,
 				571F881B2D759F8000188226 /* BlackHanSans-Regular.ttf */,
 			);
 			path = File;
@@ -339,6 +347,7 @@
 				57EB9E2A2CB782D50036E5D8 /* GoogleSignInSwift */,
 				5760BF012CBD087500A94068 /* KeychainSwift */,
 				57A295622D9153CD0057BF28 /* Alamofire */,
+				57F7A6812D9B666A002E1209 /* FSCalendar */,
 			);
 			productName = ORI;
 			productReference = 57EB9DEA2CAFADE60036E5D8 /* ORI.app */;
@@ -372,6 +381,7 @@
 				57EB9E272CB782D50036E5D8 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				5760BF002CBD087500A94068 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				57A295612D9153CD0057BF28 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				57F7A6802D9B666A002E1209 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 57EB9DEB2CAFADE60036E5D8 /* Products */;
 			projectDirPath = "";
@@ -387,6 +397,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57F7A6862D9B7003002E1209 /* KoPubWorld Dotum Bold.ttf in Resources */,
+				57F7A6882D9B7019002E1209 /* KoPubWorld Dotum Light.ttf in Resources */,
 				57EB9DF72CAFADE80036E5D8 /* Assets.xcassets in Resources */,
 				57EB9DFA2CAFADE80036E5D8 /* Base in Resources */,
 				571F881C2D759F8000188226 /* BlackHanSans-Regular.ttf in Resources */,
@@ -690,6 +702,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		57F7A6802D9B666A002E1209 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -712,6 +732,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57EB9E272CB782D50036E5D8 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		57F7A6812D9B666A002E1209 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57F7A6802D9B666A002E1209 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
