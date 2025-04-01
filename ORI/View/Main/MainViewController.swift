@@ -70,17 +70,40 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return label
     }()
     
+    private let prevButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("〈", for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("〉", for: .normal)
+        button.setTitleColor(.gray, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
+        prevButton.addTarget(self, action: #selector(prevMonth), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextMonth), for: .touchUpInside)
+        
         contentView.addSubview(imageView)
         contentView.addSubview(calendarView)
         contentView.addSubview(mainpageTextLabel)
         contentView.addSubview(grayBackgroundView)
         contentView.addSubview(todayListLabel)
+        contentView.addSubview(prevButton)
+        contentView.addSubview(nextButton)
+        
+        calendarView.delegate = self
         
         mainNavigationBar()
         setupConstraints()
@@ -104,6 +127,12 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 90),
+            
+            prevButton.centerYAnchor.constraint(equalTo: calendarView.topAnchor, constant: 25),
+            prevButton.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor),
+            
+            nextButton.centerYAnchor.constraint(equalTo: calendarView.topAnchor, constant: 25),
+            nextButton.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor),
             
             calendarView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
             calendarView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
@@ -145,6 +174,18 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     func updateTodayList() {
         let todayDates = viewModel.todayList.joined(separator: "\n")
         todayListLabel.text = todayDates
+    }
+    
+    @objc private func prevMonth() {
+        let currentPage = calendarView.currentPage
+        let previousMonth = Calendar.current.date(byAdding: .month, value: -1, to: currentPage)!
+        calendarView.setCurrentPage(previousMonth, animated: true)
+    }
+    
+    @objc private func nextMonth() {
+        let currentPage = calendarView.currentPage
+        let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentPage)!
+        calendarView.setCurrentPage(nextMonth, animated: true)
     }
 }
 
