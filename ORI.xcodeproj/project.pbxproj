@@ -35,6 +35,8 @@
 		576354BB2D8CFAFF00910917 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576354BA2D8CFAFF00910917 /* NotificationCell.swift */; };
 		577758892D83B02A00EB464F /* LogoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577758882D83B02900EB464F /* LogoutManager.swift */; };
 		579F0D7C2D9BB4A40076F9A9 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F0D7B2D9BB49F0076F9A9 /* MainViewModel.swift */; };
+		579F0D812D9BD5580076F9A9 /* CheckListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F0D802D9BD5580076F9A9 /* CheckListTableViewController.swift */; };
+		579F0D832D9BD5F30076F9A9 /* MainNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */; };
 		57A295632D9153CD0057BF28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57A295622D9153CD0057BF28 /* Alamofire */; };
 		57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C682CCA228D0083A346 /* TILListViewModel.swift */; };
 		57C35C6E2CCA69E40083A346 /* CodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */; };
@@ -87,6 +89,8 @@
 		576354BA2D8CFAFF00910917 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		577758882D83B02900EB464F /* LogoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutManager.swift; sourceTree = "<group>"; };
 		579F0D7B2D9BB49F0076F9A9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		579F0D802D9BD5580076F9A9 /* CheckListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListTableViewController.swift; sourceTree = "<group>"; };
+		579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotificationCell.swift; sourceTree = "<group>"; };
 		57C35C682CCA228D0083A346 /* TILListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILListViewModel.swift; sourceTree = "<group>"; };
 		57C35C6D2CCA69E40083A346 /* CodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeListViewModel.swift; sourceTree = "<group>"; };
 		57DC453C2D7E854200E68B5A /* MyPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNetwork.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 		576353B82D8A487700910917 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */,
 				576353B62D8A487000910917 /* PostListCell.swift */,
 				576354BA2D8CFAFF00910917 /* NotificationCell.swift */,
 			);
@@ -237,7 +242,7 @@
 				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
 				57EB9E092CB15D9B0036E5D8 /* TILListViewController.swift */,
 				571F88232D75B85700188226 /* MyView */,
-				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
+				579F0D7D2D9BD1A00076F9A9 /* Main */,
 				57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */,
 			);
 			path = TabGroup;
@@ -253,6 +258,15 @@
 				5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */,
 			);
 			path = TabGroup;
+			sourceTree = "<group>";
+		};
+		579F0D7D2D9BD1A00076F9A9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
+				579F0D802D9BD5580076F9A9 /* CheckListTableViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		57C35C6A2CCA23240083A346 /* Model */ = {
@@ -436,6 +450,7 @@
 				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
 				576353D52D8A976700910917 /* MyTILListViewController.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
+				579F0D832D9BD5F30076F9A9 /* MainNotificationCell.swift in Sources */,
 				576354B52D8CF2DD00910917 /* Notification.swift in Sources */,
 				57DC453D2D7E854F00E68B5A /* MyPageNetwork.swift in Sources */,
 				57EB9E082CAFC50A0036E5D8 /* TabViewController.swift in Sources */,
@@ -445,6 +460,7 @@
 				576354BB2D8CFAFF00910917 /* NotificationCell.swift in Sources */,
 				57EB9E122CB164480036E5D8 /* MyViewController.swift in Sources */,
 				5719E7EE2D7988B300C3D9B8 /* KeychainManager.swift in Sources */,
+				579F0D812D9BD5580076F9A9 /* CheckListTableViewController.swift in Sources */,
 				5719E7EA2D78179B00C3D9B8 /* NetworkConstants.swift in Sources */,
 				57EB9DEE2CAFADE60036E5D8 /* AppDelegate.swift in Sources */,
 				5729F6CD2CDB095400FB9ADC /* MyPageViewModel.swift in Sources */,

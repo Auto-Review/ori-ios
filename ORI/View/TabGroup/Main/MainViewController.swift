@@ -10,6 +10,7 @@ import FSCalendar
 
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelegateAppearance {
     let viewModel = MainViewModel()
+    var date = Date()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -61,15 +62,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return view
     }()
     
-    lazy var todayListLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .black
-        return label
-    }()
-    
     private let prevButton: UIButton = {
         let button = UIButton()
         button.setTitle("〈", for: .normal)
@@ -99,7 +91,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         contentView.addSubview(calendarView)
         contentView.addSubview(mainpageTextLabel)
         contentView.addSubview(grayBackgroundView)
-        contentView.addSubview(todayListLabel)
         contentView.addSubview(prevButton)
         contentView.addSubview(nextButton)
         
@@ -145,13 +136,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             grayBackgroundView.topAnchor.constraint(equalTo: mainpageTextLabel.bottomAnchor, constant: 14),
             grayBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
             grayBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
-            grayBackgroundView.heightAnchor.constraint(equalToConstant: 500),
-            
-            todayListLabel.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor, constant: 10),
-            todayListLabel.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 10),
-            todayListLabel.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -10),
-            todayListLabel.bottomAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor, constant: -10),
-            
+            grayBackgroundView.heightAnchor.constraint(equalToConstant: 150),
             grayBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
@@ -166,14 +151,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
                 self.calendarView.reloadData()
                 
                 self.viewModel.loadSelectDayAlarmList(date: today)
-                self.updateTodayList()
+                self.setupCheckListTableViewController(date: self.viewModel.getFormattedDate(date: today))
             }
         }
-    }
-    
-    func updateTodayList() {
-        let todayDates = viewModel.todayList.joined(separator: "\n")
-        todayListLabel.text = todayDates
     }
     
     @objc private func prevMonth() {
@@ -186,6 +166,23 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         let currentPage = calendarView.currentPage
         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentPage)!
         calendarView.setCurrentPage(nextMonth, animated: true)
+    }
+    
+    private func setupCheckListTableViewController(date: String) {
+        let checkListVC = CheckListTableViewController(viewModel: viewModel, date: date)
+
+        addChild(checkListVC)
+        grayBackgroundView.addSubview(checkListVC.tableView)
+        checkListVC.tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            checkListVC.tableView.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor),
+            checkListVC.tableView.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor),
+            checkListVC.tableView.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor),
+            checkListVC.tableView.bottomAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor)
+        ])
+        
+        checkListVC.didMove(toParent: self)
     }
 }
 
@@ -203,6 +200,7 @@ extension MainViewController {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewModel.loadSelectDayAlarmList(date: date)
-        updateTodayList()
+        setupCheckListTableViewController(date: self.viewModel.getFormattedDate(date: date))
+        viewModel.tableView.reloadData()
     }
 }

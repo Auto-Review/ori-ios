@@ -11,6 +11,7 @@ class MainViewModel {
     var notiList: [Notification] = []
     var highlightedDates: [String] = []
     var todayList: [String] = []
+    var tableView = UITableView()
     
     func loadNotiList(completion: @escaping () -> Void) {
         fetchNotificationList() { [weak self] result in
