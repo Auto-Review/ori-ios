@@ -231,7 +231,7 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		576354E32D8D0B2400910917 /* Main */ = {
+		576354E32D8D0B2400910917 /* TabGroup */ = {
 			isa = PBXGroup;
 			children = (
 				57EB9E0B2CB15DAB0036E5D8 /* CodeListViewController.swift */,
@@ -240,10 +240,10 @@
 				57EB9E0D2CB15DB70036E5D8 /* MainViewController.swift */,
 				57EB9E0F2CB164170036E5D8 /* SettingViewController.swift */,
 			);
-			path = Main;
+			path = TabGroup;
 			sourceTree = "<group>";
 		};
-		576354E42D8D0B9700910917 /* Main */ = {
+		576354E42D8D0B9700910917 /* TabGroup */ = {
 			isa = PBXGroup;
 			children = (
 				5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */,
@@ -252,7 +252,7 @@
 				579F0D7B2D9BB49F0076F9A9 /* MainViewModel.swift */,
 				5729F6CC2CDB095400FB9ADC /* MyPageViewModel.swift */,
 			);
-			path = Main;
+			path = TabGroup;
 			sourceTree = "<group>";
 		};
 		57C35C6A2CCA23240083A346 /* Model */ = {
@@ -306,7 +306,7 @@
 				5729F6D22CDB591700FB9ADC /* Components */,
 				57EB9E212CB528230036E5D8 /* LoginViewController.swift */,
 				576354B62D8CF54600910917 /* Navigaion */,
-				576354E32D8D0B2400910917 /* Main */,
+				576354E32D8D0B2400910917 /* TabGroup */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -315,7 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				576354B72D8CF56800910917 /* Navigation */,
-				576354E42D8D0B9700910917 /* Main */,
+				576354E42D8D0B9700910917 /* TabGroup */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
