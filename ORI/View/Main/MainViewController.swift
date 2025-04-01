@@ -8,7 +8,12 @@
 import UIKit
 import FSCalendar
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelegateAppearance {
+    let highlightedDates: [String] = [
+        "2025-04-03", "2025-04-07", "2025-04-15", "2025-04-21", "2025-04-30",
+        "2025-10-11"
+    ]
+    
     let imageView = UIImageView(image: UIImage(named: "mainimage"))
     
     private let calendarView: FSCalendar = {
@@ -64,13 +69,14 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(imageView)
         view.addSubview(calendarView)
         view.addSubview(mainpageTextLabel)
         view.addSubview(grayBackgroundView)
-        view.addSubview(prevButton)  // calendarView 위에 배치
-        view.addSubview(nextButton)  // calendarView 위에 배치
+        view.addSubview(prevButton)
+        view.addSubview(nextButton)
+        
+        calendarView.delegate = self
         
         mainNavigationBar()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -112,5 +118,16 @@ class MainViewController: UIViewController {
         let currentPage = calendarView.currentPage
         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentPage)!
         calendarView.setCurrentPage(nextMonth, animated: true)
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+
+        if highlightedDates.contains(dateString) {
+            return .baseYellow
+        }
+        return nil
     }
 }
