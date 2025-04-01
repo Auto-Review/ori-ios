@@ -18,7 +18,6 @@ class MainViewModel {
             case .success(let lists):
                 self?.notiList = lists
                 self?.loadAlarmList()
-                self?.loadTodayAlarmList()
                 completion()
             case .failure(let error):
                 print("Error fetching posts: \(error)")
@@ -31,17 +30,15 @@ class MainViewModel {
         print("Highlighted Dates: \(highlightedDates)")
     }
     
-    func loadTodayAlarmList() {
-        let today = getFormattedCurrentDate()
-        todayList = notiList.filter { $0.executeTime == today }.map{ $0.content }
+    func loadSelectDayAlarmList(date: Date) {
+        let date = getFormattedDate(date: date)
+        todayList = notiList.filter { $0.executeTime == date }.map{ $0.content }
         print("오늘꺼 : \(todayList)")
     }
     
-    func getFormattedCurrentDate() -> String {
-        let currentDate = Date()
+    func getFormattedDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        return dateFormatter.string(from: currentDate)
+        return dateFormatter.string(from: date)
     }
 }

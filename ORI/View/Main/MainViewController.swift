@@ -18,7 +18,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         calendar.translatesAutoresizingMaskIntoConstraints = false
         calendar.placeholderType = .none
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
-        calendar.appearance.todayColor = .baseYellow
+        calendar.appearance.todayColor = .clear
+        calendar.appearance.selectionColor = .baseYellow
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.weekdayTextColor = .gray
         calendar.weekdayHeight = 55
@@ -62,11 +63,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return view
     }()
     
-    // todayList를 표시할 UI 요소
     lazy var todayListLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0 // 여러 줄로 표시되도록 설정
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .black
         return label
@@ -75,9 +75,17 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let today = Date()
+        
+        // NotiList 로드 후 처리
         viewModel.loadNotiList { [weak self] in
-            self!.calendarView.reloadData()
-            self?.updateTodayList()  // todayList를 갱신
+            guard let self = self else { return }
+            
+            self.calendarView.select(today)
+            self.calendarView.reloadData()
+            
+            self.viewModel.loadSelectDayAlarmList(date: today)
+            self.updateTodayList()
         }
 
         view.addSubview(imageView)
@@ -86,7 +94,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         view.addSubview(grayBackgroundView)
         view.addSubview(prevButton)
         view.addSubview(nextButton)
-        view.addSubview(todayListLabel)  // todayListLabel 추가
+        view.addSubview(todayListLabel)
         
         calendarView.delegate = self
         
@@ -129,8 +137,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     
     // todayList 업데이트
     func updateTodayList() {
-        let todayDates = viewModel.todayList.joined(separator: "\n") // 날짜 목록을 한 줄씩 나열
-        todayListLabel.text = todayDates  // todayList 텍스트 업데이트
+        let todayDates = viewModel.todayList.joined(separator: "\n")
+        todayListLabel.text = todayDates
     }
     
     @objc private func prevMonth() {
@@ -144,7 +152,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: currentPage)!
         calendarView.setCurrentPage(nextMonth, animated: true)
     }
-    
+}
+
+extension MainViewController {
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -154,5 +164,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             return .baseYellow
         }
         return nil
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        viewModel.loadSelectDayAlarmList(date: date)
+        updateTodayList()
     }
 }
