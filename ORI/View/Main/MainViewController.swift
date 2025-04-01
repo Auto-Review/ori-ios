@@ -45,8 +45,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return button
     }()
     
-    let gregorianCalendar = Calendar(identifier: .gregorian)
-    
     lazy var mainpageTextLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,18 +73,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let today = Date()
-        
-        // NotiList 로드 후 처리
-        viewModel.loadNotiList { [weak self] in
-            guard let self = self else { return }
-            
-            self.calendarView.select(today)
-            self.calendarView.reloadData()
-            
-            self.viewModel.loadSelectDayAlarmList(date: today)
-            self.updateTodayList()
-        }
+        mainNavigationBar()
+        loadDataAndUpdateUI()
+        setupRefreshControl()
 
         view.addSubview(imageView)
         view.addSubview(calendarView)
@@ -100,8 +89,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         
         prevButton.addTarget(self, action: #selector(prevMonth), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(nextMonth), for: .touchUpInside)
-        
-        mainNavigationBar()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -133,6 +120,30 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             todayListLabel.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 10),
             todayListLabel.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -10)
         ])
+    }
+    
+    func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+    }
+    
+    @objc func refreshData() {
+        loadDataAndUpdateUI()
+    }
+    
+    private func loadDataAndUpdateUI() {
+        let today = Date()
+        
+        viewModel.loadNotiList { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async{
+                self.calendarView.select(today)
+                self.calendarView.reloadData()
+                
+                self.viewModel.loadSelectDayAlarmList(date: today)
+                self.updateTodayList()
+            }
+        }
     }
     
     // todayList 업데이트

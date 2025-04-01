@@ -27,13 +27,11 @@ class MainViewModel {
     
     func loadAlarmList() {
         highlightedDates = notiList.map { $0.executeTime }
-        print("Highlighted Dates: \(highlightedDates)")
     }
     
     func loadSelectDayAlarmList(date: Date) {
         let date = getFormattedDate(date: date)
         todayList = notiList.filter { $0.executeTime == date }.map{ $0.content }
-        print("오늘꺼 : \(todayList)")
     }
     
     func getFormattedDate(date: Date) -> String {
