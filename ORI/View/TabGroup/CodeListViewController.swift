@@ -23,6 +23,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.tableView.rowHeight = 70
         
         mainNavigationBar()
         setupTableView()
@@ -63,6 +64,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
         cell.titleLabel.text = viewModel.posts[indexPath.row].title
+        cell.nameLabel.text = viewModel.posts[indexPath.row].writerNickName
         cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
         cell.reviewCntLabel.text = "RE: 3"
         return cell

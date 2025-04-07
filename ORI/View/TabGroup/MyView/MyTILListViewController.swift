@@ -32,6 +32,7 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.tableView.rowHeight = 70
         
         mainNavigationBar()
         setupTableView()
@@ -70,6 +71,7 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PostListCell()
         cell.titleLabel.text = viewModel.myTILPosts[indexPath.row].title
+        cell.nameLabel.text = viewModel.myTILPosts[indexPath.row].writerNickName
         cell.dateLabel.text = viewModel.myTILPosts[indexPath.row].createdDate.prefix(10).description
         cell.reviewCntLabel.text = "RE: 3"
         return cell
