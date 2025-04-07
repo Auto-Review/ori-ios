@@ -22,6 +22,7 @@ class TabViewController: UIViewController {
         
         tabBarVC.setViewControllers([vc1, vc2, vc3, vc4, vc5], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
+        tabBarVC.selectedIndex = 2
         
         setupTabBarAppearance()
         

@@ -31,16 +31,18 @@
 	<string>$(GOOGLE_API_KEY).apps.googleusercontent.com</string>
 	<key>GOOGLE_API_KEY</key>
 	<string>$(GOOGLE_API_KEY)</string>
-    <key>SERVER_API_URL</key>
-    <string>$(SERVER_API_URL)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>SERVER_API_URL</key>
+	<string>$(SERVER_API_URL)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BlackHanSans-Regular.ttf</string>
+		<string>KoPubWorld Dotum Bold.ttf</string>
+		<string>KoPubWorld Dotum Light.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

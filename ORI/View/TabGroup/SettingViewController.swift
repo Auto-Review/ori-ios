@@ -19,14 +19,22 @@ class SettingViewController: UIViewController {
         fetchButton.addTarget(self, action: #selector(fetchTokensFromKeychain), for: .touchUpInside)
         view.addSubview(fetchButton)
         
+        // 알림 목록을 불러오는 버튼 추가
+        let fetchNotificationsButton = UIButton(type: .system)
+        fetchNotificationsButton.setTitle("Fetch Notifications", for: .normal)
+        fetchNotificationsButton.frame = CGRect(x: 100, y: 400, width: 200, height: 50)
+        fetchNotificationsButton.addTarget(self, action: #selector(fetchNotifications), for: .touchUpInside)
+        view.addSubview(fetchNotificationsButton)
+        
+        // 기타 버튼들
         let reissued = UIButton(type: .system)
-        reissued.setTitle("reissued", for: .normal)
+        reissued.setTitle("Reissue Token", for: .normal)
         reissued.frame = CGRect(x: 100, y: 300, width: 200, height: 50)
         reissued.addTarget(self, action: #selector(reissuedKeychain), for: .touchUpInside)
         view.addSubview(reissued)
         
         let logout = UIButton(type: .system)
-        logout.setTitle("logout", for: .normal)
+        logout.setTitle("Logout", for: .normal)
         logout.frame = CGRect(x: 100, y: 100, width: 200, height: 50)
         logout.addTarget(self, action: #selector(logoutk), for: .touchUpInside)
         view.addSubview(logout)
@@ -43,10 +51,24 @@ class SettingViewController: UIViewController {
         }
     }
     
+    // 알림 목록을 불러오는 함수
+    @objc func fetchNotifications() {
+        fetchNotificationList { result in
+            switch result {
+            case .success(let notifications):
+                print("Fetched notifications: \(notifications)")
+            case .failure(let error):
+                print("Failed to fetch notifications: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    // 토큰 재발급 함수
     @objc func reissuedKeychain() {
         TokenNetwork.reissuedTokenFromServer()
     }
     
+    // 로그아웃 함수
     @objc func logoutk() {
         LogoutManager.logout()
     }

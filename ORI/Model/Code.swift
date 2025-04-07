@@ -18,9 +18,11 @@ struct CodeListData: Decodable {
 
 struct Code: Decodable {
     let id: Int
+    let writerId: Int
+    let writerEmail: String
+    let writerNickName: String
     let title: String
     let level: Int
     let description: String
-    let member: Member
     let createdDate: String
 }
