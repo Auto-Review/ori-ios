@@ -12,6 +12,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     let viewModel = MainViewModel()
     var date = Date()
     
+    var cellHeight: CGFloat = 0
+    private var grayBackgroundHeightConstraint: NSLayoutConstraint?
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,6 +106,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     }
     
     private func setupConstraints() {
+        grayBackgroundHeightConstraint = grayBackgroundView.heightAnchor.constraint(equalToConstant: cellHeight)
+        grayBackgroundHeightConstraint?.isActive = true
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -137,7 +143,6 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             grayBackgroundView.topAnchor.constraint(equalTo: mainpageTextLabel.bottomAnchor, constant: 14),
             grayBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
             grayBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
-            grayBackgroundView.heightAnchor.constraint(equalToConstant: 150),
             grayBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
@@ -202,6 +207,14 @@ extension MainViewController {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewModel.loadSelectDayAlarmList(date: date)
         setupCheckListTableViewController(date: self.viewModel.getFormattedDate(date: date))
+
+        cellHeight = CGFloat(viewModel.todayList.count * 44)
+        grayBackgroundHeightConstraint?.constant = cellHeight
+
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+        
         viewModel.tableView.reloadData()
     }
 }

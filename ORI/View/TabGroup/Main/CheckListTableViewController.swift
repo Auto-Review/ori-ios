@@ -23,6 +23,9 @@ class CheckListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 10
+        tableView.clipsToBounds = true
         tableView.isScrollEnabled = false
         viewModel.tableView.delegate = self
         viewModel.tableView.dataSource = self
@@ -39,6 +42,7 @@ class CheckListTableViewController: UITableViewController {
         cell.layoutMargins = .zero
         cell.titleLabel.text = viewModel.todayList[indexPath.row]
         cell.subtitleLabel.text = date
+        cell.backgroundColor = .systemGray6
         return cell
     }
 }
