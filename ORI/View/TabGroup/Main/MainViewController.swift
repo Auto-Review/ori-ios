@@ -13,7 +13,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     var date = Date()
     
     var cellHeight: CGFloat = 0
-    private var grayBackgroundHeightConstraint: NSLayoutConstraint?
+    private var listHeightConstraint: NSLayoutConstraint?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -58,11 +58,9 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return label
     }()
     
-    lazy var grayBackgroundView: UIView = {
+    lazy var listView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.systemGray6
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 10
         return view
     }()
     
@@ -82,6 +80,16 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return button
     }()
     
+    let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "알림이 없습니다"
+        label.textAlignment = .center
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,7 +102,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         contentView.addSubview(imageView)
         contentView.addSubview(calendarView)
         contentView.addSubview(mainpageTextLabel)
-        contentView.addSubview(grayBackgroundView)
+        contentView.addSubview(listView)
         contentView.addSubview(prevButton)
         contentView.addSubview(nextButton)
         
@@ -106,8 +114,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     }
     
     private func setupConstraints() {
-        grayBackgroundHeightConstraint = grayBackgroundView.heightAnchor.constraint(equalToConstant: cellHeight)
-        grayBackgroundHeightConstraint?.isActive = true
+        listHeightConstraint = listView.heightAnchor.constraint(equalToConstant: cellHeight)
+        listHeightConstraint?.isActive = true
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -140,10 +148,10 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             mainpageTextLabel.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 30),
             mainpageTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
             
-            grayBackgroundView.topAnchor.constraint(equalTo: mainpageTextLabel.bottomAnchor, constant: 14),
-            grayBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
-            grayBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
-            grayBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            listView.topAnchor.constraint(equalTo: mainpageTextLabel.bottomAnchor, constant: 14),
+            listView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
+            listView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18),
+            listView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
     
@@ -175,21 +183,38 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     }
     
     private func setupCheckListTableViewController(date: String) {
-        let checkListVC = CheckListTableViewController(viewModel: viewModel, date: date)
+        listView.subviews.forEach { $0.removeFromSuperview() }
 
-        addChild(checkListVC)
-        grayBackgroundView.addSubview(checkListVC.tableView)
-        checkListVC.tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            checkListVC.tableView.topAnchor.constraint(equalTo: grayBackgroundView.topAnchor),
-            checkListVC.tableView.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor),
-            checkListVC.tableView.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor),
-            checkListVC.tableView.bottomAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor)
-        ])
-        
-        checkListVC.didMove(toParent: self)
+        if viewModel.selectDayTodoList.isEmpty {
+            listHeightConstraint?.constant = 132
+            listView.addSubview(emptyLabel)
+            NSLayoutConstraint.activate([
+                emptyLabel.centerXAnchor.constraint(equalTo: listView.centerXAnchor),
+                emptyLabel.centerYAnchor.constraint(equalTo: listView.centerYAnchor)
+            ])
+        } else {
+            let checkListVC = CheckListTableViewController(viewModel: viewModel, date: date)
+            addChild(checkListVC)
+            listView.addSubview(checkListVC.tableView)
+            checkListVC.tableView.translatesAutoresizingMaskIntoConstraints = false
+
+            NSLayoutConstraint.activate([
+                checkListVC.tableView.topAnchor.constraint(equalTo: listView.topAnchor),
+                checkListVC.tableView.leadingAnchor.constraint(equalTo: listView.leadingAnchor),
+                checkListVC.tableView.trailingAnchor.constraint(equalTo: listView.trailingAnchor),
+                checkListVC.tableView.bottomAnchor.constraint(equalTo: listView.bottomAnchor)
+            ])
+
+            checkListVC.didMove(toParent: self)
+            cellHeight = CGFloat(viewModel.selectDayTodoList.count*44)
+            listHeightConstraint?.constant = cellHeight
+        }
+
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
     }
+
 }
 
 extension MainViewController {
@@ -207,9 +232,6 @@ extension MainViewController {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewModel.loadSelectDayAlarmList(date: date)
         setupCheckListTableViewController(date: self.viewModel.getFormattedDate(date: date))
-
-        cellHeight = CGFloat(viewModel.todayList.count * 44)
-        grayBackgroundHeightConstraint?.constant = cellHeight
 
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()

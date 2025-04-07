@@ -10,7 +10,7 @@ import UIKit
 class MainViewModel {
     var notiList: [Notification] = []
     var highlightedDates: [String] = []
-    var todayList: [String] = []
+    var selectDayTodoList: [String] = []
     var tableView = UITableView()
     
     func loadNotiList(completion: @escaping () -> Void) {
@@ -32,7 +32,7 @@ class MainViewModel {
     
     func loadSelectDayAlarmList(date: Date) {
         let date = getFormattedDate(date: date)
-        todayList = notiList.filter { $0.executeTime == date }.map{ $0.content }
+        selectDayTodoList = notiList.filter { $0.executeTime == date }.map{ $0.content }
     }
     
     func getFormattedDate(date: Date) -> String {

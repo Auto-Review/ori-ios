@@ -33,14 +33,14 @@ class CheckListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.todayList.count
+        return viewModel.selectDayTodoList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = MainNotificationCell()
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
-        cell.titleLabel.text = viewModel.todayList[indexPath.row]
+        cell.titleLabel.text = viewModel.selectDayTodoList[indexPath.row]
         cell.subtitleLabel.text = date
         cell.backgroundColor = .systemGray6
         return cell
