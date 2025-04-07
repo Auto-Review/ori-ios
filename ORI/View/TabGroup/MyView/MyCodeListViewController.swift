@@ -32,6 +32,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.tableView.rowHeight = 70
         
         mainNavigationBar()
         setupTableView()
@@ -70,6 +71,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = PostListCell()
         cell.titleLabel.text = viewModel.myCodePosts[indexPath.row].title
+        cell.nameLabel.text = viewModel.myCodePosts[indexPath.row].writerNickName
         cell.dateLabel.text = viewModel.myCodePosts[indexPath.row].createdDate.prefix(10).description
         cell.reviewCntLabel.text = "RE: 3"
         return cell

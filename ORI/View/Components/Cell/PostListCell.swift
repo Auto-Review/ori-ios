@@ -9,6 +9,7 @@ import UIKit
 
 class PostListCell: UITableViewCell {
     let titleLabel = UILabel()
+    let nameLabel = UILabel()
     let dateLabel = UILabel()
     let reviewCntLabel = UILabel()
 
@@ -16,33 +17,32 @@ class PostListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         titleLabel.font = UIFont.systemFont(ofSize: 15)
-        dateLabel.font = UIFont.systemFont(ofSize: 15)
-        reviewCntLabel.font = UIFont.systemFont(ofSize: 15)
-        dateLabel.textColor = .gray
-        reviewCntLabel.textColor = .gray
-        
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(dateLabel)
-        contentView.addSubview(reviewCntLabel)
+        titleLabel.lineBreakMode = .byTruncatingTail
 
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        reviewCntLabel.translatesAutoresizingMaskIntoConstraints = false
+        [nameLabel, dateLabel, reviewCntLabel].forEach {
+            $0.font = UIFont.systemFont(ofSize: 12)
+            $0.textColor = .gray
+        }
+
+        [titleLabel, nameLabel, dateLabel, reviewCntLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
 
         NSLayoutConstraint.activate([
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 45),
-            
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            reviewCntLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            reviewCntLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10),
-            reviewCntLabel.widthAnchor.constraint(equalToConstant: 40),
+            nameLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
             
-            dateLabel.centerYAnchor.constraint(equalTo: reviewCntLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: reviewCntLabel.trailingAnchor, constant: 20),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            dateLabel.widthAnchor.constraint(equalToConstant: 90)
+            dateLabel.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10),
+            
+            reviewCntLabel.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
+            reviewCntLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 10)
         ])
     }
     
