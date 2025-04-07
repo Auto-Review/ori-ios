@@ -58,7 +58,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return label
     }()
     
-    lazy var listView: UIView = {
+    private let listView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -80,7 +80,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         return button
     }()
     
-    let emptyLabel: UILabel = {
+    private let emptyLabel: UILabel = {
         let label = UILabel()
         label.text = "알림이 없습니다"
         label.textAlignment = .center
