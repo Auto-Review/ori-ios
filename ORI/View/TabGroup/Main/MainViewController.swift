@@ -36,6 +36,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         calendar.placeholderType = .none
         calendar.appearance.headerMinimumDissolvedAlpha = 0.0
         calendar.appearance.todayColor = .clear
+        calendar.appearance.titleTodayColor = .black
         calendar.appearance.selectionColor = .baseYellow
         calendar.appearance.headerTitleColor = .black
         calendar.appearance.weekdayTextColor = .gray
