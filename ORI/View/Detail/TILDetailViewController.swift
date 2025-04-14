@@ -16,6 +16,22 @@ class TILDetailViewController: UIViewController {
     let backgroundView = UIView()
     let textView = UITextView()
     var textViewHeightConstraint: NSLayoutConstraint?
+    
+    private let nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.text = "Ksiomng"
+        return label
+    }()
+    
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.text = "2025-04-01"
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +48,8 @@ class TILDetailViewController: UIViewController {
         scrollView.addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.borderColor = UIColor.systemGray6.cgColor
-        backgroundView.layer.borderWidth = 3
-        backgroundView.layer.cornerRadius = 20
+        backgroundView.layer.borderWidth = 1
+        backgroundView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
@@ -44,17 +60,27 @@ class TILDetailViewController: UIViewController {
         ])
         
         backgroundView.addSubview(textView)
+        backgroundView.addSubview(nicknameLabel)
+        backgroundView.addSubview(dateLabel)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = false
         textView.font = UIFont.systemFont(ofSize: 17)
         textView.text = dummyText
+        textView.textContainer.lineFragmentPadding = 0
         
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
-            textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
-            textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20),
-            textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20),
-            textView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor, constant: -40)
+            nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
+            nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            
+            dateLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 10),
+            
+            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
+            textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
         ])
         
         DispatchQueue.main.async {
