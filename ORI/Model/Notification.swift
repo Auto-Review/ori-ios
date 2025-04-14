@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct NotificationResponse: Decodable {
-    let status: String
-    let data: [Notification]
-    let message: String
-}
-
 struct Notification: Decodable {
     let id: Int
     let content: String

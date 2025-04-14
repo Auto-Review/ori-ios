@@ -6,12 +6,6 @@
 //
 
 struct CodeListResponse: Decodable {
-    let status: String
-    let data: CodeListData
-    let message: String
-}
-
-struct CodeListData: Decodable {
     let dtoList: [Code]
     let totalPage: Int
 }

@@ -8,12 +8,6 @@
 import Foundation
 
 struct TILListResponse: Decodable {
-    let status: String
-    let data: TILListData
-    let message: String
-}
-
-struct TILListData: Decodable {
     let dtoList: [TIL]
     let totalPage: Int
 }

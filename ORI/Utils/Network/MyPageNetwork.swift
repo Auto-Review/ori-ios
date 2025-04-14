@@ -28,7 +28,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
         .responseDecodable(of: TILListResponse.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.data.dtoList))
+                completion(.success(data.dtoList))
             case .failure:
                 NetworkConstants.handleError(response: response, completion: completion)
             }
@@ -55,7 +55,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
         .responseDecodable(of: CodeListResponse.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.data.dtoList))
+                completion(.success(data.dtoList))
             case .failure:
                 NetworkConstants.handleError(response: response, completion: completion)
             }
@@ -77,10 +77,10 @@ func fetchMyProfile(completion: @escaping (Result<Member, Error>) -> Void) {
     
     AF.request(url, method: .get, encoding: URLEncoding.default, headers: headers)
         .validate(statusCode: 200..<300)
-        .responseDecodable(of: MemberResponse.self) { response in
+        .responseDecodable(of: Member.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.data))
+                completion(.success(data))
             case .failure:
                 NetworkConstants.handleError(response: response, completion: completion)
             }
