@@ -18,7 +18,7 @@ func fetchCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], E
         .responseDecodable(of: CodeListResponse.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.data.dtoList))
+                completion(.success(data.dtoList))
             case .failure:
                 NetworkConstants.handleError(response: response, completion: completion)
             }

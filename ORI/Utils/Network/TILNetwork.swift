@@ -18,7 +18,7 @@ func fetchTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Err
         .responseDecodable(of: TILListResponse.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.data.dtoList))
+                completion(.success(data.dtoList))
             case .failure:
                 NetworkConstants.handleError(response: response, completion: completion)
             }

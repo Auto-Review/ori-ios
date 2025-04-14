@@ -23,10 +23,10 @@ func fetchNotificationList(completion: @escaping (Result<[Notification], Error>)
     
     AF.request(url, method: .get, encoding: URLEncoding.default, headers: headers)
         .validate(statusCode: 200..<300)
-        .responseDecodable(of: NotificationResponse.self) { response in
+        .responseDecodable(of: [Notification].self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.data))
+                completion(.success(data))
             case .failure:
                 NetworkConstants.handleError(response: response, completion: completion)
             }
