@@ -21,8 +21,19 @@ class TILDetailViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let backgroundView = UIView()
-    let textView = UITextView()
+    
     var textViewHeightConstraint: NSLayoutConstraint?
+    
+    private let textView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.textContainer.lineFragmentPadding = 0
+        return textView
+    }()
     
     private let nicknameLabel: UILabel = {
         let label = UILabel()
@@ -40,8 +51,14 @@ class TILDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = post.title
+        addScrollView()
+        addPostDetail()
+    }
+    
+    func addScrollView() {
+        view.backgroundColor = .white
         view.addSubview(scrollView)
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -49,11 +66,13 @@ class TILDetailViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
+    }
+    
+    func addPostDetail() {
         scrollView.addSubview(backgroundView)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.borderColor = UIColor.systemGray6.cgColor
-        backgroundView.layer.borderWidth = 1
+        backgroundView.layer.borderWidth = 2
         backgroundView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
@@ -64,18 +83,13 @@ class TILDetailViewController: UIViewController {
             backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40)
         ])
         
-        backgroundView.addSubview(textView)
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(dateLabel)
+        backgroundView.addSubview(textView)
+        
         nicknameLabel.text = post.writerNickName
         dateLabel.text = DateFormat.dayTime(str: post.createdDate)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        textView.isSelectable = false
-        textView.font = UIFont.systemFont(ofSize: 17)
         textView.text = post.content
-        textView.textContainer.lineFragmentPadding = 0
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
