@@ -51,6 +51,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     func setupTableView() {
         viewModel.tableView.frame = view.bounds
         viewModel.tableView.dataSource = self
+        viewModel.tableView.delegate = self
         viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
         view.addSubview(viewModel.tableView)
     }
@@ -68,6 +69,12 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
         cell.reviewCntLabel.text = "RE: 3"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPost = viewModel.posts[indexPath.row]
+        let detailVC = TILDetailViewController(post: selectedPost)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     private func updateNoPostsLabelVisibility() {

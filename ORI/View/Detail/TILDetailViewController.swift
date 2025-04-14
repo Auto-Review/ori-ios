@@ -8,10 +8,17 @@
 import UIKit
 
 class TILDetailViewController: UIViewController {
-    let dummyText = """
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod, nisl at convallis luctus, magna mauris ullamcorper risus, nec suscipit nibh lorem non mauris. Nullam eget felis ut augue pretium laoreet. Aenean euismod eros non pulvinar efficitur. Donec pretium dapibus nisl, sit amet fermentum erat. Sed varius mi vel neque egestas, nec laoreet nulla tempor. Pellentesque nec odio at purus volutpat faucibus. Etiam at tellus nec sapien fermentum aliquam. Quisque pretium nibh vel gravida aliquam. Integer vel justo tortor.
-    """
-
+    var post: TIL
+    
+    init(post: TIL) {
+        self.post = post
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let scrollView = UIScrollView()
     let backgroundView = UIView()
     let textView = UITextView()
@@ -21,7 +28,6 @@ class TILDetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
-        label.text = "Ksiomng"
         return label
     }()
     
@@ -29,13 +35,12 @@ class TILDetailViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
-        label.text = "2025-04-01"
         return label
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.title = post.title
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -62,12 +67,14 @@ class TILDetailViewController: UIViewController {
         backgroundView.addSubview(textView)
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(dateLabel)
+        nicknameLabel.text = post.writerNickName
+        dateLabel.text = DateFormat.dayTime(str: post.createdDate)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.isSelectable = false
         textView.font = UIFont.systemFont(ofSize: 17)
-        textView.text = dummyText
+        textView.text = post.content
         textView.textContainer.lineFragmentPadding = 0
         
         NSLayoutConstraint.activate([

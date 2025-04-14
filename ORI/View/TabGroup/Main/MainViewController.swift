@@ -165,7 +165,8 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
                 self.calendarView.reloadData()
                 
                 self.viewModel.loadSelectDayAlarmList(date: today)
-                self.setupCheckListTableViewController(date: self.viewModel.getFormattedDate(date: today))
+                let dateString = DateFormat.onlyDay(date: self.date)
+                self.setupCheckListTableViewController(date: dateString)
             }
         }
     }
@@ -219,10 +220,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
 
 extension MainViewController {
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.string(from: date)
-        
+        let dateString = DateFormat.onlyDay(date: date)
         if viewModel.highlightedDates.contains(dateString) {
             return .baseYellow
         }
@@ -231,7 +229,8 @@ extension MainViewController {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewModel.loadSelectDayAlarmList(date: date)
-        setupCheckListTableViewController(date: self.viewModel.getFormattedDate(date: date))
+        let dateString = DateFormat.onlyDay(date: date)
+        setupCheckListTableViewController(date: dateString)
 
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()

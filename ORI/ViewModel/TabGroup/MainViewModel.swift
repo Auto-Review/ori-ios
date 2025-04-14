@@ -31,13 +31,7 @@ class MainViewModel {
     }
     
     func loadSelectDayAlarmList(date: Date) {
-        let date = getFormattedDate(date: date)
+        let date = DateFormat.onlyDay(date: date)
         selectDayTodoList = notiList.filter { $0.executeTime == date }.map{ $0.content }
-    }
-    
-    func getFormattedDate(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: date)
     }
 }
