@@ -21,7 +21,7 @@ class SettingViewController: UIViewController {
         
         // 알림 목록을 불러오는 버튼 추가
         let fetchNotificationsButton = UIButton(type: .system)
-        fetchNotificationsButton.setTitle("Fetch Notifications", for: .normal)
+        fetchNotificationsButton.setTitle("comment", for: .normal)
         fetchNotificationsButton.frame = CGRect(x: 100, y: 400, width: 200, height: 50)
         fetchNotificationsButton.addTarget(self, action: #selector(fetchNotifications), for: .touchUpInside)
         view.addSubview(fetchNotificationsButton)
@@ -51,16 +51,8 @@ class SettingViewController: UIViewController {
         }
     }
     
-    // 알림 목록을 불러오는 함수
     @objc func fetchNotifications() {
-        fetchNotificationList { result in
-            switch result {
-            case .success(let notifications):
-                print("Fetched notifications: \(notifications)")
-            case .failure(let error):
-                print("Failed to fetch notifications: \(error.localizedDescription)")
-            }
-        }
+        createTILComment(comment: WriteComment(postId: 11, body: "에헤이", isPublic: true, mentionNickName: "ksiomng", mentionEmail: "nadana092@gmail.com", parentId: 1))
     }
     
     // 토큰 재발급 함수
