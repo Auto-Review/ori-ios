@@ -28,7 +28,13 @@ func fetchNotificationList(completion: @escaping (Result<[Notification], Error>)
             case .success(let data):
                 completion(.success(data))
             case .failure:
-                NetworkConstants.handleError(response: response, completion: completion)
+                NetworkConstants.handleError(
+                    response: response,
+                    retryAction: {
+                        fetchNotificationList(completion: completion)
+                    },
+                    completion: completion
+                )
             }
         }
 }

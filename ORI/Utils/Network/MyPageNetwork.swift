@@ -30,7 +30,13 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
             case .success(let data):
                 completion(.success(data.dtoList))
             case .failure:
-                NetworkConstants.handleError(response: response, completion: completion)
+                NetworkConstants.handleError(
+                    response: response,
+                    retryAction: {
+                        fetchMyTILList(page: page, size: size, completion: completion)
+                    },
+                    completion: completion
+                )
             }
         }
 }
@@ -57,7 +63,13 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
             case .success(let data):
                 completion(.success(data.dtoList))
             case .failure:
-                NetworkConstants.handleError(response: response, completion: completion)
+                NetworkConstants.handleError(
+                    response: response,
+                    retryAction: {
+                        fetchMyCodeList(page: page, size: size, completion: completion)
+                    },
+                    completion: completion
+                )
             }
         }
 }
@@ -82,7 +94,13 @@ func fetchMyProfile(completion: @escaping (Result<Member, Error>) -> Void) {
             case .success(let data):
                 completion(.success(data))
             case .failure:
-                NetworkConstants.handleError(response: response, completion: completion)
+                NetworkConstants.handleError(
+                    response: response,
+                    retryAction: {
+                        fetchMyProfile(completion: completion)
+                    },
+                    completion: completion
+                )
             }
         }
 }

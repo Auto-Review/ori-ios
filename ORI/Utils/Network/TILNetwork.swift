@@ -20,7 +20,13 @@ func fetchTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Err
             case .success(let data):
                 completion(.success(data.dtoList))
             case .failure:
-                NetworkConstants.handleError(response: response, completion: completion)
+                NetworkConstants.handleError(
+                    response: response,
+                    retryAction: {
+                        fetchTILList(page: page, size: size, completion: completion)
+                    },
+                    completion: completion
+                )
             }
         }
 }

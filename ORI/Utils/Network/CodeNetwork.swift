@@ -20,7 +20,13 @@ func fetchCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], E
             case .success(let data):
                 completion(.success(data.dtoList))
             case .failure:
-                NetworkConstants.handleError(response: response, completion: completion)
+                NetworkConstants.handleError(
+                    response: response,
+                    retryAction: {
+                        fetchCodeList(page: page, size: size, completion: completion)
+                    },
+                    completion: completion
+                )
             }
         }
 }

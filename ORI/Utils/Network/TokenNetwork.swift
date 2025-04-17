@@ -46,7 +46,7 @@ class TokenNetwork {
             }
     }
     
-    static func reissuedTokenFromServer() {
+    static func reissuedTokenFromServer(completion: @escaping () -> Void) {
         let url = "http://\(NetworkConstants.baseURL)/auth/reissued"
         
         guard let accessToken = KeychainManager.load(key: "accessToken") else {
@@ -78,6 +78,7 @@ class TokenNetwork {
                         
                         if KeychainManager.save("accessToken", newAccessToken) && KeychainManager.save("refreshToken", newRefreshToken) && KeychainManager.save("refreshTokenExpiration", "\(newExpirationTimestamp)") {
                             print("new 키체인 저장완료")
+                            completion()
                         }
                     }
                 case .failure(let error):

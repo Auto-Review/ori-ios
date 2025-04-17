@@ -8,7 +8,7 @@
 import SwiftUI
 import Alamofire
 
-func fetchTILCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping (Result<Comments, Error>) -> Void){
+func fetchTILCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping (Result<Comments, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/til-post/\(tilPostId)/USER/comments"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
@@ -26,9 +26,15 @@ func fetchTILCommentList(tilPostId: Int, page: Int, size: Int, completion: @esca
         .responseDecodable(of: Comments.self) { response in
             switch response.result {
             case .success(let data):
-                return completion(.success(data))
+                completion(.success(data))
             case .failure(_):
-                NetworkConstants.handleError(response: response, completion: completion)
+                NetworkConstants.handleError(
+                    response: response,
+                    retryAction: {
+                        fetchTILCommentList(tilPostId: tilPostId, page: page, size: size, completion: completion)
+                    },
+                    completion: completion
+                )
             }
         }
 }
