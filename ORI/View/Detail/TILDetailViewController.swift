@@ -7,8 +7,14 @@
 
 import UIKit
 
-class TILDetailViewController: UIViewController {
+class TILDetailViewController: UIViewController, UITextViewDelegate  {
     var post: TIL
+
+    var content: String = "" {
+        didSet {
+            placeHolderLabel.isHidden = !content.isEmpty
+        }
+    }
     
     init(post: TIL) {
         self.post = post
@@ -24,6 +30,15 @@ class TILDetailViewController: UIViewController {
     let backgroundCreateCommentView = UIView()
     
     var textViewHeightConstraint: NSLayoutConstraint?
+    
+    private let placeHolderLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .gray
+        label.text = "악플, 잘못된 정보는 경고없이 삭제될 수 있습니다."
+        return label
+    }()
     
     private let commentLabel: UILabel = {
         let label = UILabel()
@@ -46,7 +61,6 @@ class TILDetailViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.systemFont(ofSize: 17)
         textView.textContainer.lineFragmentPadding = 0
-        textView.backgroundColor = .baseYellow
         return textView
     }()
     
@@ -90,6 +104,7 @@ class TILDetailViewController: UIViewController {
         detailNavigationBar(text: post.title)
         addScrollView()
         addPostDetail()
+        commentTextView.delegate = self
     }
     
     func addScrollView() {
@@ -165,7 +180,7 @@ class TILDetailViewController: UIViewController {
             commentnameLabel.topAnchor.constraint(equalTo: backgroundCreateCommentView.topAnchor, constant: 20),
             commentnameLabel.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
             
-            commentTextView.topAnchor.constraint(equalTo: commentnameLabel.bottomAnchor, constant: 10),
+            commentTextView.topAnchor.constraint(equalTo: commentnameLabel.bottomAnchor, constant: 5),
             commentTextView.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
             commentTextView.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -15),
             
@@ -174,9 +189,21 @@ class TILDetailViewController: UIViewController {
             commentButton.bottomAnchor.constraint(equalTo: backgroundCreateCommentView.bottomAnchor, constant: -10)
         ])
         
+        commentTextView.addSubview(placeHolderLabel)
+        
+        NSLayoutConstraint.activate([
+            placeHolderLabel.topAnchor.constraint(equalTo: commentTextView.topAnchor, constant: 7),
+            placeHolderLabel.leadingAnchor.constraint(equalTo: commentTextView.leadingAnchor),
+            placeHolderLabel.trailingAnchor.constraint(equalTo: commentTextView.trailingAnchor),
+        ])
+        
         DispatchQueue.main.async {
             let size = self.textView.sizeThatFits(CGSize(width: self.textView.frame.width, height: .greatestFiniteMagnitude))
             self.textViewHeightConstraint?.constant = size.height
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        content = textView.text
     }
 }
