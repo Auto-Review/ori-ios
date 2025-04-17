@@ -58,7 +58,6 @@ func createTILComment(comment: WriteComment) {
             case .success(_ ):
                 print("✅ 댓글 등록 성공")
                 fetchTILCommentList(tilPostId: comment.postId, page: 0, size: 10) { result in
-                    print(result)
                 }
             case .failure(let error):
                 print("❌ 에러 내용: \(error.localizedDescription)")

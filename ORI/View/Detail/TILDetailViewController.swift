@@ -8,6 +8,7 @@
 import UIKit
 
 class TILDetailViewController: UIViewController, UITextViewDelegate  {
+    let viewModel = DetailViewModel()
     var post: TIL
     
     init(post: TIL) {
@@ -184,6 +185,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         ])
         
         commentTextView.addSubview(placeHolderLabel)
+        commentButton.addTarget(self, action: #selector(createComment), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             placeHolderLabel.topAnchor.constraint(equalTo: commentTextView.topAnchor, constant: 7),
@@ -199,5 +201,10 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     
     func textViewDidChange(_ textView: UITextView) {
         placeHolderLabel.isHidden = !textView.text.isEmpty
+    }
+    
+    @objc func createComment() {
+        let text = commentTextView.text ?? ""
+        createTILComment(comment: WriteComment(postId: post.id, body: text, isPublic: true, mentionNickName: viewModel.myInfo.nickname, mentionEmail: viewModel.myInfo.email, parentId: 1))
     }
 }
