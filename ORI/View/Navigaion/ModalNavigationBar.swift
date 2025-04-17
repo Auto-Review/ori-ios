@@ -30,7 +30,8 @@ extension UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    @objc private func closeButtonTapped() {
+    @objc func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
