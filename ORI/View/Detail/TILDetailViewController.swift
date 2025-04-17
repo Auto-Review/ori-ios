@@ -47,7 +47,6 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        label.text = "닉네임"
         return label
     }()
     
@@ -193,7 +192,8 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             placeHolderLabel.trailingAnchor.constraint(equalTo: commentTextView.trailingAnchor),
         ])
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
+            self.commentnameLabel.text = viewModel.myInfo.nickname
             let size = self.textView.sizeThatFits(CGSize(width: self.textView.frame.width, height: .greatestFiniteMagnitude))
             self.textViewHeightConstraint?.constant = size.height
         }
