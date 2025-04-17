@@ -18,7 +18,7 @@ class DateFormat {
     static func dayTime(str: String) -> String {
         let components = str.split(separator: "T")
         if components.count > 1 {
-            let formattedString = components[0] + " " + components[1].prefix(8)
+            let formattedString = components[0] + " " + components[1].prefix(5)
             return String(formattedString)
         }
         return ""

@@ -21,8 +21,44 @@ class TILDetailViewController: UIViewController {
     
     let scrollView = UIScrollView()
     let backgroundView = UIView()
+    let backgroundCreateCommentView = UIView()
     
     var textViewHeightConstraint: NSLayoutConstraint?
+    
+    private let commentLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.text = "COMMENTS"
+        return label
+    }()
+    
+    private let commentnameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.text = "닉네임"
+        return label
+    }()
+    
+    private let commentTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.textContainer.lineFragmentPadding = 0
+        textView.backgroundColor = .baseYellow
+        return textView
+    }()
+    
+    private let commentButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("COMMIT", for: .normal)
+        button.backgroundColor = .clear
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        button.setTitleColor(UIColor.gray, for: .normal)
+        return button
+    }()
     
     private let textView: UITextView = {
         let textView = UITextView()
@@ -70,17 +106,33 @@ class TILDetailViewController: UIViewController {
     
     func addPostDetail() {
         scrollView.addSubview(backgroundView)
+        scrollView.addSubview(commentLabel)
+        scrollView.addSubview(backgroundCreateCommentView)
+        
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.borderColor = UIColor.systemGray6.cgColor
         backgroundView.layer.borderWidth = 2
         backgroundView.layer.cornerRadius = 10
         
+        backgroundCreateCommentView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundCreateCommentView.layer.borderColor = UIColor.systemGray6.cgColor
+        backgroundCreateCommentView.layer.borderWidth = 2
+        backgroundCreateCommentView.layer.cornerRadius = 10
+        
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            backgroundView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
             backgroundView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             backgroundView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
-            backgroundView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
-            backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40)
+            backgroundView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -40),
+            
+            commentLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25),
+            commentLabel.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 20),
+            
+            backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 10),
+            backgroundCreateCommentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            backgroundCreateCommentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            backgroundCreateCommentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         backgroundView.addSubview(nicknameLabel)
@@ -102,6 +154,23 @@ class TILDetailViewController: UIViewController {
             textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
             textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
+        ])
+        
+        backgroundCreateCommentView.addSubview(commentnameLabel)
+        backgroundCreateCommentView.addSubview(commentTextView)
+        backgroundCreateCommentView.addSubview(commentButton)
+        
+        NSLayoutConstraint.activate([
+            commentnameLabel.topAnchor.constraint(equalTo: backgroundCreateCommentView.topAnchor, constant: 20),
+            commentnameLabel.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
+            
+            commentTextView.topAnchor.constraint(equalTo: commentnameLabel.bottomAnchor, constant: 10),
+            commentTextView.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
+            commentTextView.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -15),
+            
+            commentButton.topAnchor.constraint(equalTo: commentTextView.bottomAnchor),
+            commentButton.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -15),
+            commentButton.bottomAnchor.constraint(equalTo: backgroundCreateCommentView.bottomAnchor, constant: -10)
         ])
         
         DispatchQueue.main.async {
