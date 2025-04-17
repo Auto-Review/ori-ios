@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 
 class TokenNetwork {
-    static func requestTokenFromServer(idToken: String) {
+    static func requestTokenFromServer(idToken: String, completion: @escaping (Bool) -> Void) {
         let url = "http://\(NetworkConstants.baseURL)/auth/token"
         let parameters: [String: String] = ["accessToken": idToken]
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
@@ -20,6 +20,7 @@ class TokenNetwork {
                 case .success:
                     guard let httpResponse = response.response else {
                         print("No HTTP response available")
+                        completion(false)
                         return
                     }
                     
@@ -35,13 +36,16 @@ class TokenNetwork {
                         
                         if KeychainManager.save("accessToken", accessToken) && KeychainManager.save("refreshToken", refreshToken) && KeychainManager.save("refreshTokenExpiration", "\(expirationTimestamp)") {
                             print("키체인 저장완료")
+                            completion(true)
                         }
                     } else {
                         print("Failed to retrieve tokens from headers")
+                        completion(false)
                     }
                     
                 case .failure(let error):
                     print("Failed to send token to server: \(error)")
+                    completion(false)
                 }
             }
     }
