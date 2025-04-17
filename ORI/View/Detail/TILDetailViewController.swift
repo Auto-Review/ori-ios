@@ -51,7 +51,7 @@ class TILDetailViewController: UIViewController {
     }()
     
     private let commentButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("COMMIT", for: .normal)
         button.backgroundColor = .clear

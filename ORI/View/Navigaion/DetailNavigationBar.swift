@@ -35,7 +35,7 @@ extension UIViewController {
         
         let bookmarkButton: UIButton = {
             let button = UIButton()
-            let icon = UIImage(systemName: "bookmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+            let icon = UIImage(systemName: "bookmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
             let resizedIcon = icon?.scaledToFitSize(CGSize(width: 28, height: 25)).withRenderingMode(.alwaysTemplate)
             button.setImage(resizedIcon, for: .normal)
             button.tintColor = .systemGray4
