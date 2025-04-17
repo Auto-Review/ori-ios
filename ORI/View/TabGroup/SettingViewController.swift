@@ -26,13 +26,6 @@ class SettingViewController: UIViewController {
         fetchNotificationsButton.addTarget(self, action: #selector(fetchNotifications), for: .touchUpInside)
         view.addSubview(fetchNotificationsButton)
         
-        // 기타 버튼들
-        let reissued = UIButton(type: .system)
-        reissued.setTitle("Reissue Token", for: .normal)
-        reissued.frame = CGRect(x: 100, y: 300, width: 200, height: 50)
-        reissued.addTarget(self, action: #selector(reissuedKeychain), for: .touchUpInside)
-        view.addSubview(reissued)
-        
         let logout = UIButton(type: .system)
         logout.setTitle("Logout", for: .normal)
         logout.frame = CGRect(x: 100, y: 100, width: 200, height: 50)
@@ -53,11 +46,6 @@ class SettingViewController: UIViewController {
     
     @objc func fetchNotifications() {
         createTILComment(comment: WriteComment(postId: 11, body: "에헤이", isPublic: true, mentionNickName: "ksiomng", mentionEmail: "nadana092@gmail.com", parentId: 1))
-    }
-    
-    // 토큰 재발급 함수
-    @objc func reissuedKeychain() {
-        TokenNetwork.reissuedTokenFromServer()
     }
     
     // 로그아웃 함수
