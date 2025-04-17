@@ -9,12 +9,6 @@ import UIKit
 
 class TILDetailViewController: UIViewController, UITextViewDelegate  {
     var post: TIL
-
-    var content: String = "" {
-        didSet {
-            placeHolderLabel.isHidden = !content.isEmpty
-        }
-    }
     
     init(post: TIL) {
         self.post = post
@@ -204,6 +198,6 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        content = textView.text
+        placeHolderLabel.isHidden = !textView.text.isEmpty
     }
 }
