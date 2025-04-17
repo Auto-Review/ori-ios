@@ -12,7 +12,7 @@ extension UIViewController {
         let titleLabel: UILabel = {
             let label = UILabel()
             label.text = " \(text)"
-            label.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+            label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
             label.sizeToFit()
             return label
         }()
@@ -36,7 +36,7 @@ extension UIViewController {
         let bookmarkButton: UIButton = {
             let button = UIButton()
             let icon = UIImage(systemName: "bookmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
-            let resizedIcon = icon?.scaledToFitSize(CGSize(width: 28, height: 25)).withRenderingMode(.alwaysTemplate)
+            let resizedIcon = icon?.scaledToFitSize(CGSize(width: 24, height: 21)).withRenderingMode(.alwaysTemplate)
             button.setImage(resizedIcon, for: .normal)
             button.tintColor = .systemGray4
             return button

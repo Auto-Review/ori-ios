@@ -12,9 +12,3 @@ struct Member: Decodable {
     let email: String
     let nickname: String
 }
-
-struct ProfileResponse: Decodable {
-    let status: String
-    let data: Int
-    let message: String
-}

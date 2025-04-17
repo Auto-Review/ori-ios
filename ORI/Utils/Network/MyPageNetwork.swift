@@ -122,7 +122,7 @@ func updateMyProfile(id: Int, nickname: String) {
     
     AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
         .validate(statusCode: 200..<300)
-        .responseDecodable(of: ProfileResponse.self) { response in
+        .responseDecodable(of: Int.self) { response in
             switch response.result {
             case .success(let data):
                 print("✅ 프로필 업데이트 성공: \(data)")
