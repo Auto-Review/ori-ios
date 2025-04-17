@@ -20,7 +20,7 @@ class DetailViewModel {
             case .success(let posts):
                 self?.myInfo = posts
             case .failure(let error):
-                print("error")
+                print(error.localizedDescription)
             }
         }
     }
