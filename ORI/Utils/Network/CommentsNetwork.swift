@@ -49,7 +49,7 @@ func createTILComment(comment: WriteComment) {
         "Authorization": accessToken,
         "Content-Type": "application/json"
     ]
-    let parameters: [String: Any] = ["postId": comment.postId, "body": comment.body, "isPublic": comment.isPublic, "mentionNickName": comment.mentionNickName, "mentionEmail": comment.mentionEmail, "parentId": comment.parentId]
+    let parameters: [String: Any] = ["postId": comment.postId, "body": comment.body, "isPublic": comment.isPublic, "mentionNickName": comment.mentionNickName, "mentionEmail": comment.mentionEmail, "parentId": comment.parentId as Any]
     
     AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
         .validate(statusCode: 200..<300)
