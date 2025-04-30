@@ -21,6 +21,8 @@ struct Comment: Decodable {
     let mentionNickName: String? // 대댓글일 경우에만 있음
     let mentionEmail: String? // 대댓글일 경우에만 있음
     let body: String
+    let createdAt: String
+    let updatedAt: String
 }
 
 struct WriteComment: Decodable {
