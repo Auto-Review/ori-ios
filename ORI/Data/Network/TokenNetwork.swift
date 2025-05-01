@@ -10,7 +10,7 @@ import Foundation
 
 class TokenNetwork {
     static func requestTokenFromServer(idToken: String, completion: @escaping (Bool) -> Void) {
-        let url = "http://\(NetworkConstants.baseURL)/auth/token"
+        let url = "http://\(NetworkUtils.baseURL)/auth/token"
         let parameters: [String: String] = ["accessToken": idToken]
         let headers: HTTPHeaders = ["Content-Type": "application/json"]
         
@@ -51,7 +51,7 @@ class TokenNetwork {
     }
     
     static func reissuedTokenFromServer(completion: @escaping () -> Void) {
-        let url = "http://\(NetworkConstants.baseURL)/auth/reissued"
+        let url = "http://\(NetworkUtils.baseURL)/auth/reissued"
         
         guard let accessToken = KeychainManager.load(key: "accessToken") else {
             print("❌ Access Token이 없습니다.")

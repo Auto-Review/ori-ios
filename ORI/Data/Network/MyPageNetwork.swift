@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Error>) -> Void) {
-    let url = "http://\(NetworkConstants.baseURL)/post/til/own"
+    let url = "http://\(NetworkUtils.baseURL)/post/til/own"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
@@ -30,7 +30,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
             case .success(let data):
                 completion(.success(data.dtoList))
             case .failure:
-                NetworkConstants.handleError(
+                NetworkUtils.handleError(
                     response: response,
                     retryAction: {
                         fetchMyTILList(page: page, size: size, completion: completion)
@@ -42,7 +42,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
 }
 
 func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], Error>) -> Void) {
-    let url = "http://\(NetworkConstants.baseURL)/post/code/own"
+    let url = "http://\(NetworkUtils.baseURL)/post/code/own"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
@@ -63,7 +63,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
             case .success(let data):
                 completion(.success(data.dtoList))
             case .failure:
-                NetworkConstants.handleError(
+                NetworkUtils.handleError(
                     response: response,
                     retryAction: {
                         fetchMyCodeList(page: page, size: size, completion: completion)
@@ -75,7 +75,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
 }
 
 func fetchMyProfile(completion: @escaping (Result<Member, Error>) -> Void) {
-    let url = "http://\(NetworkConstants.baseURL)/profile/info"
+    let url = "http://\(NetworkUtils.baseURL)/profile/info"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         completion(.failure(NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Access Token이 없습니다."])))
@@ -94,7 +94,7 @@ func fetchMyProfile(completion: @escaping (Result<Member, Error>) -> Void) {
             case .success(let data):
                 completion(.success(data))
             case .failure:
-                NetworkConstants.handleError(
+                NetworkUtils.handleError(
                     response: response,
                     retryAction: {
                         fetchMyProfile(completion: completion)
@@ -106,7 +106,7 @@ func fetchMyProfile(completion: @escaping (Result<Member, Error>) -> Void) {
 }
 
 func updateMyProfile(id: Int, nickname: String) {
-    let url = "http://\(NetworkConstants.baseURL)/profile"
+    let url = "http://\(NetworkUtils.baseURL)/profile"
     
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")

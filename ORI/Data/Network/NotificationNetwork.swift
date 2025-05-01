@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 func fetchNotificationList(completion: @escaping (Result<[Notification], Error>) -> Void) {
-    let url = "http://\(NetworkConstants.baseURL)/notification/own"
+    let url = "http://\(NetworkUtils.baseURL)/notification/own"
     
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
@@ -28,7 +28,7 @@ func fetchNotificationList(completion: @escaping (Result<[Notification], Error>)
             case .success(let data):
                 completion(.success(data))
             case .failure:
-                NetworkConstants.handleError(
+                NetworkUtils.handleError(
                     response: response,
                     retryAction: {
                         fetchNotificationList(completion: completion)

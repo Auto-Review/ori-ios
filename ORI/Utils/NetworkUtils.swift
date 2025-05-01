@@ -1,5 +1,5 @@
 //
-//  NetworkConstants.swift
+//  NetworkUtils.swift
 //  ORI
 //
 //  Created by Song Kim on 3/5/25.
@@ -8,9 +8,7 @@
 import UIKit
 import Alamofire
 
-struct NetworkConstants {
-    static let baseURL = Bundle.main.infoDictionary?["SERVER_API_URL"] as? String ?? ""
-    
+struct NetworkUtils {
     static func handleError<T, U>(
         response: DataResponse<U, AFError>,
         retryAction: @escaping () -> Void,
