@@ -15,8 +15,6 @@ class MyPageViewModel {
     var myCodePosts: [Code] = []
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
     
-    var tableView = UITableView()
-    
     var didUpdateMyData: (() -> Void)?
     var didFailWithError: ((Error) -> Void)?
         
