@@ -10,7 +10,7 @@ import Alamofire
 
 // 전체 TIL 리스트
 func fetchTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Error>) -> Void) {
-    let url = "http://\(NetworkUtils.baseURL)/post/til/list"
+    let url = "http://\(NetworkConstants.baseURL)/post/til/list"
     let parameters: [String: Any] = ["page": page, "size": size]
     
     AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)

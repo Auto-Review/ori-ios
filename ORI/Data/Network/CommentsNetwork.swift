@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 
 func fetchTILCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping (Result<Comments, Error>) -> Void) {
-    let url = "http://\(NetworkUtils.baseURL)/til-post/\(tilPostId)/USER/comments"
+    let url = "http://\(NetworkConstants.baseURL)/til-post/\(tilPostId)/USER/comments"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         return
@@ -40,7 +40,7 @@ func fetchTILCommentList(tilPostId: Int, page: Int, size: Int, completion: @esca
 }
 
 func createTILComment(comment: WriteComment) {
-    let url = "http://\(NetworkUtils.baseURL)/til-post/comment"
+    let url = "http://\(NetworkConstants.baseURL)/til-post/comment"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
         return
