@@ -162,7 +162,7 @@ class MyViewController: UIViewController {
             myTabVC.view.topAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor, constant: 40),
             myTabVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             myTabVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            myTabVC.view.heightAnchor.constraint(equalToConstant: 200)
+            myTabVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         myTabVC.didMove(toParent: self)

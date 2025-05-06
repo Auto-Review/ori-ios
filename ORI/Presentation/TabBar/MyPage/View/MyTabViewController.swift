@@ -115,7 +115,7 @@ class MyTabViewController: UIViewController {
             myPostListView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 5),
             myPostListView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             myPostListView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            myPostListView.heightAnchor.constraint(equalToConstant: 420),
+            myPostListView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
