@@ -9,7 +9,6 @@ import UIKit
 
 class NotificationViewModel {
     var lists: [Notification] = []
-    let tableView = UITableView()
     
     func loadNotiList(completion: @escaping () -> Void) {
         fetchNotificationList(){ [weak self] result in

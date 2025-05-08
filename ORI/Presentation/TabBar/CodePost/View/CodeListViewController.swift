@@ -9,6 +9,7 @@ import UIKit
 
 class CodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let viewModel = CodeListViewModel()
+    var tableView = UITableView()
     
     private let noPostsLabel: UILabel = {
         let label = UILabel()
@@ -23,7 +24,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.tableView.rowHeight = 70
+        tableView.rowHeight = 70
         
         mainNavigationBar()
         setupTableView()
@@ -41,7 +42,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        viewModel.tableView.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
     }
     
     @objc func refreshData() {
@@ -49,10 +50,10 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func setupTableView() {
-        viewModel.tableView.frame = view.bounds
-        viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
-        view.addSubview(viewModel.tableView)
+        tableView.frame = view.bounds
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
+        view.addSubview(tableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,8 +79,8 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         viewModel.loadCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
-                self?.viewModel.tableView.reloadData()
-                self?.viewModel.tableView.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
             }
         }
     }

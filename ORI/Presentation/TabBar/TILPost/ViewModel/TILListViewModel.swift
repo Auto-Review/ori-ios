@@ -9,7 +9,6 @@ import UIKit
 
 class TILListViewModel {
     var posts: [TIL] = []
-    let tableView = UITableView()
     
     func loadTILList(completion: @escaping () -> Void) {
         fetchTILList(page: 0, size: 10) { [weak self] result in
