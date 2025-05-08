@@ -10,6 +10,7 @@ import FSCalendar
 
 class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelegateAppearance {
     let viewModel = MainViewModel()
+    var tableView = UITableView()
     var date = Date()
     
     var cellHeight: CGFloat = 0
@@ -235,7 +236,6 @@ extension MainViewController {
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
-        
-        viewModel.tableView.reloadData()
+        tableView.reloadData()
     }
 }

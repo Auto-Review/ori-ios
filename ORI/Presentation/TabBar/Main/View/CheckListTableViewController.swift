@@ -27,8 +27,8 @@ class CheckListTableViewController: UITableViewController {
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
         tableView.isScrollEnabled = false
-        viewModel.tableView.delegate = self
-        viewModel.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     // MARK: - Table view data source
