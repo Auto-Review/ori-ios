@@ -208,15 +208,13 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             ])
 
             checkListVC.didMove(toParent: self)
-            cellHeight = CGFloat(viewModel.selectDayTodoList.count*44)
-            listHeightConstraint?.constant = cellHeight
+            listHeightConstraint?.constant = viewModel.tableViewHeight
         }
 
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
     }
-
 }
 
 extension MainViewController {

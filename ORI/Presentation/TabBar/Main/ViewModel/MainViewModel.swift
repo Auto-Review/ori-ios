@@ -25,6 +25,10 @@ class MainViewModel {
         }
     }
     
+    var tableViewHeight: CGFloat {
+        return CGFloat(selectDayTodoList.count * 44)
+    }
+    
     func loadAlarmList() {
         highlightedDates = notiList.map { $0.executeTime }
     }
