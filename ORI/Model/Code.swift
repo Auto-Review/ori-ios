@@ -17,6 +17,7 @@ struct Code: Decodable {
     let writerNickName: String
     let title: String
     let level: Int
-    let description: String
+    let commentCount: Int
+    let reviewCount: Int
     let createdDate: String
 }

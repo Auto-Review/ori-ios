@@ -82,7 +82,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.titleLabel.text = viewModel.myCodePosts[indexPath.row].title
         cell.nameLabel.text = viewModel.myCodePosts[indexPath.row].writerNickName
         cell.dateLabel.text = viewModel.myCodePosts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+        cell.reviewCntLabel.text = "RE: \(viewModel.myCodePosts[indexPath.row].commentCount)"
         return cell
     }
     
