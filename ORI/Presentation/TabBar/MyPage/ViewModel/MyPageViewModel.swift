@@ -10,47 +10,96 @@ import UIKit
 
 class MyPageViewModel {
     var isCode = true
-    
     var myTILPosts: [TIL] = []
     var myCodePosts: [MyCode] = []
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
     
-    var didUpdateMyData: (() -> Void)?
-    var didFailWithError: ((Error) -> Void)?
+    // 코드 포스트 무한 스크롤
+    private var currentCodePage = 0
+    private var isCodeFetching = false
+    private var lastCodePage = false
     
-    func loadMyCodeList(completion: @escaping () -> Void) {
-        fetchMyCodeList(page: 0, size: 10) { [weak self] result in
+    func resetMyCodeList() {
+        currentCodePage = 0
+        isCodeFetching = false
+        lastCodePage = false
+        myCodePosts = []
+    }
+    
+    func fetchMoreMyCodeList(completion: @escaping () -> Void) {
+        guard !isCodeFetching, !lastCodePage else {
+            completion()
+            return
+        }
+        isCodeFetching = true
+        
+        fetchMyCodeList(page: currentCodePage, size: 10) { [weak self] result in
+            guard let self = self else { return }
+            self.isCodeFetching = false
+            
             switch result {
-            case .success(let posts):
-                self?.myCodePosts = posts
-                completion()
-            case .failure( _):
-                completion()
+            case .success(let response):
+                self.myCodePosts.append(contentsOf: response.dtoList)
+                if response.totalPage <= self.currentCodePage + 1 {
+                    self.lastCodePage = true
+                } else {
+                    self.currentCodePage += 1
+                }
+            case .failure:
+                break
             }
+            completion()
         }
     }
     
-    func loadMyTILList(completion: @escaping () -> Void) {
+    // TIL 포스트 무한 스크롤
+    private var currentTILPage = 0
+    private var isTILFetching = false
+    private var lastTILPage = false
+    
+    func resetMyTILList() {
+        currentTILPage = 0
+        isTILFetching = false
+        lastTILPage = false
+        myTILPosts = []
+    }
+    
+    func fetchMoreMyTILList(completion: @escaping () -> Void) {
+        guard !isTILFetching, !lastTILPage else {
+            completion()
+            return
+        }
+        isTILFetching = true
+        
         fetchMyTILList(page: 0, size: 10) { [weak self] result in
+            guard let self = self else { return }
+            self.isTILFetching = false
+            
             switch result {
-            case .success(let posts):
-                self?.myTILPosts = posts
-                completion()
-            case .failure(_):
-                completion()
+            case .success(let response):
+                self.myTILPosts.append(contentsOf: response.dtoList)
+                if response.totalPage <= self.currentTILPage + 1 {
+                    self.lastTILPage = true
+                } else {
+                    self.currentTILPage += 1
+                }
+            case .failure:
+                break
             }
+            completion()
         }
     }
     
-    func fetchMyData() {
+    // 내 정보 가져오기 (이메일, 이름)
+    func fetchMyData(completion: @escaping () -> Void) {
         fetchMyProfile() { [weak self] result in
             switch result {
-            case .success(let posts):
-                self?.myInfo = posts
-                self?.didUpdateMyData?()
-            case .failure(let error):
-                self?.didFailWithError?(error)
+            case .success(let user):
+                self?.myInfo = user
+            case .failure(_):
+                break
             }
+            completion()
         }
     }
     

@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 // 전체 TIL 리스트
-func fetchTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Error>) -> Void) {
+func fetchTILList(page: Int, size: Int, completion: @escaping (Result<TILListResponse, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/til/list"
     let parameters: [String: Any] = ["page": page, "size": size]
     
@@ -18,7 +18,7 @@ func fetchTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Err
         .responseDecodable(of: TILListResponse.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.dtoList))
+                completion(.success(data))
             case .failure:
                 NetworkUtils.handleError(
                     response: response,

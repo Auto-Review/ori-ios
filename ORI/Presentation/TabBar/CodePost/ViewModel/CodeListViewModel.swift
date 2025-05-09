@@ -9,6 +9,42 @@ import UIKit
 
 class CodeListViewModel {
     var posts: [Code] = []
+    private var currentPage = 0
+    private var isFetching = false
+    private var lastPage = false
+    
+    func resetMyCodeList() {
+        currentPage = 0
+        isFetching = false
+        lastPage = false
+        posts = []
+    }
+    
+    func fetchMoreAllCodeList(completion: @escaping () -> Void) {
+        guard !isFetching, !lastPage else {
+            completion()
+            return
+        }
+        isFetching = true
+        
+        fetchCodeList(page: self.currentPage, size: 20) { [weak self] result in
+            guard let self = self else { return }
+            self.isFetching = false
+            
+            switch result {
+            case .success(let response):
+                self.posts.append(contentsOf: response.dtoList)
+                if response.totalPage <= self.currentPage + 1 {
+                    self.lastPage = true
+                } else {
+                    self.currentPage += 1
+                }
+            case .failure:
+                break
+            }
+            completion()
+        }
+    }
     
     var cellModels: [PostCellModel] {
         posts.map {
@@ -16,21 +52,8 @@ class CodeListViewModel {
                 title: $0.title,
                 author: $0.writerNickName,
                 date: String($0.createdDate.prefix(10)),
-                reviewCountText: ""
+                reviewCountText: "RE: \($0.commentCount)"
             )
-        }
-    }
-    
-    func loadCodeList(completion: @escaping () -> Void) {
-        fetchCodeList(page: 0, size: 10) { [weak self] result in
-            switch result {
-            case .success(let posts):
-                self?.posts = posts
-                completion()
-            case .failure(let error):
-                print("Error fetching posts: \(error)")
-                completion()
-            }
         }
     }
 }

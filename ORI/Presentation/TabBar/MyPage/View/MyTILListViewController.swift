@@ -37,15 +37,14 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         mainNavigationBar()
         setupTableView()
+        loadDataAndUpdateUI()
         setupRefreshControl()
-        view.addSubview(noPostsLabel)
         
+        view.addSubview(noPostsLabel)
         NSLayoutConstraint.activate([
             noPostsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        loadDataAndUpdateUI()
     }
     
     func setupRefreshControl() {
@@ -55,14 +54,21 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc func refreshData() {
-        loadDataAndUpdateUI()
+        viewModel.resetMyCodeList()
+        viewModel.fetchMoreMyTILList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
     
     func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -82,7 +88,7 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.titleLabel.text = viewModel.myTILPosts[indexPath.row].title
         cell.nameLabel.text = viewModel.myTILPosts[indexPath.row].writerNickName
         cell.dateLabel.text = viewModel.myTILPosts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+        cell.reviewCntLabel.text = ""
         return cell
     }
     
@@ -91,11 +97,31 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadMyTILList() { [weak self] in
+        viewModel.fetchMoreMyTILList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
                 self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+}
+
+extension MyTILListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        if offsetY > contentHeight - frameHeight - 100 {
+            loadMoreData()
+        }
+    }
+    
+    private func loadMoreData() {
+        viewModel.fetchMoreMyTILList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
             }
         }
     }

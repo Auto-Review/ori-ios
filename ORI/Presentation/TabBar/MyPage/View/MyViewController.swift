@@ -66,8 +66,7 @@ class MyViewController: UIViewController {
         mainNavigationBar()
         setupConstraints()
         addMyTabView()
-        setupViewModel()
-        viewModel.fetchMyData()
+        setupMyInfo()
     }
     
     func setupConstraints() {
@@ -92,11 +91,11 @@ class MyViewController: UIViewController {
         ])
     }
     
-    private func setupViewModel() {
-        viewModel.didUpdateMyData = { [weak self] in
+    private func setupMyInfo() {
+        viewModel.fetchMyData {
             DispatchQueue.main.async {
-                self?.nameTextField.text = self!.viewModel.myInfo.nickname
-                self?.emailTextField.text = self!.viewModel.myInfo.email
+                self.nameTextField.text = self.viewModel.myInfo.nickname
+                self.emailTextField.text = self.viewModel.myInfo.email
             }
         }
     }

@@ -37,15 +37,14 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         mainNavigationBar()
         setupTableView()
+        loadDataAndUpdateUI()
         setupRefreshControl()
-        view.addSubview(noPostsLabel)
         
+        view.addSubview(noPostsLabel)
         NSLayoutConstraint.activate([
             noPostsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        loadDataAndUpdateUI()
     }
     
     func setupRefreshControl() {
@@ -55,7 +54,14 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @objc func refreshData() {
-        loadDataAndUpdateUI()
+        viewModel.resetMyCodeList()
+        viewModel.fetchMoreMyCodeList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
     
     func setupTableView() {
@@ -91,11 +97,30 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadMyCodeList() { [weak self] in
+        viewModel.fetchMoreMyCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
-                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+}
+
+extension MyCodeListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        if offsetY > contentHeight - frameHeight - 100 {
+            loadMoreData()
+        }
+    }
+    
+    private func loadMoreData() {
+        viewModel.fetchMoreMyCodeList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
             }
         }
     }
