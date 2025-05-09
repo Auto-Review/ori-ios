@@ -37,26 +37,13 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         mainNavigationBar()
         setupTableView()
-        setupRefreshControl()
-        view.addSubview(noPostsLabel)
+        loadDataAndUpdateUI()
         
+        view.addSubview(noPostsLabel)
         NSLayoutConstraint.activate([
             noPostsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        loadDataAndUpdateUI()
-    }
-    
-    func setupRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-    
-    @objc func refreshData() {
-        viewModel.resetMyTILList()
-        loadMoreData()
     }
     
     func setupTableView() {
