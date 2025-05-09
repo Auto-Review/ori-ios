@@ -30,6 +30,10 @@ class LoginViewModel {
             self.userEmail = signInResult.user.profile!.email
             
             completion(true)
+            
+            self.requestServerToken(idToken: self.idToken) { tokenSaved in
+                 completion(tokenSaved)
+             }
         }
     }
     
