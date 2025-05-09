@@ -30,6 +30,16 @@ class LoginViewModel {
             self.userEmail = signInResult.user.profile!.email
             
             completion(true)
+            
+            self.requestServerToken(idToken: self.idToken) { tokenSaved in
+                completion(tokenSaved)
+            }
+        }
+    }
+    
+    private func requestServerToken(idToken: String, completion: @escaping (Bool) -> Void) {
+        TokenNetwork.requestTokenFromServer(idToken: idToken) { tokenSaved in
+            completion(tokenSaved)
         }
     }
 }

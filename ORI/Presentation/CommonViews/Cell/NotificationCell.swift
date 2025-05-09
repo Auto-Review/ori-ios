@@ -11,7 +11,7 @@ class NotificationCell: UITableViewCell {
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
     let iconImage = UIImageView(image: UIImage(systemName: "archivebox"))
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -23,11 +23,11 @@ class NotificationCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(subtitleLabel)
         contentView.addSubview(iconImage)
-
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         iconImage.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 90),
             

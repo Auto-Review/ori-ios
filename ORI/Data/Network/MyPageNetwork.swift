@@ -41,7 +41,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
         }
 }
 
-func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], Error>) -> Void) {
+func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[MyCode], Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/code/own"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
@@ -58,7 +58,7 @@ func fetchMyCodeList(page: Int, size: Int, completion: @escaping (Result<[Code],
     
     AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers)
         .validate(statusCode: 200..<300)
-        .responseDecodable(of: CodeListResponse.self) { response in
+        .responseDecodable(of: MyCodeListResponse.self) { response in
             switch response.result {
             case .success(let data):
                 completion(.success(data.dtoList))

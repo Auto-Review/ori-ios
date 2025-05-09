@@ -9,7 +9,17 @@ import UIKit
 
 class CodeListViewModel {
     var posts: [Code] = []
-    var tableView = UITableView()
+    
+    var cellModels: [PostCellModel] {
+        posts.map {
+            PostCellModel(
+                title: $0.title,
+                author: $0.writerNickName,
+                date: String($0.createdDate.prefix(10)),
+                reviewCountText: ""
+            )
+        }
+    }
     
     func loadCodeList(completion: @escaping () -> Void) {
         fetchCodeList(page: 0, size: 10) { [weak self] result in

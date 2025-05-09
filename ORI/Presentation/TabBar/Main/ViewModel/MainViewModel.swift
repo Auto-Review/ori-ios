@@ -11,7 +11,6 @@ class MainViewModel {
     var notiList: [Notification] = []
     var highlightedDates: [String] = []
     var selectDayTodoList: [String] = []
-    var tableView = UITableView()
     
     func loadNotiList(completion: @escaping () -> Void) {
         fetchNotificationList() { [weak self] result in
@@ -26,6 +25,10 @@ class MainViewModel {
         }
     }
     
+    var numberOfTodos: Int {
+        return selectDayTodoList.count
+    }
+    
     func loadAlarmList() {
         highlightedDates = notiList.map { $0.executeTime }
     }
@@ -33,5 +36,14 @@ class MainViewModel {
     func loadSelectDayAlarmList(date: Date) {
         let date = DateFormat.onlyDay(date: date)
         selectDayTodoList = notiList.filter { $0.executeTime == date }.map{ $0.content }
+    }
+    
+    func loadDataAndUpdateUI(today: Date, completion: @escaping (_ todos: [String], _ dateString: String) -> Void) {
+        loadNotiList { [weak self] in
+            guard let self = self else { return }
+            self.loadSelectDayAlarmList(date: today)
+            let dateString = DateFormat.onlyDay(date: today)
+            completion(self.selectDayTodoList, dateString)
+        }
     }
 }

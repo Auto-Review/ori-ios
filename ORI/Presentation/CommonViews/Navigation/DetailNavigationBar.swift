@@ -30,7 +30,6 @@ extension UIViewController {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         let closeItem = UIBarButtonItem(customView: closeButton)
-
         navigationItem.leftBarButtonItems = [closeItem, titleItem]
         
         let bookmarkButton: UIButton = {
@@ -43,7 +42,6 @@ extension UIViewController {
         }()
         
         let bookmarkItem = UIBarButtonItem(customView: bookmarkButton)
-        
         navigationItem.rightBarButtonItem = bookmarkItem
     }
 }

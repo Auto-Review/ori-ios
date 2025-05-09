@@ -9,6 +9,7 @@ import UIKit
 
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let viewModel = NotificationViewModel()
+    var tableView = UITableView()
     
     private let noPostsLabel: UILabel = {
         let label = UILabel()
@@ -42,7 +43,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        viewModel.tableView.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
     }
     
     @objc func refreshData() {
@@ -50,10 +51,10 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func setupTableView() {
-        viewModel.tableView.frame = view.bounds
-        viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
-        view.addSubview(viewModel.tableView)
+        tableView.frame = view.bounds
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
+        view.addSubview(tableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,8 +65,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let cell = NotificationCell()
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
-        cell.subtitleLabel.text = viewModel.lists[indexPath.row].content
-        cell.titleLabel.text = "REVIEW AL \(viewModel.lists[indexPath.row].executeTime.prefix(10).description)"
+        let cellModel = viewModel.cellModels[indexPath.row]
+        cell.titleLabel.text = cellModel.title
+        cell.subtitleLabel.text = cellModel.subtitle
         return cell
     }
     
@@ -81,12 +83,16 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadNotiList() { [weak self] in
-            DispatchQueue.main.async {
-                self?.updateNoPostsLabelVisibility()
-                self?.viewModel.tableView.reloadData()
-                self?.viewModel.tableView.refreshControl?.endRefreshing()
-            }
+        viewModel.loadNotiList { [weak self] in
+            self?.refreshUI()
+        }
+    }
+    
+    private func refreshUI() {
+        DispatchQueue.main.async {
+            self.updateNoPostsLabelVisibility()
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
 }

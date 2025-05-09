@@ -26,7 +26,6 @@ extension UIViewController {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         let barButtonItem = UIBarButtonItem(customView: closeButton)
-        
         navigationItem.rightBarButtonItem = barButtonItem
     }
     

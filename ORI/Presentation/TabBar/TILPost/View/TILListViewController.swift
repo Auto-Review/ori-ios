@@ -9,6 +9,7 @@ import UIKit
 
 class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let viewModel = TILListViewModel()
+    var tableView = UITableView()
     
     private let noPostsLabel: UILabel = {
         let label = UILabel()
@@ -23,7 +24,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.tableView.rowHeight = 70
+        tableView.rowHeight = 70
         
         mainNavigationBar()
         setupTableView()
@@ -41,7 +42,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        viewModel.tableView.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
     }
     
     @objc func refreshData() {
@@ -49,11 +50,18 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setupTableView() {
-        viewModel.tableView.frame = view.bounds
-        viewModel.tableView.dataSource = self
-        viewModel.tableView.delegate = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
-        view.addSubview(viewModel.tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor) // 중요!
+        ])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,10 +72,12 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = PostListCell()
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
-        cell.titleLabel.text = viewModel.posts[indexPath.row].title
-        cell.nameLabel.text = viewModel.posts[indexPath.row].writerNickName
-        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+        
+        let cellModel = viewModel.cellModels[indexPath.row]
+        cell.titleLabel.text = cellModel.title
+        cell.nameLabel.text = cellModel.author
+        cell.dateLabel.text = cellModel.date
+        cell.reviewCntLabel.text = cellModel.reviewCountText
         return cell
     }
     
@@ -85,8 +95,8 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         viewModel.loadTILList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
-                self?.viewModel.tableView.reloadData()
-                self?.viewModel.tableView.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
             }
         }
     }

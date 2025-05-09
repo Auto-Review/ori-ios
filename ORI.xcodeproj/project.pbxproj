@@ -23,7 +23,6 @@
 		5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */; };
 		5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */; };
 		575BFC902DC310A900CDD29E /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575BFC8F2DC310A800CDD29E /* Untitled.swift */; };
-		575BFC9F2DC3131E00CDD29E /* Untitled2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575BFC9E2DC3131C00CDD29E /* Untitled2.swift */; };
 		5760BF022CBD087500A94068 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5760BF012CBD087500A94068 /* KeychainSwift */; };
 		576353B32D8A473900910917 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353B22D8A473900910917 /* Token.swift */; };
 		576353B72D8A487000910917 /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576353B62D8A487000910917 /* PostListCell.swift */; };
@@ -40,6 +39,8 @@
 		579F0D812D9BD5580076F9A9 /* CheckListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F0D802D9BD5580076F9A9 /* CheckListTableViewController.swift */; };
 		579F0D832D9BD5F30076F9A9 /* MainNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */; };
 		57A295632D9153CD0057BF28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57A295622D9153CD0057BF28 /* Alamofire */; };
+		57B1629A2DCD9EEA00A41B00 /* NotificationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */; };
+		57B1629C2DCD9FFD00A41B00 /* PostCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */; };
 		57B268092DC2055A005F37D0 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B268082DC2055A005F37D0 /* CommentCell.swift */; };
 		57B3929E2DAC9AED00CAB138 /* TILDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */; };
 		57B392A02DACE59700CAB138 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929F2DACE59000CAB138 /* DateFormatters.swift */; };
@@ -88,7 +89,6 @@
 		5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		5729F6D92CDC5DE500FB9ADC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		575BFC8F2DC310A800CDD29E /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
-		575BFC9E2DC3131C00CDD29E /* Untitled2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled2.swift; sourceTree = "<group>"; };
 		576353B22D8A473900910917 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		576353B62D8A487000910917 /* PostListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
 		576353BA2D8A5D2100910917 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -103,6 +103,8 @@
 		579F0D7B2D9BB49F0076F9A9 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		579F0D802D9BD5580076F9A9 /* CheckListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListTableViewController.swift; sourceTree = "<group>"; };
 		579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotificationCell.swift; sourceTree = "<group>"; };
+		57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellModel.swift; sourceTree = "<group>"; };
+		57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellModel.swift; sourceTree = "<group>"; };
 		57B268082DC2055A005F37D0 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILDetailViewController.swift; sourceTree = "<group>"; };
 		57B3929F2DACE59000CAB138 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
@@ -432,7 +434,12 @@
 		575BFC9C2DC312F600CDD29E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				575BFC9E2DC3131C00CDD29E /* Untitled2.swift */,
+				57B392B62DB07F6F00CAB138 /* Comment.swift */,
+				5719E7DE2D77E77A00C3D9B8 /* Code.swift */,
+				571F88282D773DB300188226 /* TIL.swift */,
+				5729F6CE2CDB096000FB9ADC /* Member.swift */,
+				576353B22D8A473900910917 /* Token.swift */,
+				576354B42D8CF2DD00910917 /* Notification.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -486,12 +493,8 @@
 		57C35C6A2CCA23240083A346 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				57B392B62DB07F6F00CAB138 /* Comment.swift */,
-				5719E7DE2D77E77A00C3D9B8 /* Code.swift */,
-				571F88282D773DB300188226 /* TIL.swift */,
-				5729F6CE2CDB096000FB9ADC /* Member.swift */,
-				576353B22D8A473900910917 /* Token.swift */,
-				576354B42D8CF2DD00910917 /* Notification.swift */,
+				57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */,
+				57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -633,10 +636,10 @@
 				571F881E2D759FC000188226 /* Extension+Font.swift in Sources */,
 				57EB9E0C2CB15DAB0036E5D8 /* CodeListViewController.swift in Sources */,
 				57B3929E2DAC9AED00CAB138 /* TILDetailViewController.swift in Sources */,
-				575BFC9F2DC3131E00CDD29E /* Untitled2.swift in Sources */,
 				57B268092DC2055A005F37D0 /* CommentCell.swift in Sources */,
 				579F0D7C2D9BB4A40076F9A9 /* MainViewModel.swift in Sources */,
 				576354B32D8CEC7700910917 /* NotificationNetwork.swift in Sources */,
+				57B1629A2DCD9EEA00A41B00 /* NotificationCellModel.swift in Sources */,
 				57C35C692CCA228D0083A346 /* TILListViewModel.swift in Sources */,
 				57B392BD2DB0D08A00CAB138 /* DetailNavigationBar.swift in Sources */,
 				571F88272D773C8A00188226 /* TILNetwork.swift in Sources */,
@@ -677,6 +680,7 @@
 				57B392B52DB07F6400CAB138 /* CommentsNetwork.swift in Sources */,
 				576353B72D8A487000910917 /* PostListCell.swift in Sources */,
 				57EB9DF02CAFADE60036E5D8 /* SceneDelegate.swift in Sources */,
+				57B1629C2DCD9FFD00A41B00 /* PostCellModel.swift in Sources */,
 				576354B92D8CF57900910917 /* NotificationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

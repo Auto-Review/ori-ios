@@ -12,23 +12,23 @@ class PostListCell: UITableViewCell {
     let nameLabel = UILabel()
     let dateLabel = UILabel()
     let reviewCntLabel = UILabel()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         titleLabel.font = UIFont.systemFont(ofSize: 15)
         titleLabel.lineBreakMode = .byTruncatingTail
-
+        
         [nameLabel, dateLabel, reviewCntLabel].forEach {
             $0.font = UIFont.systemFont(ofSize: 12)
             $0.textColor = .gray
         }
-
+        
         [titleLabel, nameLabel, dateLabel, reviewCntLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
-
+        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),

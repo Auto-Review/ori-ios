@@ -9,6 +9,7 @@ import UIKit
 
 class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var viewModel: MyPageViewModel
+    var tableView = UITableView()
     
     init(viewModel: MyPageViewModel) {
         self.viewModel = viewModel
@@ -32,7 +33,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.tableView.rowHeight = 70
+        tableView.rowHeight = 70
         
         mainNavigationBar()
         setupTableView()
@@ -50,7 +51,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        viewModel.tableView.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
     }
     
     @objc func refreshData() {
@@ -58,10 +59,18 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func setupTableView() {
-        viewModel.tableView.frame = view.bounds
-        viewModel.tableView.dataSource = self
-        viewModel.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
-        view.addSubview(viewModel.tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,7 +82,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.titleLabel.text = viewModel.myCodePosts[indexPath.row].title
         cell.nameLabel.text = viewModel.myCodePosts[indexPath.row].writerNickName
         cell.dateLabel.text = viewModel.myCodePosts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+        cell.reviewCntLabel.text = "RE: \(viewModel.myCodePosts[indexPath.row].commentCount)"
         return cell
     }
     
@@ -85,8 +94,8 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
         viewModel.loadMyCodeList() { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
-                self?.viewModel.tableView.reloadData()
-                self?.viewModel.tableView.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
             }
         }
     }
