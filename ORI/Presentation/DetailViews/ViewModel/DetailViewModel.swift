@@ -11,10 +11,6 @@ class DetailViewModel {
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
     var tilPostComments: Comments = Comments(commentList: [], totalPage: 0)
     
-    init() {
-        fetchMyData()
-    }
-    
     func fetchCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
         fetchTILCommentList(tilPostId: tilPostId, page: page, size: size) { [weak self] result in
             switch result {
@@ -36,5 +32,17 @@ class DetailViewModel {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func createComment(text: String, postId: Int, completion: @escaping (Bool) -> Void) {
+        let comment = WriteComment(
+            postId: postId,
+            body: text,
+            isPublic: true,
+            mentionNickName: myInfo.nickname,
+            mentionEmail: myInfo.email,
+            parentId: nil
+        )
+        createTILComment(comment: comment)
     }
 }

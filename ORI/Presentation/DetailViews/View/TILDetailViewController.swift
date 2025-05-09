@@ -110,6 +110,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         addScrollView()
         addPostDetail()
         commentTextView.delegate = self
+        viewModel.fetchMyData()
         
         viewModel.fetchCommentList(tilPostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
@@ -249,14 +250,15 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     
     @objc func createComment() {
         let text = commentTextView.text ?? ""
-        createTILComment(comment: WriteComment(
-            postId: post.id,
-            body: text,
-            isPublic: true,
-            mentionNickName: viewModel.myInfo.nickname,
-            mentionEmail: viewModel.myInfo.email,
-            parentId: nil
-        ))
+        viewModel.createComment(text: text, postId: post.id) { success in
+            if success {
+                self.viewModel.fetchCommentList(tilPostId: self.post.id, page: 0, size: 20) {
+                    DispatchQueue.main.async {
+                        self.reloadComments()
+                    }
+                }
+            }
+        }
     }
 }
 
