@@ -64,10 +64,12 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = PostListCell()
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
-        cell.titleLabel.text = viewModel.posts[indexPath.row].title
-        cell.nameLabel.text = viewModel.posts[indexPath.row].writerNickName
-        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+        
+        let cellModel = viewModel.cellModels[indexPath.row]
+        cell.titleLabel.text = cellModel.title
+        cell.nameLabel.text = cellModel.author
+        cell.dateLabel.text = cellModel.date
+        cell.reviewCntLabel.text = cellModel.reviewCountText
         return cell
     }
     
