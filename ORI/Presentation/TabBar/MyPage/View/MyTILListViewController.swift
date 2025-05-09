@@ -82,7 +82,7 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.titleLabel.text = viewModel.myTILPosts[indexPath.row].title
         cell.nameLabel.text = viewModel.myTILPosts[indexPath.row].writerNickName
         cell.dateLabel.text = viewModel.myTILPosts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+        cell.reviewCntLabel.text = ""
         return cell
     }
     

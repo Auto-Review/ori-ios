@@ -34,6 +34,7 @@ struct Code: Decodable {
     let writerNickName: String
     let title: String
     let level: Int
+    let commentCount: Int
     let description: String
     let createdDate: String
     let isPublic: Bool  // Swift에서는 예약어 사용 불가
@@ -45,6 +46,7 @@ struct Code: Decodable {
         case writerNickName
         case title
         case level
+        case commentCount
         case description
         case createdDate
         case isPublic = "public"  // 매핑 처리
