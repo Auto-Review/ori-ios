@@ -28,7 +28,6 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         mainNavigationBar()
         setupTableView()
-        setupRefreshControl()
         view.addSubview(noPostsLabel)
         
         NSLayoutConstraint.activate([
@@ -36,16 +35,6 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-        loadDataAndUpdateUI()
-    }
-    
-    func setupRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-    
-    @objc func refreshData() {
         loadDataAndUpdateUI()
     }
     
@@ -60,7 +49,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor) // 중요!
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -92,11 +81,32 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadTILList { [weak self] in
+        viewModel.fetchMoreAllTILList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
-                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+}
+
+extension TILListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - frameHeight - 100 {
+            loadMoreData()
+        }
+    }
+    
+    private func loadMoreData() {
+        viewModel.fetchMoreAllTILList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
+                
             }
         }
     }
