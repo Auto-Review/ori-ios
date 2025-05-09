@@ -158,15 +158,11 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     
     private func loadDataAndUpdateUI() {
         let today = Date()
-        
-        viewModel.loadNotiList { [weak self] in
+        viewModel.loadDataAndUpdateUI(today: today) { [weak self] todos, dateString in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.calendarView.select(today)
                 self.calendarView.reloadData()
-                
-                self.viewModel.loadSelectDayAlarmList(date: today)
-                let dateString = DateFormat.onlyDay(date: self.date)
                 self.setupCheckListTableViewController(date: dateString)
             }
         }
@@ -186,7 +182,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
     
     private func setupCheckListTableViewController(date: String) {
         listView.subviews.forEach { $0.removeFromSuperview() }
-
+        
         if viewModel.selectDayTodoList.isEmpty {
             listHeightConstraint?.constant = 132
             listView.addSubview(emptyLabel)
@@ -199,18 +195,19 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
             addChild(checkListVC)
             listView.addSubview(checkListVC.tableView)
             checkListVC.tableView.translatesAutoresizingMaskIntoConstraints = false
-
+            
             NSLayoutConstraint.activate([
                 checkListVC.tableView.topAnchor.constraint(equalTo: listView.topAnchor),
                 checkListVC.tableView.leadingAnchor.constraint(equalTo: listView.leadingAnchor),
                 checkListVC.tableView.trailingAnchor.constraint(equalTo: listView.trailingAnchor),
                 checkListVC.tableView.bottomAnchor.constraint(equalTo: listView.bottomAnchor)
             ])
-
+            
             checkListVC.didMove(toParent: self)
-            listHeightConstraint?.constant = viewModel.tableViewHeight
+            let rowHeight: CGFloat = 44
+            listHeightConstraint?.constant = CGFloat(viewModel.numberOfTodos) * rowHeight
         }
-
+        
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
@@ -230,7 +227,7 @@ extension MainViewController {
         viewModel.loadSelectDayAlarmList(date: date)
         let dateString = DateFormat.onlyDay(date: date)
         setupCheckListTableViewController(date: dateString)
-
+        
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
