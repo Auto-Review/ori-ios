@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 // 전체 Code 리스트
-func fetchCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], Error>) -> Void) {
+func fetchCodeList(page: Int, size: Int, completion: @escaping (Result<CodeListResponse, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/code/list"
     let parameters: [String: Any] = ["page": page, "size": size]
     
@@ -18,7 +18,7 @@ func fetchCodeList(page: Int, size: Int, completion: @escaping (Result<[Code], E
         .responseDecodable(of: CodeListResponse.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.dtoList))
+                completion(.success(data))
             case .failure:
                 NetworkUtils.handleError(
                     response: response,

@@ -28,7 +28,6 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         
         mainNavigationBar()
         setupTableView()
-        setupRefreshControl()
         view.addSubview(noPostsLabel)
         
         NSLayoutConstraint.activate([
@@ -38,19 +37,10 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         loadDataAndUpdateUI()
     }
     
-    func setupRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        tableView.refreshControl = refreshControl
-    }
-    
-    @objc func refreshData() {
-        loadDataAndUpdateUI()
-    }
-    
     func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
         view.addSubview(tableView)
         
@@ -58,7 +48,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor) // 중요!
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -84,11 +74,31 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadCodeList { [weak self] in
+        viewModel.fetchMoreAllCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
-                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+}
+
+extension CodeListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+
+        if offsetY > contentHeight - frameHeight - 100 {
+            loadMoreData()
+        }
+    }
+
+    private func loadMoreData() {
+        viewModel.fetchMoreAllCodeList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
             }
         }
     }
