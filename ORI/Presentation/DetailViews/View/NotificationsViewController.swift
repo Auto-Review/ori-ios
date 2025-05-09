@@ -65,8 +65,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let cell = NotificationCell()
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
-        cell.subtitleLabel.text = viewModel.lists[indexPath.row].content
-        cell.titleLabel.text = "REVIEW AL \(viewModel.lists[indexPath.row].executeTime.prefix(10).description)"
+        let cellModel = viewModel.cellModels[indexPath.row]
+        cell.titleLabel.text = cellModel.title
+        cell.subtitleLabel.text = cellModel.subtitle
         return cell
     }
     
@@ -82,12 +83,16 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadNotiList() { [weak self] in
-            DispatchQueue.main.async {
-                self?.updateNoPostsLabelVisibility()
-                self?.tableView.reloadData()
-                self?.tableView.refreshControl?.endRefreshing()
-            }
+        viewModel.loadNotiList { [weak self] in
+            self?.refreshUI()
+        }
+    }
+    
+    private func refreshUI() {
+        DispatchQueue.main.async {
+            self.updateNoPostsLabelVisibility()
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
 }

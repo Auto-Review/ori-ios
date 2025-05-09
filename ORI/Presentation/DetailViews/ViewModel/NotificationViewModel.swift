@@ -22,4 +22,13 @@ class NotificationViewModel {
             }
         }
     }
+    
+    var cellModels: [NotificationCellModel] {
+        return lists.map {
+            NotificationCellModel(
+                title: "REVIEW AL \($0.executeTime.prefix(10))",
+                subtitle: $0.content
+            )
+        }
+    }
 }
