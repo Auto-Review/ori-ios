@@ -50,11 +50,18 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func setupTableView() {
-        tableView.frame = view.bounds
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
         view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor) // 중요!
+        ])
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,10 +72,12 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = PostListCell()
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
-        cell.titleLabel.text = viewModel.posts[indexPath.row].title
-        cell.nameLabel.text = viewModel.posts[indexPath.row].writerNickName
-        cell.dateLabel.text = viewModel.posts[indexPath.row].createdDate.prefix(10).description
-        cell.reviewCntLabel.text = "RE: 3"
+
+        let cellModel = viewModel.cellModels[indexPath.row]
+        cell.titleLabel.text = cellModel.title
+        cell.nameLabel.text = cellModel.author
+        cell.dateLabel.text = cellModel.date
+        cell.reviewCntLabel.text = cellModel.reviewCountText
         return cell
     }
     

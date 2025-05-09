@@ -41,7 +41,7 @@
 		579F0D832D9BD5F30076F9A9 /* MainNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */; };
 		57A295632D9153CD0057BF28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57A295622D9153CD0057BF28 /* Alamofire */; };
 		57B1629A2DCD9EEA00A41B00 /* NotificationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */; };
-		57B1629C2DCD9FFD00A41B00 /* CodePostCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1629B2DCD9FFD00A41B00 /* CodePostCellModel.swift */; };
+		57B1629C2DCD9FFD00A41B00 /* PostCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */; };
 		57B268092DC2055A005F37D0 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B268082DC2055A005F37D0 /* CommentCell.swift */; };
 		57B3929E2DAC9AED00CAB138 /* TILDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */; };
 		57B392A02DACE59700CAB138 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929F2DACE59000CAB138 /* DateFormatters.swift */; };
@@ -106,7 +106,7 @@
 		579F0D802D9BD5580076F9A9 /* CheckListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListTableViewController.swift; sourceTree = "<group>"; };
 		579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotificationCell.swift; sourceTree = "<group>"; };
 		57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellModel.swift; sourceTree = "<group>"; };
-		57B1629B2DCD9FFD00A41B00 /* CodePostCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePostCellModel.swift; sourceTree = "<group>"; };
+		57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellModel.swift; sourceTree = "<group>"; };
 		57B268082DC2055A005F37D0 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILDetailViewController.swift; sourceTree = "<group>"; };
 		57B3929F2DACE59000CAB138 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
@@ -490,7 +490,7 @@
 		57C35C6A2CCA23240083A346 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				57B1629B2DCD9FFD00A41B00 /* CodePostCellModel.swift */,
+				57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */,
 				57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */,
 				57B392B62DB07F6F00CAB138 /* Comment.swift */,
 				5719E7DE2D77E77A00C3D9B8 /* Code.swift */,
@@ -684,7 +684,7 @@
 				57B392B52DB07F6400CAB138 /* CommentsNetwork.swift in Sources */,
 				576353B72D8A487000910917 /* PostListCell.swift in Sources */,
 				57EB9DF02CAFADE60036E5D8 /* SceneDelegate.swift in Sources */,
-				57B1629C2DCD9FFD00A41B00 /* CodePostCellModel.swift in Sources */,
+				57B1629C2DCD9FFD00A41B00 /* PostCellModel.swift in Sources */,
 				576354B92D8CF57900910917 /* NotificationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

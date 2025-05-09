@@ -10,9 +10,9 @@ import UIKit
 class CodeListViewModel {
     var posts: [Code] = []
 
-    var cellModels: [CodePostCellModel] {
+    var cellModels: [PostCellModel] {
         posts.map {
-            CodePostCellModel(
+            PostCellModel(
                 title: $0.title,
                 author: $0.writerNickName,
                 date: String($0.createdDate.prefix(10)),
