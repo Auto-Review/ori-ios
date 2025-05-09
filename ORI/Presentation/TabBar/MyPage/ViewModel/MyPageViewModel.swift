@@ -14,9 +14,6 @@ class MyPageViewModel {
     var myCodePosts: [MyCode] = []
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
     
-    var didUpdateMyData: (() -> Void)?
-    var didFailWithError: ((Error) -> Void)?
-    
     // 코드 포스트 무한 스크롤
     private var currentCodePage = 0
     private var isCodeFetching = false
@@ -28,13 +25,13 @@ class MyPageViewModel {
         myCodePosts = []
     }
     
-    func loadMoreMyCodeList(completion: @escaping () -> Void) {
+    func fetchMoreMyCodeList(completion: @escaping () -> Void) {
         guard !isCodeFetching, !lastCodePage else {
             completion()
             return
         }
-        
         isCodeFetching = true
+        
         fetchMyCodeList(page: currentCodePage, size: 10) { [weak self] result in
             guard let self = self else { return }
             self.isCodeFetching = false
@@ -65,12 +62,11 @@ class MyPageViewModel {
         myTILPosts = []
     }
     
-    func loadMoreMyTILList(completion: @escaping () -> Void) {
+    func fetchMoreMyTILList(completion: @escaping () -> Void) {
         guard !isTILFetching, !lastTILPage else {
             completion()
             return
         }
-        
         isTILFetching = true
         
         fetchMyTILList(page: 0, size: 10) { [weak self] result in
@@ -92,16 +88,16 @@ class MyPageViewModel {
         }
     }
     
-    // 내 정보 가져오기 ( 이메일 이름 )
-    func fetchMyData() {
+    // 내 정보 가져오기 (이메일, 이름)
+    func fetchMyData(completion: @escaping () -> Void) {
         fetchMyProfile() { [weak self] result in
             switch result {
-            case .success(let posts):
-                self?.myInfo = posts
-                self?.didUpdateMyData?()
-            case .failure(let error):
-                self?.didFailWithError?(error)
+            case .success(let user):
+                self?.myInfo = user
+            case .failure(_):
+                break
             }
+            completion()
         }
     }
     
