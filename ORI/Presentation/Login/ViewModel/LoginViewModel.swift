@@ -32,4 +32,10 @@ class LoginViewModel {
             completion(true)
         }
     }
+    
+    private func requestServerToken(idToken: String, completion: @escaping (Bool) -> Void) {
+        TokenNetwork.requestTokenFromServer(idToken: idToken) { tokenSaved in
+            completion(tokenSaved)
+        }
+    }
 }

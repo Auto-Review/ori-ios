@@ -58,15 +58,9 @@ class LoginViewController: UIViewController {
     @objc func handleGoogleLogin() {
         viewModel.signInWithGoogle(presentingViewController: self) { success in
             if success {
-                TokenNetwork.requestTokenFromServer(idToken: self.viewModel.idToken) { tokenSaved in
-                    if tokenSaved {
-                        NavigationManager.navigateToTabView()
-                    } else {
-                        print("❌ 로그인 실패: 토큰 저장 오류")
-                    }
-                }
+                NavigationManager.navigateToTabView()
             } else {
-                print("❌ 로그인 실패: 구글 로그인 오류")
+                print("❌ 로그인 실패")
             }
         }
     }
