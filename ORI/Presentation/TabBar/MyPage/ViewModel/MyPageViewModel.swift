@@ -22,6 +22,7 @@ class MyPageViewModel {
     func resetMyCodeList() {
         currentCodePage = 0
         isCodeFetching = false
+        lastCodePage = false
         myCodePosts = []
     }
     
@@ -59,6 +60,7 @@ class MyPageViewModel {
     func resetMyTILList() {
         currentTILPage = 0
         isTILFetching = false
+        lastTILPage = false
         myTILPosts = []
     }
     

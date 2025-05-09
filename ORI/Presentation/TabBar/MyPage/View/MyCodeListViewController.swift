@@ -38,12 +38,30 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
         mainNavigationBar()
         setupTableView()
         loadDataAndUpdateUI()
+        setupRefreshControl()
         
         view.addSubview(noPostsLabel)
         NSLayoutConstraint.activate([
             noPostsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshData() {
+        viewModel.resetMyCodeList()
+        viewModel.fetchMoreMyCodeList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
     
     func setupTableView() {
@@ -93,12 +111,11 @@ extension MyCodeListViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
-
         if offsetY > contentHeight - frameHeight - 100 {
             loadMoreData()
         }
     }
-
+    
     private func loadMoreData() {
         viewModel.fetchMoreMyCodeList { [weak self] in
             DispatchQueue.main.async {

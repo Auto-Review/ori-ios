@@ -106,12 +106,11 @@ extension CodeListViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.size.height
-
         if offsetY > contentHeight - frameHeight - 100 {
             loadMoreData()
         }
     }
-
+    
     private func loadMoreData() {
         viewModel.fetchMoreAllCodeList { [weak self] in
             DispatchQueue.main.async {
