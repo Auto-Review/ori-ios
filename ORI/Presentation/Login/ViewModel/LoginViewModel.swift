@@ -32,8 +32,8 @@ class LoginViewModel {
             completion(true)
             
             self.requestServerToken(idToken: self.idToken) { tokenSaved in
-                 completion(tokenSaved)
-             }
+                completion(tokenSaved)
+            }
         }
     }
     

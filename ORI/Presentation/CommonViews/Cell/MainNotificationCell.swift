@@ -10,7 +10,7 @@ import UIKit
 class MainNotificationCell: UITableViewCell {
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -20,17 +20,17 @@ class MainNotificationCell: UITableViewCell {
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(subtitleLabel)
-
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
             
             subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10),
             subtitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-
+            
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
         ])

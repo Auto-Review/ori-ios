@@ -35,7 +35,6 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
             noPostsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
         loadDataAndUpdateUI()
     }
     
@@ -54,7 +53,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
         view.addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

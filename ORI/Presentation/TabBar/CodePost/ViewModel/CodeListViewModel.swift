@@ -9,7 +9,7 @@ import UIKit
 
 class CodeListViewModel {
     var posts: [Code] = []
-
+    
     var cellModels: [PostCellModel] {
         posts.map {
             PostCellModel(

@@ -72,7 +72,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = PostListCell()
         cell.separatorInset = .zero
         cell.layoutMargins = .zero
-
+        
         let cellModel = viewModel.cellModels[indexPath.row]
         cell.titleLabel.text = cellModel.title
         cell.nameLabel.text = cellModel.author

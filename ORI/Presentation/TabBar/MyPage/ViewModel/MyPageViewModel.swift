@@ -17,7 +17,7 @@ class MyPageViewModel {
     
     var didUpdateMyData: (() -> Void)?
     var didFailWithError: ((Error) -> Void)?
-        
+    
     func loadMyCodeList(completion: @escaping () -> Void) {
         fetchMyCodeList(page: 0, size: 10) { [weak self] result in
             switch result {
@@ -44,14 +44,14 @@ class MyPageViewModel {
     
     func fetchMyData() {
         fetchMyProfile() { [weak self] result in
-                switch result {
-                case .success(let posts):
-                    self?.myInfo = posts
-                    self?.didUpdateMyData?()
-                case .failure(let error):
-                    self?.didFailWithError?(error)
-                }
+            switch result {
+            case .success(let posts):
+                self?.myInfo = posts
+                self?.didUpdateMyData?()
+            case .failure(let error):
+                self?.didFailWithError?(error)
             }
+        }
     }
     
     func numberOfPosts() -> Int {
