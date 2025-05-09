@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], Error>) -> Void) {
+func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<TILListResponse, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/til/own"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
@@ -28,7 +28,7 @@ func fetchMyTILList(page: Int, size: Int, completion: @escaping (Result<[TIL], E
         .responseDecodable(of: TILListResponse.self) { response in
             switch response.result {
             case .success(let data):
-                completion(.success(data.dtoList))
+                completion(.success(data))
             case .failure:
                 NetworkUtils.handleError(
                     response: response,

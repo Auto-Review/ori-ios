@@ -55,14 +55,15 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @objc func refreshData() {
-        loadDataAndUpdateUI()
+        viewModel.resetMyTILList()
+        loadMoreData()
     }
     
     func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CodePostCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TILPostCell")
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -91,11 +92,32 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.loadMyTILList() { [weak self] in
+        viewModel.loadMoreMyTILList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
                 self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+}
+
+extension MyTILListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+
+        if offsetY > contentHeight - frameHeight - 100 {
+            loadMoreData()
+        }
+    }
+
+    private func loadMoreData() {
+        viewModel.loadMoreMyTILList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
             }
         }
     }
