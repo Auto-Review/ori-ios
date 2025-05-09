@@ -18,15 +18,40 @@ class MyPageViewModel {
     var didUpdateMyData: (() -> Void)?
     var didFailWithError: ((Error) -> Void)?
     
-    func loadMyCodeList(completion: @escaping () -> Void) {
-        fetchMyCodeList(page: 0, size: 10) { [weak self] result in
+    private var currentPage = 0
+    private var isFetching = false
+    private var lastPage = false
+    
+    func resetMyCodeList() {
+        currentPage = 0
+        lastPage = false
+        myCodePosts = []
+    }
+    
+    func loadMoreMyCodeList(completion: @escaping () -> Void) {
+        guard !isFetching, !lastPage else {
+            completion()
+            return
+        }
+        
+        isFetching = true
+        fetchMyCodeList(page: currentPage, size: 10) { [weak self] result in
+            guard let self = self else { return }
+            self.isFetching = false
+            
             switch result {
-            case .success(let posts):
-                self?.myCodePosts = posts
-                completion()
-            case .failure( _):
-                completion()
+            case .success(let response):
+                self.myCodePosts.append(contentsOf: response.dtoList)
+                if response.totalPage <= self.currentPage + 1 {
+                    self.lastPage = true
+                } else {
+                    self.currentPage += 1
+                }
+            case .failure:
+                break
             }
+            
+            completion()
         }
     }
     
