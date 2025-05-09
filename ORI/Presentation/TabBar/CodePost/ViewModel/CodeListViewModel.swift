@@ -9,35 +9,35 @@ import UIKit
 
 class CodeListViewModel {
     var posts: [Code] = []
-    
-    private var currentCodePage = 0
-    private var isCodeFetching = false
-    private var lastCodePage = false
+    private var currentPage = 0
+    private var isFetching = false
+    private var lastPage = false
     
     func resetMyCodeList() {
-        currentCodePage = 0
-        isCodeFetching = false
+        currentPage = 0
+        isFetching = false
+        lastPage = false
         posts = []
     }
     
     func fetchMoreAllCodeList(completion: @escaping () -> Void) {
-        guard !isCodeFetching, !lastCodePage else {
+        guard !isFetching, !lastPage else {
             completion()
             return
         }
-        isCodeFetching = true
+        isFetching = true
         
-        fetchCodeList(page: self.currentCodePage, size: 20) { [weak self] result in
+        fetchCodeList(page: self.currentPage, size: 20) { [weak self] result in
             guard let self = self else { return }
-            self.isCodeFetching = false
+            self.isFetching = false
             
             switch result {
             case .success(let response):
                 self.posts.append(contentsOf: response.dtoList)
-                if response.totalPage <= self.currentCodePage + 1 {
-                    self.lastCodePage = true
+                if response.totalPage <= self.currentPage + 1 {
+                    self.lastPage = true
                 } else {
-                    self.currentCodePage += 1
+                    self.currentPage += 1
                 }
             case .failure:
                 break

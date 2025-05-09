@@ -28,14 +28,31 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         mainNavigationBar()
         setupTableView()
-        view.addSubview(noPostsLabel)
+        loadDataAndUpdateUI()
+        setupRefreshControl()
         
+        view.addSubview(noPostsLabel)
         NSLayoutConstraint.activate([
             noPostsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noPostsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        loadDataAndUpdateUI()
+    }
+    
+    func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshData() {
+        viewModel.resetMyCodeList()
+        viewModel.fetchMoreAllTILList { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateNoPostsLabelVisibility()
+                self?.tableView.reloadData()
+                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }
     }
     
     func setupTableView() {

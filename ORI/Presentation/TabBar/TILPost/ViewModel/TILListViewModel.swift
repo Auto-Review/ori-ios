@@ -16,6 +16,7 @@ class TILListViewModel {
     func resetMyCodeList() {
         currentPage = 0
         isFetching = false
+        lastPage = false
         posts = []
     }
     
@@ -26,7 +27,7 @@ class TILListViewModel {
         }
         isFetching = true
         
-        fetchTILList(page: self.currentPage, size: 10) { [weak self] result in
+        fetchTILList(page: self.currentPage, size: 20) { [weak self] result in
             guard let self = self else { return }
             self.isFetching = false
             
