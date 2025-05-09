@@ -12,7 +12,7 @@ class MyPageViewModel {
     var isCode = true
     
     var myTILPosts: [TIL] = []
-    var myCodePosts: [Code] = []
+    var myCodePosts: [MyCode] = []
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
     
     var didUpdateMyData: (() -> Void)?
