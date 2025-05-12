@@ -16,10 +16,14 @@ class DateFormat {
     }
     
     static func dayTime(str: String) -> String {
-        let components = str.split(separator: "T")
-        if components.count > 1 {
-            let formattedString = components[0] + " " + components[1].prefix(5)
-            return String(formattedString)
+        let inputFormatter = DateFormatter()
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+
+        if let date = inputFormatter.date(from: str) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            return outputFormatter.string(from: date)
         }
         return ""
     }
