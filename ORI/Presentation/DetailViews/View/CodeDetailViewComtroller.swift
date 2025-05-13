@@ -135,6 +135,24 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         return stack
     }()
     
+    func starRatingView(rating: Int) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 4
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
+
+        for i in 1...5 {
+            let label = UILabel()
+            label.text = i <= rating ? "★" : "☆"
+            label.textColor = i <= rating ? .systemYellow : .lightGray
+            label.font = UIFont.systemFont(ofSize: 20)
+            stackView.addArrangedSubview(label)
+        }
+
+        return stackView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         detailNavigationBar(text: post.title)
@@ -174,12 +192,15 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     func addPostDetail() {
+        let stars = starRatingView(rating: post.level)
+        contentView.addSubview(stars)
         contentView.addSubview(DateButtonView)
         contentView.addSubview(backgroundView)
         contentView.addSubview(commentLabel)
         contentView.addSubview(backgroundCreateCommentView)
         contentView.addSubview(commentTableView)
         
+        stars.translatesAutoresizingMaskIntoConstraints = false
         DateButtonView.translatesAutoresizingMaskIntoConstraints = false
         DateButtonView.layer.borderColor = UIColor.systemGray6.cgColor
         DateButtonView.layer.borderWidth = 2
@@ -196,7 +217,10 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         backgroundCreateCommentView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
-            DateButtonView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stars.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            
+            DateButtonView.topAnchor.constraint(equalTo: stars.bottomAnchor, constant: 10),
             DateButtonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             DateButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
@@ -231,6 +255,18 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         button.addTarget(self, action: #selector(dateButtonTapped(_:)), for: .touchUpInside)
         dateStackView.addArrangedSubview(button)
+        
+        if let firstButton = dateStackView.arrangedSubviews.first as? UIButton,
+           let firstDate = firstButton.title(for: .normal),
+           firstDate == DateFormat.dayTime(str: post.createDate) {
+            
+            firstButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+            let attributedString = NSAttributedString(string: firstDate, attributes: [
+                .underlineStyle: NSUnderlineStyle.single.rawValue
+            ])
+            firstButton.setAttributedTitle(attributedString, for: .normal)
+        }
+
         
         for dto in post.dtoList {
             let button = UIButton(type: .system)
@@ -323,7 +359,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         guard let date = sender.title(for: .normal) else { return }
 
         for button in dateStackView.arrangedSubviews.compactMap({ $0 as? UIButton }) {
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15) // 기본 폰트로 리셋
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             let attributedString = NSAttributedString(string: button.titleLabel?.text ?? "", attributes: [
                 .underlineStyle: []
             ])
