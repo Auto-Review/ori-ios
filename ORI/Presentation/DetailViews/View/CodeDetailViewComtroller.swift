@@ -140,16 +140,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         detailNavigationBar(text: post.title)
         addScrollView()
         addPostDetail()
-        commentTextView.delegate = self
         viewModel.loadMyData()
-        
-        viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
-            DispatchQueue.main.async {
-                self.reloadComments()
-            }
-        }
-        commentTableView.dataSource = self
-        commentTableView.delegate = self
+        settableViewData()
     }
     
     func addScrollView() {
@@ -305,6 +297,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     func setCreateCommentView() {
+        commentTextView.delegate = self
+        
         backgroundCreateCommentView.addSubview(commentnameLabel)
         backgroundCreateCommentView.addSubview(commentTextView)
         backgroundCreateCommentView.addSubview(commentButton)
@@ -409,6 +403,16 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     
     func textViewDidChange(_ textView: UITextView) {
         placeHolderLabel.isHidden = !textView.text.isEmpty
+    }
+    
+    func settableViewData() {
+        viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
+            DispatchQueue.main.async {
+                self.reloadComments()
+            }
+        }
+        commentTableView.dataSource = self
+        commentTableView.delegate = self
     }
 
     func reloadComments() {
