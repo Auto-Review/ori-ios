@@ -137,7 +137,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailNavigationBar(text: post.title)
+        print(post.id)
+        detailNavigationBar(text: post.title, postId: post.id)
         addScrollView()
         addPostDetail()
         commentTextView.delegate = self
