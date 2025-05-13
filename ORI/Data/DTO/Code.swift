@@ -60,7 +60,7 @@ struct CodeDetail: Decodable {
     let writerNickName: String
     let title: String
     let level: Int
-    let reviewDay: String?
+    let reviewDay: String
     let description: String
     let language: String
     let code: String

@@ -7,11 +7,8 @@
 
 import UIKit
 
-private var id = 0
-
 extension UIViewController {
-    func detailNavigationBar(text: String, postId: Int) {
-        id = postId
+    func detailNavigationBar(text: String) {
         let titleLabel: UILabel = {
             let label = UILabel()
             label.text = " \(text)"
@@ -43,13 +40,8 @@ extension UIViewController {
             button.tintColor = .systemGray4
             return button
         }()
-        bookmarkButton.addTarget(self, action: #selector(clickbookmarkButton), for: .touchUpInside)
         
         let bookmarkItem = UIBarButtonItem(customView: bookmarkButton)
         navigationItem.rightBarButtonItem = bookmarkItem
-    }
-    
-    @objc func clickbookmarkButton() {
-        createCodeBookmark(id: id)
     }
 }
