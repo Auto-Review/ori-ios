@@ -104,6 +104,19 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPostId = viewModel.myCodePosts[indexPath.row].id
+        fetchCodeDeatilList(id: selectedPostId) { result in
+            switch result {
+            case .success(let list):
+                let detailVC = CodeDetailViewController(post: list)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            case .failure(let error):
+                print("Error fetching posts: \(error)")
+            }
+        }
+    }
 }
 
 extension MyCodeListViewController {

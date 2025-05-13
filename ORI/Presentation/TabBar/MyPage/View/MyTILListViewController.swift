@@ -105,6 +105,12 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPost = viewModel.myTILPosts[indexPath.row]
+        let detailVC = TILDetailViewController(post: selectedPost)
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 extension MyTILListViewController {
