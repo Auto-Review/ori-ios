@@ -87,6 +87,19 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPostId = viewModel.posts[indexPath.row].id
+        fetchCodeDeatilList(id: selectedPostId) { result in
+            switch result {
+            case .success(let list):
+                let detailVC = CodeDetailViewController(post: list)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            case .failure(let error):
+                print("Error fetching posts: \(error)")
+            }
+        }
+    }
+    
     private func updateNoPostsLabelVisibility() {
         noPostsLabel.isHidden = !viewModel.posts.isEmpty
     }
