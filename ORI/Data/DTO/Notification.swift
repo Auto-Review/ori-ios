@@ -9,6 +9,7 @@ import Foundation
 
 struct Notification: Decodable {
     let id: Int
+    let codePostId: Int
     let content: String
     let executeTime: String
     let status: String
