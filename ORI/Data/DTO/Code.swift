@@ -67,11 +67,3 @@ struct CodeDetail: Decodable {
     let dtoList: [Review]
     let createDate: String
 }
-
-struct Review: Decodable {
-    let id: Int
-    let description: String
-    let code: String
-    let createdAt: String
-    let updatedAt: String
-}

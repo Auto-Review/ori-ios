@@ -23,6 +23,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     let scrollView = UIScrollView()
     let contentView = UIView()
     let backgroundView = UIView()
+    let DateButtonView = UIView()
     let backgroundCreateCommentView = UIView()
     
     var tableViewHeightConstraint: NSLayoutConstraint?
@@ -126,6 +127,14 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         return textView
     }()
     
+    let dateStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         detailNavigationBar(text: post.title)
@@ -165,10 +174,16 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     func addPostDetail() {
+        contentView.addSubview(DateButtonView)
         contentView.addSubview(backgroundView)
         contentView.addSubview(commentLabel)
         contentView.addSubview(backgroundCreateCommentView)
         contentView.addSubview(commentTableView)
+        
+        DateButtonView.translatesAutoresizingMaskIntoConstraints = false
+        DateButtonView.layer.borderColor = UIColor.systemGray6.cgColor
+        DateButtonView.layer.borderWidth = 2
+        DateButtonView.layer.cornerRadius = 10
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.borderColor = UIColor.systemGray6.cgColor
@@ -181,7 +196,11 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         backgroundCreateCommentView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            DateButtonView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            DateButtonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            DateButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            backgroundView.topAnchor.constraint(equalTo: DateButtonView.bottomAnchor, constant: 10),
             backgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             backgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
@@ -193,6 +212,38 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
             backgroundCreateCommentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 150)
         ])
+        
+        DateButtonView.addSubview(dateStackView)
+        
+        NSLayoutConstraint.activate([
+            dateStackView.topAnchor.constraint(equalTo: DateButtonView.topAnchor, constant: 10),
+            dateStackView.leadingAnchor.constraint(equalTo: DateButtonView.leadingAnchor, constant: 15),
+            dateStackView.trailingAnchor.constraint(equalTo: DateButtonView.trailingAnchor, constant: -15),
+            dateStackView.bottomAnchor.constraint(equalTo: DateButtonView.bottomAnchor, constant: -10)
+        ])
+        
+        let button = UIButton(type: .system)
+        let date = DateFormat.dayTime(str: post.createDate)
+        button.setTitle(date, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.contentHorizontalAlignment = .leading
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        button.addTarget(self, action: #selector(dateButtonTapped(_:)), for: .touchUpInside)
+        dateStackView.addArrangedSubview(button)
+        
+        for dto in post.dtoList {
+            let button = UIButton(type: .system)
+            let date = DateFormat.dayTime(str: dto.updatedAt)
+            button.setTitle(date, for: .normal)
+            button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            button.contentHorizontalAlignment = .leading
+            button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            button.tag = dto.id
+            button.addTarget(self, action: #selector(dateButtonTapped(_:)), for: .touchUpInside)
+            dateStackView.addArrangedSubview(button)
+        }
         
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(languageLabel)
@@ -267,6 +318,42 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
             self.textViewHeightConstraint?.constant = size.height
         }
     }
+    
+    @objc func dateButtonTapped(_ sender: UIButton) {
+        guard let date = sender.title(for: .normal) else { return }
+
+        for button in dateStackView.arrangedSubviews.compactMap({ $0 as? UIButton }) {
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15) // 기본 폰트로 리셋
+            let attributedString = NSAttributedString(string: button.titleLabel?.text ?? "", attributes: [
+                .underlineStyle: []
+            ])
+            button.setAttributedTitle(attributedString, for: .normal)
+        }
+        
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        let attributedString = NSAttributedString(string: date, attributes: [
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ])
+        sender.setAttributedTitle(attributedString, for: .normal)
+        
+        print("Selected date: \(date)")
+        
+        if DateFormat.dayTime(str: self.post.createDate) == date {
+            self.codeBlock.text = self.post.code
+            self.textView.text = self.post.description
+        } else {
+            fetchReviewDeatilList(id: sender.tag) { result in
+                switch result {
+                case .success(let list):
+                    self.codeBlock.text = list.code
+                    self.textView.text = list.description
+                case .failure(let error):
+                    print("Error fetching posts: \(error)")
+                }
+            }
+        }
+    }
+
     
     func reloadComments() {
         commentTableView.reloadData()
