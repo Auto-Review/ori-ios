@@ -92,7 +92,7 @@ class MyViewController: UIViewController {
     }
     
     private func setupMyInfo() {
-        viewModel.fetchMyData {
+        viewModel.loadMyData {
             DispatchQueue.main.async {
                 self.nameTextField.text = self.viewModel.myInfo.nickname
                 self.emailTextField.text = self.viewModel.myInfo.email

@@ -1,5 +1,5 @@
 //
-//  DetailViewModel.swift
+//  CodeDetailViewModel.swift
 //  ORI
 //
 //  Created by Song Kim on 4/17/25.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-class DetailViewModel {
+class CodeDetailViewModel {
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
-    var tilPostComments: Comments = Comments(commentList: [], totalPage: 0)
+    var codePostComments: Comments = Comments(commentList: [], totalPage: 0)
     
-    func loadCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
-        fetchTILCommentList(tilPostId: tilPostId, page: page, size: size) { [weak self] result in
+    func loadCommentList(codePostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
+        fetchCodeCommentList(codePostId: codePostId, page: page, size: size) { [weak self] result in
             switch result {
             case .success(let lists):
-                self?.tilPostComments = lists
+                self?.codePostComments = lists
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)
@@ -43,6 +43,6 @@ class DetailViewModel {
             mentionEmail: myInfo.email,
             parentId: nil
         )
-        createTILComment(comment: comment)
+        createCodeComment(comment: comment)
     }
 }

@@ -26,7 +26,7 @@ class MyPageViewModel {
         myCodePosts = []
     }
     
-    func fetchMoreMyCodeList(completion: @escaping () -> Void) {
+    func loadMoreMyCodeList(completion: @escaping () -> Void) {
         guard !isCodeFetching, !lastCodePage else {
             completion()
             return
@@ -64,7 +64,7 @@ class MyPageViewModel {
         myTILPosts = []
     }
     
-    func fetchMoreMyTILList(completion: @escaping () -> Void) {
+    func loadMoreMyTILList(completion: @escaping () -> Void) {
         guard !isTILFetching, !lastTILPage else {
             completion()
             return
@@ -91,7 +91,7 @@ class MyPageViewModel {
     }
     
     // 내 정보 가져오기 (이메일, 이름)
-    func fetchMyData(completion: @escaping () -> Void) {
+    func loadMyData(completion: @escaping () -> Void) {
         fetchMyProfile() { [weak self] result in
             switch result {
             case .success(let user):

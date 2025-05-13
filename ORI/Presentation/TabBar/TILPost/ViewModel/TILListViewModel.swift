@@ -20,7 +20,7 @@ class TILListViewModel {
         posts = []
     }
     
-    func fetchMoreAllTILList(completion: @escaping () -> Void) {
+    func loadMoreAllTILList(completion: @escaping () -> Void) {
         guard !isFetching, !lastPage else {
             completion()
             return

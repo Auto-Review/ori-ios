@@ -1,17 +1,17 @@
 //
-//  TILDetailViewController.swift
+//  CodeDetailViewComtroller.swift
 //  ORI
 //
-//  Created by Song Kim on 4/14/25.
+//  Created by Song Kim on 5/13/25.
 //
 
 import UIKit
 
-class TILDetailViewController: UIViewController, UITextViewDelegate  {
-    let viewModel = DetailViewModel()
-    var post: TIL
+class CodeDetailViewController: UIViewController, UITextViewDelegate  {
+    let viewModel = CodeDetailViewModel()
+    var post: CodeDetail
     
-    init(post: TIL) {
+    init(post: CodeDetail) {
         self.post = post
         super.init(nibName: nil, bundle: nil)
     }
@@ -23,6 +23,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     let scrollView = UIScrollView()
     let contentView = UIView()
     let backgroundView = UIView()
+    let DateButtonView = UIView()
     let backgroundCreateCommentView = UIView()
     
     var tableViewHeightConstraint: NSLayoutConstraint?
@@ -97,11 +98,41 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         return label
     }()
     
-    private let dateLabel: UILabel = {
+    private let languageLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .systemGray2
         return label
+    }()
+    
+    private let publicLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .systemGray2
+        label.text = "전체공개"
+        return label
+    }()
+    
+    private let codeBlock: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.backgroundColor = .systemGray6
+        textView.layer.cornerRadius = 5
+        return textView
+    }()
+    
+    let dateStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     override func viewDidLoad() {
@@ -112,12 +143,11 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         commentTextView.delegate = self
         viewModel.loadMyData()
         
-        viewModel.loadCommentList(tilPostId: post.id, page: 0, size: 20) {
+        viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
                 self.reloadComments()
             }
         }
-        
         commentTableView.dataSource = self
         commentTableView.delegate = self
     }
@@ -144,10 +174,16 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     func addPostDetail() {
+        contentView.addSubview(DateButtonView)
         contentView.addSubview(backgroundView)
         contentView.addSubview(commentLabel)
         contentView.addSubview(backgroundCreateCommentView)
         contentView.addSubview(commentTableView)
+        
+        DateButtonView.translatesAutoresizingMaskIntoConstraints = false
+        DateButtonView.layer.borderColor = UIColor.systemGray6.cgColor
+        DateButtonView.layer.borderWidth = 2
+        DateButtonView.layer.cornerRadius = 10
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.layer.borderColor = UIColor.systemGray6.cgColor
@@ -160,7 +196,11 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         backgroundCreateCommentView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            DateButtonView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            DateButtonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            DateButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            backgroundView.topAnchor.constraint(equalTo: DateButtonView.bottomAnchor, constant: 10),
             backgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             backgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
@@ -173,25 +213,67 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
+        DateButtonView.addSubview(dateStackView)
+        
+        NSLayoutConstraint.activate([
+            dateStackView.topAnchor.constraint(equalTo: DateButtonView.topAnchor, constant: 10),
+            dateStackView.leadingAnchor.constraint(equalTo: DateButtonView.leadingAnchor, constant: 15),
+            dateStackView.trailingAnchor.constraint(equalTo: DateButtonView.trailingAnchor, constant: -15),
+            dateStackView.bottomAnchor.constraint(equalTo: DateButtonView.bottomAnchor, constant: -10)
+        ])
+        
+        let button = UIButton(type: .system)
+        let date = DateFormat.dayTime(str: post.createDate)
+        button.setTitle(date, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.contentHorizontalAlignment = .leading
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        button.addTarget(self, action: #selector(dateButtonTapped(_:)), for: .touchUpInside)
+        dateStackView.addArrangedSubview(button)
+        
+        for dto in post.dtoList {
+            let button = UIButton(type: .system)
+            let date = DateFormat.dayTime(str: dto.updatedAt)
+            button.setTitle(date, for: .normal)
+            button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            button.contentHorizontalAlignment = .leading
+            button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            button.tag = dto.id
+            button.addTarget(self, action: #selector(dateButtonTapped(_:)), for: .touchUpInside)
+            dateStackView.addArrangedSubview(button)
+        }
+        
         backgroundView.addSubview(nicknameLabel)
-        backgroundView.addSubview(dateLabel)
+        backgroundView.addSubview(languageLabel)
         backgroundView.addSubview(textView)
+        backgroundView.addSubview(publicLabel)
+        backgroundView.addSubview(codeBlock)
         
         nicknameLabel.text = post.writerNickName
-        dateLabel.text = DateFormat.dayTime(str: post.createdDate)
-        textView.text = post.content
+        languageLabel.text = post.language
+        textView.text = post.description
+        codeBlock.text = post.code
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
             nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             
-            dateLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 10),
-            
-            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
+            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 3),
             textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
-            textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
+            
+            languageLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 7),
+            languageLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            
+            publicLabel.centerYAnchor.constraint(equalTo: languageLabel.centerYAnchor),
+            publicLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            
+            codeBlock.topAnchor.constraint(equalTo: languageLabel.bottomAnchor, constant: 15),
+            codeBlock.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            codeBlock.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            codeBlock.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10),
         ])
         
         backgroundCreateCommentView.addSubview(commentnameLabel)
@@ -237,9 +319,45 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         }
     }
     
+    @objc func dateButtonTapped(_ sender: UIButton) {
+        guard let date = sender.title(for: .normal) else { return }
+
+        for button in dateStackView.arrangedSubviews.compactMap({ $0 as? UIButton }) {
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15) // 기본 폰트로 리셋
+            let attributedString = NSAttributedString(string: button.titleLabel?.text ?? "", attributes: [
+                .underlineStyle: []
+            ])
+            button.setAttributedTitle(attributedString, for: .normal)
+        }
+        
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        let attributedString = NSAttributedString(string: date, attributes: [
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ])
+        sender.setAttributedTitle(attributedString, for: .normal)
+        
+        print("Selected date: \(date)")
+        
+        if DateFormat.dayTime(str: self.post.createDate) == date {
+            self.codeBlock.text = self.post.code
+            self.textView.text = self.post.description
+        } else {
+            fetchReviewDeatilList(id: sender.tag) { result in
+                switch result {
+                case .success(let list):
+                    self.codeBlock.text = list.code
+                    self.textView.text = list.description
+                case .failure(let error):
+                    print("Error fetching posts: \(error)")
+                }
+            }
+        }
+    }
+
+    
     func reloadComments() {
         commentTableView.reloadData()
-        let rowCount = viewModel.tilPostComments.commentList.count
+        let rowCount = viewModel.codePostComments.commentList.count
         let rowHeight: CGFloat = 90
         tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
     }
@@ -252,7 +370,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         let text = commentTextView.text ?? ""
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
-                self.viewModel.loadCommentList(tilPostId: self.post.id, page: 0, size: 20) {
+                self.viewModel.loadCommentList(codePostId: self.post.id, page: 0, size: 20) {
                     DispatchQueue.main.async {
                         self.reloadComments()
                     }
@@ -262,13 +380,13 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     }
 }
 
-extension TILDetailViewController: UITableViewDataSource, UITableViewDelegate {
+extension CodeDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.tilPostComments.commentList.count
+        return viewModel.codePostComments.commentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let comment = viewModel.tilPostComments.commentList[indexPath.row]
+        let comment = viewModel.codePostComments.commentList[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? CommentCell else {
             return UITableViewCell()
         }

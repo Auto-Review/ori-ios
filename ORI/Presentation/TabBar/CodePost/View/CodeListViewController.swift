@@ -46,7 +46,7 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     
     @objc func refreshData() {
         viewModel.resetMyCodeList()
-        viewModel.fetchMoreAllCodeList { [weak self] in
+        viewModel.loadMoreAllCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
@@ -87,12 +87,25 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPostId = viewModel.posts[indexPath.row].id
+        fetchCodeDeatilList(id: selectedPostId) { result in
+            switch result {
+            case .success(let list):
+                let detailVC = CodeDetailViewController(post: list)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            case .failure(let error):
+                print("Error fetching posts: \(error)")
+            }
+        }
+    }
+    
     private func updateNoPostsLabelVisibility() {
         noPostsLabel.isHidden = !viewModel.posts.isEmpty
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.fetchMoreAllCodeList { [weak self] in
+        viewModel.loadMoreAllCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
@@ -112,7 +125,7 @@ extension CodeListViewController {
     }
     
     private func loadMoreData() {
-        viewModel.fetchMoreAllCodeList { [weak self] in
+        viewModel.loadMoreAllCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
