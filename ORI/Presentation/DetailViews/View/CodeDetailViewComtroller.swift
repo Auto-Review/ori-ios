@@ -143,11 +143,17 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         stackView.distribution = .fillEqually
 
         for i in 1...5 {
-            let label = UILabel()
-            label.text = i <= rating ? "★" : "☆"
-            label.textColor = i <= rating ? .systemYellow : .lightGray
-            label.font = UIFont.systemFont(ofSize: 20)
-            stackView.addArrangedSubview(label)
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFit
+            let symbolName = i <= rating ? "starfill" : "star"
+            imageView.image = UIImage(named: symbolName)
+            imageView.tintColor = i <= rating ? .systemOrange : .lightGray
+            
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
+
+            stackView.addArrangedSubview(imageView)
         }
 
         return stackView
@@ -266,7 +272,6 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
             ])
             firstButton.setAttributedTitle(attributedString, for: .normal)
         }
-
         
         for dto in post.dtoList {
             let button = UIButton(type: .system)
