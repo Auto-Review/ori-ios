@@ -19,9 +19,8 @@ class SettingViewController: UIViewController {
         fetchButton.addTarget(self, action: #selector(fetchTokensFromKeychain), for: .touchUpInside)
         view.addSubview(fetchButton)
         
-        // 알림 목록을 불러오는 버튼 추가
         let fetchNotificationsButton = UIButton(type: .system)
-        fetchNotificationsButton.setTitle("comment", for: .normal)
+        fetchNotificationsButton.setTitle("test", for: .normal)
         fetchNotificationsButton.frame = CGRect(x: 100, y: 400, width: 200, height: 50)
         fetchNotificationsButton.addTarget(self, action: #selector(fetchNotifications), for: .touchUpInside)
         view.addSubview(fetchNotificationsButton)
@@ -45,7 +44,14 @@ class SettingViewController: UIViewController {
     }
     
     @objc func fetchNotifications() {
-        createTILComment(comment: WriteComment(postId: 11, body: "에헤이", isPublic: true, mentionNickName: "ksiomng", mentionEmail: "nadana092@gmail.com", parentId: 1))
+        fetchCodeDeatilList(id: 38) { result in
+            switch result {
+            case .success(let lists):
+                print(lists)
+            case .failure(let error):
+                print("Error fetching posts: \(error)")
+            }
+        }
     }
     
     // 로그아웃 함수

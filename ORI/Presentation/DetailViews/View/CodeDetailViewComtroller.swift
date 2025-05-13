@@ -8,7 +8,7 @@
 import UIKit
 
 class CodeDetailViewController: UIViewController, UITextViewDelegate  {
-    let viewModel = DetailViewModel()
+    let viewModel = CodeDetailViewModel()
     var post: CodeDetail
     
     init(post: CodeDetail) {
@@ -111,6 +111,12 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         addPostDetail()
         commentTextView.delegate = self
         viewModel.fetchMyData()
+        
+        viewModel.fetchCommentList(codePostId: post.id, page: 0, size: 20) {
+            DispatchQueue.main.async {
+                self.reloadComments()
+            }
+        }
         
         commentTableView.dataSource = self
         commentTableView.delegate = self
@@ -233,7 +239,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     
     func reloadComments() {
         commentTableView.reloadData()
-        let rowCount = viewModel.tilPostComments.commentList.count
+        let rowCount = viewModel.codePostComments.commentList.count
         let rowHeight: CGFloat = 90
         tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
     }
@@ -246,7 +252,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         let text = commentTextView.text ?? ""
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
-                self.viewModel.fetchCommentList(tilPostId: self.post.id, page: 0, size: 20) {
+                self.viewModel.fetchCommentList(codePostId: self.post.id, page: 0, size: 20) {
                     DispatchQueue.main.async {
                         self.reloadComments()
                     }
@@ -258,11 +264,11 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
 
 extension CodeDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.tilPostComments.commentList.count
+        return viewModel.codePostComments.commentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let comment = viewModel.tilPostComments.commentList[indexPath.row]
+        let comment = viewModel.codePostComments.commentList[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? CommentCell else {
             return UITableViewCell()
         }
