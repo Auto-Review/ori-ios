@@ -20,7 +20,7 @@ class CodeListViewModel {
         posts = []
     }
     
-    func fetchMoreAllCodeList(completion: @escaping () -> Void) {
+    func loadMoreAllCodeList(completion: @escaping () -> Void) {
         guard !isFetching, !lastPage else {
             completion()
             return

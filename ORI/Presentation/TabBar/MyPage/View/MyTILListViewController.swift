@@ -55,7 +55,7 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc func refreshData() {
         viewModel.resetMyCodeList()
-        viewModel.fetchMoreMyTILList { [weak self] in
+        viewModel.loadMoreMyTILList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
@@ -97,7 +97,7 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.fetchMoreMyTILList { [weak self] in
+        viewModel.loadMoreMyTILList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
@@ -118,7 +118,7 @@ extension MyTILListViewController {
     }
     
     private func loadMoreData() {
-        viewModel.fetchMoreMyTILList { [weak self] in
+        viewModel.loadMoreMyTILList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()

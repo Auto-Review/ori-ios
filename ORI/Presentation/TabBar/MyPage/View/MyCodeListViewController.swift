@@ -55,7 +55,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @objc func refreshData() {
         viewModel.resetMyCodeList()
-        viewModel.fetchMoreMyCodeList { [weak self] in
+        viewModel.loadMoreMyCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
@@ -97,7 +97,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func loadDataAndUpdateUI() {
-        viewModel.fetchMoreMyCodeList { [weak self] in
+        viewModel.loadMoreMyCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()
@@ -117,7 +117,7 @@ extension MyCodeListViewController {
     }
     
     private func loadMoreData() {
-        viewModel.fetchMoreMyCodeList { [weak self] in
+        viewModel.loadMoreMyCodeList { [weak self] in
             DispatchQueue.main.async {
                 self?.updateNoPostsLabelVisibility()
                 self?.tableView.reloadData()

@@ -141,9 +141,9 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         addScrollView()
         addPostDetail()
         commentTextView.delegate = self
-        viewModel.fetchMyData()
+        viewModel.loadMyData()
         
-        viewModel.fetchCommentList(codePostId: post.id, page: 0, size: 20) {
+        viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
                 self.reloadComments()
             }
@@ -370,7 +370,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         let text = commentTextView.text ?? ""
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
-                self.viewModel.fetchCommentList(codePostId: self.post.id, page: 0, size: 20) {
+                self.viewModel.loadCommentList(codePostId: self.post.id, page: 0, size: 20) {
                     DispatchQueue.main.async {
                         self.reloadComments()
                     }

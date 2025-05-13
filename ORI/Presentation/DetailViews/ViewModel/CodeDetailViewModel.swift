@@ -11,7 +11,7 @@ class CodeDetailViewModel {
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
     var codePostComments: Comments = Comments(commentList: [], totalPage: 0)
     
-    func fetchCommentList(codePostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
+    func loadCommentList(codePostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
         fetchCodeCommentList(codePostId: codePostId, page: page, size: size) { [weak self] result in
             switch result {
             case .success(let lists):
@@ -23,7 +23,7 @@ class CodeDetailViewModel {
         }
     }
     
-    func fetchMyData() {
+    func loadMyData() {
         fetchMyProfile() { [weak self] result in
             switch result {
             case .success(let posts):

@@ -11,7 +11,7 @@ class DetailViewModel {
     var myInfo: Member = Member(id: 0, email: "", nickname: "")
     var tilPostComments: Comments = Comments(commentList: [], totalPage: 0)
     
-    func fetchCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
+    func loadCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
         fetchTILCommentList(tilPostId: tilPostId, page: page, size: size) { [weak self] result in
             switch result {
             case .success(let lists):
@@ -23,7 +23,7 @@ class DetailViewModel {
         }
     }
     
-    func fetchMyData() {
+    func loadMyData() {
         fetchMyProfile() { [weak self] result in
             switch result {
             case .success(let posts):
