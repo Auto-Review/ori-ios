@@ -97,11 +97,33 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         return label
     }()
     
-    private let dateLabel: UILabel = {
+    private let languageLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .systemGray2
         return label
+    }()
+    
+    private let publicLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .systemGray2
+        label.text = "전체공개"
+        return label
+    }()
+    
+    private let codeBlock: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.backgroundColor = .systemGray6
+        textView.layer.cornerRadius = 5
+        return textView
     }()
     
     override func viewDidLoad() {
@@ -117,7 +139,6 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
                 self.reloadComments()
             }
         }
-        
         commentTableView.dataSource = self
         commentTableView.delegate = self
     }
@@ -174,24 +195,34 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         ])
         
         backgroundView.addSubview(nicknameLabel)
-        backgroundView.addSubview(dateLabel)
+        backgroundView.addSubview(languageLabel)
         backgroundView.addSubview(textView)
+        backgroundView.addSubview(publicLabel)
+        backgroundView.addSubview(codeBlock)
         
         nicknameLabel.text = post.writerNickName
-        dateLabel.text = DateFormat.dayTime(str: post.createDate)
+        languageLabel.text = post.language
         textView.text = post.description
+        codeBlock.text = post.code
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
             nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             
-            dateLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 10),
-            
-            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
+            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 3),
             textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
-            textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
+            
+            languageLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 7),
+            languageLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            
+            publicLabel.centerYAnchor.constraint(equalTo: languageLabel.centerYAnchor),
+            publicLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            
+            codeBlock.topAnchor.constraint(equalTo: languageLabel.bottomAnchor, constant: 15),
+            codeBlock.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            codeBlock.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            codeBlock.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10),
         ])
         
         backgroundCreateCommentView.addSubview(commentnameLabel)

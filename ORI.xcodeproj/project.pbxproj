@@ -41,6 +41,8 @@
 		57A295632D9153CD0057BF28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57A295622D9153CD0057BF28 /* Alamofire */; };
 		57B1629A2DCD9EEA00A41B00 /* NotificationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */; };
 		57B1629C2DCD9FFD00A41B00 /* PostCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */; };
+		57B162A22DD2DA8900A41B00 /* CodeDetailViewComtroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A12DD2DA8200A41B00 /* CodeDetailViewComtroller.swift */; };
+		57B162A42DD2DCC600A41B00 /* CodeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A32DD2DCC600A41B00 /* CodeDetailViewModel.swift */; };
 		57B268092DC2055A005F37D0 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B268082DC2055A005F37D0 /* CommentCell.swift */; };
 		57B3929E2DAC9AED00CAB138 /* TILDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */; };
 		57B392A02DACE59700CAB138 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929F2DACE59000CAB138 /* DateFormatters.swift */; };
@@ -105,6 +107,8 @@
 		579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotificationCell.swift; sourceTree = "<group>"; };
 		57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellModel.swift; sourceTree = "<group>"; };
 		57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellModel.swift; sourceTree = "<group>"; };
+		57B162A12DD2DA8200A41B00 /* CodeDetailViewComtroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailViewComtroller.swift; sourceTree = "<group>"; };
+		57B162A32DD2DCC600A41B00 /* CodeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailViewModel.swift; sourceTree = "<group>"; };
 		57B268082DC2055A005F37D0 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILDetailViewController.swift; sourceTree = "<group>"; };
 		57B3929F2DACE59000CAB138 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 		575BFC952DC311AF00CDD29E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				57B162A12DD2DA8200A41B00 /* CodeDetailViewComtroller.swift */,
 				57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */,
 				5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */,
 			);
@@ -380,6 +385,7 @@
 		575BFC962DC311B300CDD29E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				57B162A32DD2DCC600A41B00 /* CodeDetailViewModel.swift */,
 				57B392BE2DB0E75F00CAB138 /* DetailViewModel.swift */,
 				576354B82D8CF57100910917 /* NotificationViewModel.swift */,
 			);
@@ -655,6 +661,7 @@
 				577758892D83B02A00EB464F /* LogoutManager.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
 				576353D52D8A976700910917 /* MyTILListViewController.swift in Sources */,
+				57B162A22DD2DA8900A41B00 /* CodeDetailViewComtroller.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				579F0D832D9BD5F30076F9A9 /* MainNotificationCell.swift in Sources */,
 				576354B52D8CF2DD00910917 /* Notification.swift in Sources */,
@@ -680,6 +687,7 @@
 				57B392B52DB07F6400CAB138 /* CommentsNetwork.swift in Sources */,
 				576353B72D8A487000910917 /* PostListCell.swift in Sources */,
 				57EB9DF02CAFADE60036E5D8 /* SceneDelegate.swift in Sources */,
+				57B162A42DD2DCC600A41B00 /* CodeDetailViewModel.swift in Sources */,
 				57B1629C2DCD9FFD00A41B00 /* PostCellModel.swift in Sources */,
 				576354B92D8CF57900910917 /* NotificationViewModel.swift in Sources */,
 			);
