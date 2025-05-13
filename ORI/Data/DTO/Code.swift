@@ -52,3 +52,26 @@ struct Code: Decodable {
         case isPublic = "public"  // 매핑 처리
     }
 }
+
+struct CodeDetail: Decodable {
+    let id: Int
+    let writerId: Int
+    let writerEmail: String
+    let writerNickName: String
+    let title: String
+    let level: Int
+    let reviewDay: String
+    let description: String
+    let language: String
+    let code: String
+    let dtoList: [Review]
+    let createDate: String
+}
+
+struct Review: Decodable {
+    let id: Int
+    let description: String
+    let code: String
+    let createdAt: String
+    let updatedAt: String
+}
