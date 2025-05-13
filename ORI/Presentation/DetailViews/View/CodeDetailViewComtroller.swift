@@ -138,13 +138,26 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailNavigationBar(text: post.title)
+        addViewModelData()
         addScrollView()
         addPostDetail()
-        viewModel.loadMyData()
-        settableViewData()
     }
     
-    func addScrollView() {
+    private func addViewModelData() {
+        viewModel.loadMyData() { my in
+            DispatchQueue.main.async {
+                self.commentnameLabel.text = my.nickname
+            }
+        }
+
+        viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
+            DispatchQueue.main.async {
+                self.reloadComments()
+            }
+        }
+    }
+    
+    private func addScrollView() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -165,7 +178,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         ])
     }
     
-    func addPostDetail() {
+    private func addPostDetail() {
         let stars = starRatingView(rating: post.level)
         stars.translatesAutoresizingMaskIntoConstraints = false
         
@@ -218,7 +231,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         setCommentTableView()
     }
     
-    func setDateStackView() {
+    private func setDateStackView() {
         DateButtonView.addSubview(dateStackView)
         
         NSLayoutConstraint.activate([
@@ -263,7 +276,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         }
     }
     
-    func setDetailPostView() {
+    private func setDetailPostView() {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(languageLabel)
         backgroundView.addSubview(textView)
@@ -296,7 +309,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         ])
     }
     
-    func setCreateCommentView() {
+    private func setCreateCommentView() {
         commentTextView.delegate = self
         
         backgroundCreateCommentView.addSubview(commentnameLabel)
@@ -326,7 +339,10 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         ])
     }
     
-    func setCommentTableView() {
+    private func setCommentTableView() {
+        commentTableView.dataSource = self
+        commentTableView.delegate = self
+        
         tableViewHeightConstraint = commentTableView.heightAnchor.constraint(equalToConstant: 1)
         tableViewHeightConstraint?.isActive = true
         
@@ -404,18 +420,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     func textViewDidChange(_ textView: UITextView) {
         placeHolderLabel.isHidden = !textView.text.isEmpty
     }
-    
-    func settableViewData() {
-        viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
-            DispatchQueue.main.async {
-                self.reloadComments()
-            }
-        }
-        commentTableView.dataSource = self
-        commentTableView.delegate = self
-    }
 
-    func reloadComments() {
+    private func reloadComments() {
         commentTableView.reloadData()
         let rowCount = viewModel.codePostComments.commentList.count
         let rowHeight: CGFloat = 90
