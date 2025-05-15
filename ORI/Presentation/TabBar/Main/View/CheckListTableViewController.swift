@@ -45,4 +45,17 @@ class CheckListTableViewController: UITableViewController {
         cell.backgroundColor = .systemGray6
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPostId = viewModel.notiList[indexPath.row].codePostId
+        fetchCodeDeatilList(id: selectedPostId) { result in
+            switch result {
+            case .success(let list):
+                let detailVC = CodeDetailViewController(post: list)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            case .failure(let error):
+                print("Error fetching posts: \(error)")
+            }
+        }
+    }
 }

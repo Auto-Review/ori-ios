@@ -107,22 +107,25 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailNavigationBar(text: post.title, postId: post.id)
+        addViewModelData()
         addScrollView()
         addPostDetail()
-        commentTextView.delegate = self
-        viewModel.loadMyData()
-        
+    }
+    
+    private func addViewModelData() {
+        viewModel.loadMyData() { my in
+            DispatchQueue.main.async {
+                self.commentnameLabel.text = my.nickname
+            }
+        }
         viewModel.loadCommentList(tilPostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
                 self.reloadComments()
             }
         }
-        
-        commentTableView.dataSource = self
-        commentTableView.delegate = self
     }
     
-    func addScrollView() {
+    private func addScrollView() {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -143,7 +146,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         ])
     }
     
-    func addPostDetail() {
+    private func addPostDetail() {
         contentView.addSubview(backgroundView)
         contentView.addSubview(commentLabel)
         contentView.addSubview(backgroundCreateCommentView)
@@ -173,6 +176,12 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
+        setPostDetailView()
+        setCreateCommentView()
+        setCommentTableView()
+    }
+    
+    private func setPostDetailView() {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(dateLabel)
         backgroundView.addSubview(textView)
@@ -193,10 +202,13 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
             textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
         ])
-        
+    }
+    
+    private func setCreateCommentView() {
         backgroundCreateCommentView.addSubview(commentnameLabel)
         backgroundCreateCommentView.addSubview(commentTextView)
         backgroundCreateCommentView.addSubview(commentButton)
+        commentTextView.delegate = self
         
         NSLayoutConstraint.activate([
             commentnameLabel.topAnchor.constraint(equalTo: backgroundCreateCommentView.topAnchor, constant: 20),
@@ -219,6 +231,11 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             placeHolderLabel.leadingAnchor.constraint(equalTo: commentTextView.leadingAnchor),
             placeHolderLabel.trailingAnchor.constraint(equalTo: commentTextView.trailingAnchor),
         ])
+    }
+    
+    private func setCommentTableView() {
+        commentTableView.dataSource = self
+        commentTableView.delegate = self
         
         tableViewHeightConstraint = commentTableView.heightAnchor.constraint(equalToConstant: 1)
         tableViewHeightConstraint?.isActive = true
@@ -237,7 +254,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         }
     }
     
-    func reloadComments() {
+    private func reloadComments() {
         commentTableView.reloadData()
         let rowCount = viewModel.tilPostComments.commentList.count
         let rowHeight: CGFloat = 90
