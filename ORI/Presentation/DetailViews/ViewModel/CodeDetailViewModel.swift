@@ -34,6 +34,10 @@ class CodeDetailViewModel {
             mentionEmail: userEmail,
             parentId: nil
         )
-        createCodeComment(comment: comment)
+        createCodeComment(comment: comment) { success in
+            if success {
+                completion(true)
+            }
+        }
     }
 }

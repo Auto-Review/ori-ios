@@ -96,7 +96,7 @@ func fetchCodeCommentList(codePostId: Int, page: Int, size: Int, completion: @es
         }
 }
 
-func createCodeComment(comment: WriteComment) {
+func createCodeComment(comment: WriteComment, completion: @escaping (Bool) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/code-post/comment"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
@@ -114,10 +114,10 @@ func createCodeComment(comment: WriteComment) {
             switch response.result {
             case .success(_ ):
                 print("✅ 댓글 등록 성공")
-                fetchCodeCommentList(codePostId: comment.postId, page: 0, size: 10) { result in
-                }
+                completion(true)
             case .failure(let error):
                 print("❌ 에러 내용: \(error.localizedDescription)")
+                completion(false)
             }
         }
 }
@@ -152,8 +152,6 @@ func deleteTILComment(commentId: Int, writerId: Int, completion: @escaping (Bool
 
 func deleteCodeComment(commentId: Int, writerId: Int, completion: @escaping (Bool) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/code-post/comment"
-    print(commentId)
-    print(writerId)
 
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         return

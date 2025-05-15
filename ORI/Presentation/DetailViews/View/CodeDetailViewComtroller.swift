@@ -138,15 +138,18 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailNavigationBar(text: post.title, postId: post.id)
-        addViewModelData()
+        loadComments()
         addScrollView()
         addPostDetail()
     }
     
-    private func addViewModelData() {
+    private func loadComments() {
         viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
-                self.reloadComments()
+                self.commentTableView.reloadData()
+                let rowCount = self.viewModel.codePostComments.commentList.count
+                let rowHeight: CGFloat = 90
+                self.tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
             }
         }
     }
@@ -197,7 +200,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         contentView.addSubview(commentLabel)
         contentView.addSubview(backgroundCreateCommentView)
         contentView.addSubview(commentTableView)
-                
+        
         NSLayoutConstraint.activate([
             stars.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -360,7 +363,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         stackView.spacing = 4
         stackView.alignment = .center
         stackView.distribution = .fillEqually
-
+        
         for i in 1...5 {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
@@ -371,16 +374,16 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
             imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-
+            
             stackView.addArrangedSubview(imageView)
         }
-
+        
         return stackView
     }
     
     @objc func dateButtonTapped(_ sender: UIButton) {
         guard let date = sender.title(for: .normal) else { return }
-
+        
         for button in dateStackView.arrangedSubviews.compactMap({ $0 as? UIButton }) {
             button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             let attributedString = NSAttributedString(string: button.titleLabel?.text ?? "", attributes: [
@@ -414,23 +417,12 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     func textViewDidChange(_ textView: UITextView) {
         placeHolderLabel.isHidden = !textView.text.isEmpty
     }
-
-    private func reloadComments() {
-        commentTableView.reloadData()
-        let rowCount = viewModel.codePostComments.commentList.count
-        let rowHeight: CGFloat = 90
-        tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
-    }
     
     @objc func createComment() {
         let text = commentTextView.text ?? ""
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
-                self.viewModel.loadCommentList(codePostId: self.post.id, page: 0, size: 20) {
-                    DispatchQueue.main.async {
-                        self.reloadComments()
-                    }
-                }
+                self.loadComments()
             }
         }
     }
@@ -451,12 +443,12 @@ extension CodeDetailViewController: UITableViewDataSource, UITableViewDelegate {
         cell.onEditTapped = {
             print("수정")
         }
-
+        
         cell.onDeleteTapped = {
             if self.viewModel.userId == comment.writerId {
                 deleteCodeComment(commentId: comment.id, writerId: self.viewModel.userId) { success in
                     if success {
-                        print("삭제완료")
+                        self.loadComments()
                     }
                 }
             } else {
