@@ -39,7 +39,7 @@ func fetchTILCommentList(tilPostId: Int, page: Int, size: Int, completion: @esca
         }
 }
 
-func createTILComment(comment: WriteComment) {
+func createTILComment(comment: WriteComment, completion: @escaping (Bool) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/til-post/comment"
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
@@ -57,8 +57,7 @@ func createTILComment(comment: WriteComment) {
             switch response.result {
             case .success(_ ):
                 print("✅ 댓글 등록 성공")
-                fetchTILCommentList(tilPostId: comment.postId, page: 0, size: 10) { result in
-                }
+                completion(true)
             case .failure(let error):
                 print("❌ 에러 내용: \(error.localizedDescription)")
             }

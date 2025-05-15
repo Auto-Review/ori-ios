@@ -107,15 +107,18 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailNavigationBar(text: post.title, postId: post.id)
-        addViewModelData()
+        loadComments()
         addScrollView()
         addPostDetail()
     }
     
-    private func addViewModelData() {
+    private func loadComments() {
         viewModel.loadCommentList(tilPostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
-                self.reloadComments()
+                self.commentTableView.reloadData()
+                let rowCount = self.viewModel.tilPostComments.commentList.count
+                let rowHeight: CGFloat = 90
+                self.tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
             }
         }
     }
@@ -249,13 +252,6 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         }
     }
     
-    private func reloadComments() {
-        commentTableView.reloadData()
-        let rowCount = viewModel.tilPostComments.commentList.count
-        let rowHeight: CGFloat = 90
-        tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
-    }
-    
     func textViewDidChange(_ textView: UITextView) {
         placeHolderLabel.isHidden = !textView.text.isEmpty
     }
@@ -264,11 +260,8 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         let text = commentTextView.text ?? ""
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
-                self.viewModel.loadCommentList(tilPostId: self.post.id, page: 0, size: 20) {
-                    DispatchQueue.main.async {
-                        self.reloadComments()
-                    }
-                }
+                self.loadComments()
+                self.commentTextView.text = ""
             }
         }
     }
@@ -285,6 +278,22 @@ extension TILDetailViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.configure(with: comment)
+        
+        cell.onEditTapped = {
+            print("수정")
+        }
+        
+        cell.onDeleteTapped = {
+            if self.viewModel.userId == comment.writerId {
+                deleteTILComment(commentId: comment.id, writerId: self.viewModel.userId) { success in
+                    if success {
+                        self.loadComments()
+                    }
+                }
+            } else {
+                print("다른사람 댓글임")
+            }
+        }
         return cell
     }
     
