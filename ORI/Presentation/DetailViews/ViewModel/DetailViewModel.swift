@@ -23,11 +23,12 @@ class DetailViewModel {
         }
     }
     
-    func loadMyData() {
+    func loadMyData(completion: @escaping (Member) -> Void) {
         fetchMyProfile() { [weak self] result in
             switch result {
             case .success(let posts):
                 self?.myInfo = posts
+                completion(posts)
             case .failure(let error):
                 print(error.localizedDescription)
             }
