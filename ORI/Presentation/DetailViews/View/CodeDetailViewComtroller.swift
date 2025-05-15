@@ -27,7 +27,6 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     let backgroundCreateCommentView = UIView()
     
     var tableViewHeightConstraint: NSLayoutConstraint?
-    var textViewHeightConstraint: NSLayoutConstraint?
     
     private let commentTableView: UITableView = {
         let tableView = UITableView()

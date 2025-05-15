@@ -26,7 +26,6 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     let backgroundCreateCommentView = UIView()
     
     var tableViewHeightConstraint: NSLayoutConstraint?
-    var textViewHeightConstraint: NSLayoutConstraint?
     
     private let commentTableView: UITableView = {
         let tableView = UITableView()
@@ -79,7 +78,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         return button
     }()
     
-    private let textView: UITextView = {
+    private let contentTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
@@ -182,11 +181,11 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     private func setPostDetailView() {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(dateLabel)
-        backgroundView.addSubview(textView)
+        backgroundView.addSubview(contentTextView)
         
         nicknameLabel.text = post.writerNickName
         dateLabel.text = DateFormat.dayTime(str: post.createdDate)
-        textView.text = post.content
+        contentTextView.text = post.content
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
@@ -195,10 +194,10 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             dateLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 10),
             
-            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
-            textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
-            textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
+            contentTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
+            contentTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            contentTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            contentTextView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
         ])
     }
     
@@ -247,8 +246,6 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         
         DispatchQueue.main.async { [self] in
             self.commentnameLabel.text = viewModel.userName
-            let size = self.textView.sizeThatFits(CGSize(width: self.textView.frame.width, height: .greatestFiniteMagnitude))
-            self.textViewHeightConstraint?.constant = size.height
         }
     }
     
