@@ -69,6 +69,13 @@ class CommentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        moreButton.isHidden = false
+        completeButton.isHidden = true
+        bodyTextField.isUserInteractionEnabled = false
+    }
+    
     private func setupLayout() {
         selectionStyle = .none
         
