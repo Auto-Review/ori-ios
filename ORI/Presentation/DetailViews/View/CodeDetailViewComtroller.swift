@@ -423,6 +423,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
                 self.loadComments()
+                self.commentTextView.text = ""
             }
         }
     }
