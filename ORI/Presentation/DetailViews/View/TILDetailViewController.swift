@@ -277,22 +277,16 @@ extension TILDetailViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: comment)
         
         cell.onEditTapped = {
-            if self.viewModel.userId == comment.writerId {
-                cell.onEditCompleted = { newBody in
-                    self.viewModel.editComment(text: newBody, id: comment.id)
-                }
+            cell.onEditCompleted = { newBody in
+                self.viewModel.editComment(text: newBody, id: comment.id)
             }
         }
         
         cell.onDeleteTapped = {
-            if self.viewModel.userId == comment.writerId {
-                self.viewModel.deleteComment(id: comment.id) { success in
-                    if success {
-                        self.loadComments()
-                    }
+            self.viewModel.deleteComment(id: comment.id) { success in
+                if success {
+                    self.loadComments()
                 }
-            } else {
-                print("다른사람 댓글임")
             }
         }
         return cell

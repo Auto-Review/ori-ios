@@ -9,9 +9,13 @@
 import UIKit
 
 class CommentCell: UITableViewCell {
+    let userId = UserDefaultsManager.shared.userId
+    
     var onEditTapped: (() -> Void)?
     var onDeleteTapped: (() -> Void)?
-    var onEditCompleted: ((String) -> Void)? // 수정 완료 시 콜백
+    var onEditCompleted: ((String) -> Void)?
+    
+    private let actionButtonContainer = UIView()
     
     private let nicknameLabel: UILabel = {
         let label = UILabel()
@@ -32,16 +36,16 @@ class CommentCell: UITableViewCell {
         let textField = UITextField()
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.textColor = .darkGray
-        textField.isUserInteractionEnabled = false // 초기에는 비활성화
+        textField.isUserInteractionEnabled = false
         return textField
     }()
     
     private let completeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("완료", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        button.isHidden = true // 처음엔 숨김
+        button.isHidden = true
         return button
     }()
     
@@ -68,11 +72,26 @@ class CommentCell: UITableViewCell {
     private func setupLayout() {
         selectionStyle = .none
         
-        let topRow = UIStackView(arrangedSubviews: [nicknameLabel, UIView(), moreButton])
+        actionButtonContainer.addSubview(moreButton)
+        actionButtonContainer.addSubview(completeButton)
+        
+        moreButton.translatesAutoresizingMaskIntoConstraints = false
+        completeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            moreButton.topAnchor.constraint(equalTo: actionButtonContainer.topAnchor),
+            moreButton.trailingAnchor.constraint(equalTo: actionButtonContainer.trailingAnchor),
+            moreButton.bottomAnchor.constraint(equalTo: actionButtonContainer.bottomAnchor),
+
+            completeButton.centerYAnchor.constraint(equalTo: moreButton.centerYAnchor),
+            completeButton.trailingAnchor.constraint(equalTo: moreButton.trailingAnchor),
+        ])
+        
+        let topRow = UIStackView(arrangedSubviews: [nicknameLabel, UIView(), actionButtonContainer])
         topRow.axis = .horizontal
         topRow.alignment = .center
         
-        let bodyRow = UIStackView(arrangedSubviews: [bodyTextField, completeButton])
+        let bodyRow = UIStackView(arrangedSubviews: [bodyTextField])
         bodyRow.axis = .horizontal
         bodyRow.spacing = 8
         bodyRow.alignment = .center
@@ -90,9 +109,7 @@ class CommentCell: UITableViewCell {
             containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            
-            completeButton.widthAnchor.constraint(equalToConstant: 50)
+            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
     }
     
@@ -110,13 +127,15 @@ class CommentCell: UITableViewCell {
     private func enableEditing() {
         bodyTextField.isUserInteractionEnabled = true
         bodyTextField.becomeFirstResponder()
+        moreButton.isHidden = true
         completeButton.isHidden = false
     }
-    
+
     @objc private func didTapComplete() {
         bodyTextField.isUserInteractionEnabled = false
-        completeButton.isHidden = true
         bodyTextField.resignFirstResponder()
+        moreButton.isHidden = false
+        completeButton.isHidden = true
         onEditCompleted?(bodyTextField.text ?? "")
     }
     
@@ -124,5 +143,8 @@ class CommentCell: UITableViewCell {
         nicknameLabel.text = comment.writerNickName
         bodyTextField.text = comment.body
         dateLabel.text = DateFormat.dayTime(str: comment.updatedAt)
+        
+        let isOwnComment = (comment.writerId == self.userId)
+        moreButton.isHidden = !isOwnComment
     }
 }
