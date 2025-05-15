@@ -79,7 +79,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         return button
     }()
     
-    private let textView: UITextView = {
+    private let postTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
@@ -275,24 +275,24 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     private func setDetailPostView() {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(languageLabel)
-        backgroundView.addSubview(textView)
+        backgroundView.addSubview(postTextView)
         backgroundView.addSubview(publicLabel)
         backgroundView.addSubview(codeBlock)
         
         nicknameLabel.text = post.writerNickName
         languageLabel.text = post.language
-        textView.text = post.description
+        postTextView.text = post.description
         codeBlock.text = post.code
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
             nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             
-            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 3),
-            textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 3),
+            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
             
-            languageLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 7),
+            languageLabel.topAnchor.constraint(equalTo: postTextView.bottomAnchor, constant: 7),
             languageLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             
             publicLabel.centerYAnchor.constraint(equalTo: languageLabel.centerYAnchor),
@@ -397,13 +397,13 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         if DateFormat.dayTime(str: self.post.createDate) == date {
             self.codeBlock.text = self.post.code
-            self.textView.text = self.post.description
+            self.postTextView.text = self.post.description
         } else {
             fetchReviewDeatilList(id: sender.tag) { result in
                 switch result {
                 case .success(let list):
                     self.codeBlock.text = list.code
-                    self.textView.text = list.description
+                    self.postTextView.text = list.description
                 case .failure(let error):
                     print("Error fetching posts: \(error)")
                 }

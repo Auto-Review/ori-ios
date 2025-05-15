@@ -78,7 +78,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         return button
     }()
     
-    private let contentTextView: UITextView = {
+    private let postTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
@@ -181,11 +181,11 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     private func setPostDetailView() {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(dateLabel)
-        backgroundView.addSubview(contentTextView)
+        backgroundView.addSubview(postTextView)
         
         nicknameLabel.text = post.writerNickName
         dateLabel.text = DateFormat.dayTime(str: post.createdDate)
-        contentTextView.text = post.content
+        postTextView.text = post.content
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
@@ -194,10 +194,10 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             dateLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 10),
             
-            contentTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
-            contentTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            contentTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
-            contentTextView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
+            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
+            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            postTextView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
         ])
     }
     
