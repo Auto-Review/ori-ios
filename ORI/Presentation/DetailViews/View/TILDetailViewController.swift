@@ -8,7 +8,7 @@
 import UIKit
 
 class TILDetailViewController: UIViewController, UITextViewDelegate  {
-    let viewModel = DetailViewModel()
+    let viewModel = TILDetailViewModel()
     var post: TIL
     
     init(post: TIL) {
@@ -113,11 +113,6 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     private func addViewModelData() {
-        viewModel.loadMyData() { my in
-            DispatchQueue.main.async {
-                self.commentnameLabel.text = my.nickname
-            }
-        }
         viewModel.loadCommentList(tilPostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
                 self.reloadComments()
@@ -248,7 +243,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         ])
         
         DispatchQueue.main.async { [self] in
-            self.commentnameLabel.text = viewModel.myInfo.nickname
+            self.commentnameLabel.text = viewModel.userName
             let size = self.textView.sizeThatFits(CGSize(width: self.textView.frame.width, height: .greatestFiniteMagnitude))
             self.textViewHeightConstraint?.constant = size.height
         }

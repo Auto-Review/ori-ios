@@ -1,5 +1,5 @@
 //
-//  DetailViewModel.swift
+//  TILDetailViewModel.swift
 //  ORI
 //
 //  Created by Song Kim on 4/17/25.
@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-class DetailViewModel {
-    var myInfo: Member = Member(id: 0, email: "", nickname: "")
+class TILDetailViewModel {
     var tilPostComments: Comments = Comments(commentList: [], totalPage: 0)
+    let userName = UserDefaults.standard.string(forKey: "userName") ?? "user"
+    let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "user"
     
     func loadCommentList(tilPostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
         fetchTILCommentList(tilPostId: tilPostId, page: page, size: size) { [weak self] result in
@@ -23,25 +24,13 @@ class DetailViewModel {
         }
     }
     
-    func loadMyData(completion: @escaping (Member) -> Void) {
-        fetchMyProfile() { [weak self] result in
-            switch result {
-            case .success(let posts):
-                self?.myInfo = posts
-                completion(posts)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
     func createComment(text: String, postId: Int, completion: @escaping (Bool) -> Void) {
         let comment = WriteComment(
             postId: postId,
             body: text,
             isPublic: true,
-            mentionNickName: myInfo.nickname,
-            mentionEmail: myInfo.email,
+            mentionNickName: userName,
+            mentionEmail: userEmail,
             parentId: nil
         )
         createTILComment(comment: comment)
