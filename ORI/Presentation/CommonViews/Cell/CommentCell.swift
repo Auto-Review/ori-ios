@@ -9,6 +9,9 @@
 import UIKit
 
 class CommentCell: UITableViewCell {
+    var onEditTapped: (() -> Void)?
+    var onDeleteTapped: (() -> Void)?
+    
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
@@ -20,6 +23,7 @@ class CommentCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.tintColor = .gray
+        button.showsMenuAsPrimaryAction = true // 메뉴가 버튼 클릭 시 바로 표시됨
         return button
     }()
     
@@ -43,6 +47,7 @@ class CommentCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+        setupMenu()
     }
     
     required init?(coder: NSCoder) {
@@ -71,6 +76,16 @@ class CommentCell: UITableViewCell {
             containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
+    }
+    
+    private func setupMenu() {
+        let edit = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { [weak self] _ in
+            self?.onEditTapped?()
+        }
+        let delete = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+            self?.onDeleteTapped?()
+        }
+        moreButton.menu = UIMenu(title: "", children: [edit, delete])
     }
     
     func configure(with comment: Comment) {

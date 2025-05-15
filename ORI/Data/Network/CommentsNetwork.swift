@@ -121,3 +121,60 @@ func createCodeComment(comment: WriteComment) {
             }
         }
 }
+
+func deleteTILComment(commentId: Int, writerId: Int, completion: @escaping (Bool) -> Void) {
+    let url = "http://\(NetworkConstants.baseURL)/til-post/comment"
+
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
+        return
+    }
+
+    let headers: HTTPHeaders = [
+        "Authorization": accessToken,
+        "Content-Type": "application/json"
+    ]
+    
+    let parameters: [String: Any] = ["commentId": commentId, "writerId": writerId]
+
+    AF.request(url,method: .delete, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        .validate(statusCode: 200..<300)
+        .response { response in
+            switch response.result {
+            case .success:
+                completion(true)
+            case .failure(let error):
+                print(error)
+                completion(false)
+            }
+        }
+}
+
+
+func deleteCodeComment(commentId: Int, writerId: Int, completion: @escaping (Bool) -> Void) {
+    let url = "http://\(NetworkConstants.baseURL)/code-post/comment"
+    print(commentId)
+    print(writerId)
+
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
+        return
+    }
+
+    let headers: HTTPHeaders = [
+        "Authorization": accessToken,
+        "Content-Type": "application/json"
+    ]
+    
+    let parameters: [String: Any] = ["commentId": commentId, "writerId": writerId]
+
+    AF.request(url,method: .delete, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        .validate(statusCode: 200..<300)
+        .response { response in
+            switch response.result {
+            case .success:
+                completion(true)
+            case .failure(let error):
+                print(error)
+                completion(false)
+            }
+        }
+}

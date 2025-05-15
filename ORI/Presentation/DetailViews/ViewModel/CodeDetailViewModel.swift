@@ -9,6 +9,7 @@ import SwiftUI
 
 class CodeDetailViewModel {
     var codePostComments: Comments = Comments(commentList: [], totalPage: 0)
+    let userId = UserDefaults.standard.integer(forKey: "userId")
     let userName = UserDefaults.standard.string(forKey: "userName") ?? "user"
     let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "user"
     

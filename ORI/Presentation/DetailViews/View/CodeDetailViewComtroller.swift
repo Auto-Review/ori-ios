@@ -447,6 +447,22 @@ extension CodeDetailViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.configure(with: comment)
+        
+        cell.onEditTapped = {
+            print("수정")
+        }
+
+        cell.onDeleteTapped = {
+            if self.viewModel.userId == comment.writerId {
+                deleteCodeComment(commentId: comment.id, writerId: self.viewModel.userId) { success in
+                    if success {
+                        print("삭제완료")
+                    }
+                }
+            } else {
+                print("다른사람 댓글임")
+            }
+        }
         return cell
     }
     
