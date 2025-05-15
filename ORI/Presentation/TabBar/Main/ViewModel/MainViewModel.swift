@@ -25,6 +25,19 @@ class MainViewModel {
         }
     }
     
+    func loadMyData() {
+        fetchMyProfile() { result in
+            switch result {
+            case .success(let user):
+                UserDefaults.standard.set(user.id, forKey: "userId")
+                UserDefaults.standard.set(user.nickname, forKey: "userName")
+                UserDefaults.standard.set(user.email, forKey: "userEmail")
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
     var numberOfTodos: Int {
         return selectDayTodoList.count
     }

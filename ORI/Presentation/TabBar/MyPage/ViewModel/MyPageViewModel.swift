@@ -90,19 +90,6 @@ class MyPageViewModel {
         }
     }
     
-    // 내 정보 가져오기 (이메일, 이름)
-    func loadMyData(completion: @escaping () -> Void) {
-        fetchMyProfile() { [weak self] result in
-            switch result {
-            case .success(let user):
-                self?.myInfo = user
-            case .failure(_):
-                break
-            }
-            completion()
-        }
-    }
-    
     func numberOfPosts() -> Int {
         return isCode ? myCodePosts.count : myTILPosts.count
     }
