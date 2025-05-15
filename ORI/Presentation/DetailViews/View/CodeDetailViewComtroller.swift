@@ -412,7 +412,9 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        placeHolderLabel.isHidden = !textView.text.isEmpty
+        DispatchQueue.main.async {
+            self.placeHolderLabel.isHidden = !textView.text.isEmpty
+        }
     }
     
     @objc func createComment() {

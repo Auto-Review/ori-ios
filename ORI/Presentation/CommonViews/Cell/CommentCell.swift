@@ -127,16 +127,20 @@ class CommentCell: UITableViewCell {
     private func enableEditing() {
         bodyTextField.isUserInteractionEnabled = true
         bodyTextField.becomeFirstResponder()
-        moreButton.isHidden = true
-        completeButton.isHidden = false
+        DispatchQueue.main.async {
+            self.moreButton.isHidden = true
+            self.completeButton.isHidden = false
+        }
     }
 
     @objc private func didTapComplete() {
         bodyTextField.isUserInteractionEnabled = false
         bodyTextField.resignFirstResponder()
-        moreButton.isHidden = false
-        completeButton.isHidden = true
-        onEditCompleted?(bodyTextField.text ?? "")
+        DispatchQueue.main.async {
+            self.moreButton.isHidden = false
+            self.completeButton.isHidden = true
+            self.onEditCompleted?(self.bodyTextField.text ?? "")
+        }
     }
     
     func configure(with comment: Comment) {
@@ -144,7 +148,10 @@ class CommentCell: UITableViewCell {
         bodyTextField.text = comment.body
         dateLabel.text = DateFormat.dayTime(str: comment.updatedAt)
         
-        let isOwnComment = (comment.writerId == self.userId)
-        moreButton.isHidden = !isOwnComment
+        if !(comment.writerId == self.userId) {
+            DispatchQueue.main.async {
+                self.moreButton.isHidden = true
+            }
+        }
     }
 }
