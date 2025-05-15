@@ -9,9 +9,9 @@ import SwiftUI
 
 class CodeDetailViewModel {
     var codePostComments: Comments = Comments(commentList: [], totalPage: 0)
-    let userId = UserDefaults.standard.integer(forKey: "userId")
-    let userName = UserDefaults.standard.string(forKey: "userName") ?? "user"
-    let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "user"
+    let userId = UserDefaultsManager.shared.userId
+    let userName = UserDefaultsManager.shared.userName
+    let userEmail = UserDefaultsManager.shared.userEmail
     
     func loadCommentList(codePostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
         fetchCodeCommentList(codePostId: codePostId, page: page, size: size) { [weak self] result in

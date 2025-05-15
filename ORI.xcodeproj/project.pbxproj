@@ -47,6 +47,7 @@
 		57B162A82DD310E900A41B00 /* ReviewNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A72DD310E200A41B00 /* ReviewNetwork.swift */; };
 		57B162AA2DD3180900A41B00 /* BookmarkNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A92DD317FE00A41B00 /* BookmarkNetwork.swift */; };
 		57B162AC2DD31BA700A41B00 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162AB2DD31BA200A41B00 /* Bookmark.swift */; };
+		57B162AE2DD5C6A400A41B00 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162AD2DD5C6A400A41B00 /* UserDefaultsManager.swift */; };
 		57B268092DC2055A005F37D0 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B268082DC2055A005F37D0 /* CommentCell.swift */; };
 		57B3929E2DAC9AED00CAB138 /* TILDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */; };
 		57B392A02DACE59700CAB138 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3929F2DACE59000CAB138 /* DateFormatters.swift */; };
@@ -117,6 +118,7 @@
 		57B162A72DD310E200A41B00 /* ReviewNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNetwork.swift; sourceTree = "<group>"; };
 		57B162A92DD317FE00A41B00 /* BookmarkNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkNetwork.swift; sourceTree = "<group>"; };
 		57B162AB2DD31BA200A41B00 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		57B162AD2DD5C6A400A41B00 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		57B268082DC2055A005F37D0 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILDetailViewController.swift; sourceTree = "<group>"; };
 		57B3929F2DACE59000CAB138 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		5719E7E02D77F15400C3D9B8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				57B162AD2DD5C6A400A41B00 /* UserDefaultsManager.swift */,
 				577758882D83B02900EB464F /* LogoutManager.swift */,
 				5719E7EF2D7993CA00C3D9B8 /* NavigationManager.swift */,
 				5719E7ED2D7988B300C3D9B8 /* KeychainManager.swift */,
@@ -684,6 +687,7 @@
 				57B162AC2DD31BA700A41B00 /* Bookmark.swift in Sources */,
 				5729F6D82CDB921C00FB9ADC /* NotificationsViewController.swift in Sources */,
 				575BFC902DC310A900CDD29E /* Untitled.swift in Sources */,
+				57B162AE2DD5C6A400A41B00 /* UserDefaultsManager.swift in Sources */,
 				57EB9E0E2CB15DB70036E5D8 /* MainViewController.swift in Sources */,
 				576353B32D8A473900910917 /* Token.swift in Sources */,
 				57B392BF2DB0E76A00CAB138 /* TILDetailViewModel.swift in Sources */,

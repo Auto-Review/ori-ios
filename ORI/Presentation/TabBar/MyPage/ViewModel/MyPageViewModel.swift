@@ -12,9 +12,9 @@ class MyPageViewModel {
     var isCode = true
     var myTILPosts: [TIL] = []
     var myCodePosts: [MyCode] = []
-    let userId = UserDefaults.standard.integer(forKey: "userId")
-    let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "user"
-    let userName = UserDefaults.standard.string(forKey: "userName") ?? "user"
+    let userId = UserDefaultsManager.shared.userId
+    let userName = UserDefaultsManager.shared.userName
+    let userEmail = UserDefaultsManager.shared.userEmail
     
     // 코드 포스트 무한 스크롤
     private var currentCodePage = 0
