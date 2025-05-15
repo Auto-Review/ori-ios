@@ -352,8 +352,6 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         DispatchQueue.main.async { [self] in
             self.commentnameLabel.text = viewModel.userName
-            let size = self.textView.sizeThatFits(CGSize(width: self.textView.frame.width, height: .greatestFiniteMagnitude))
-            self.textViewHeightConstraint?.constant = size.height
         }
     }
     
