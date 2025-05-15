@@ -11,6 +11,7 @@ import UIKit
 class CommentCell: UITableViewCell {
     var onEditTapped: (() -> Void)?
     var onDeleteTapped: (() -> Void)?
+    var onEditCompleted: ((String) -> Void)? // 수정 완료 시 콜백
     
     private let nicknameLabel: UILabel = {
         let label = UILabel()
@@ -23,16 +24,25 @@ class CommentCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.tintColor = .gray
-        button.showsMenuAsPrimaryAction = true // 메뉴가 버튼 클릭 시 바로 표시됨
+        button.showsMenuAsPrimaryAction = true
         return button
     }()
     
-    private let bodyLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.numberOfLines = 0
-        label.textColor = .darkGray
-        return label
+    private let bodyTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.textColor = .darkGray
+        textField.isUserInteractionEnabled = false // 초기에는 비활성화
+        return textField
+    }()
+    
+    private let completeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("완료", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        button.isHidden = true // 처음엔 숨김
+        return button
     }()
     
     private let dateLabel: UILabel = {
@@ -48,6 +58,7 @@ class CommentCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
         setupMenu()
+        completeButton.addTarget(self, action: #selector(didTapComplete), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -61,25 +72,33 @@ class CommentCell: UITableViewCell {
         topRow.axis = .horizontal
         topRow.alignment = .center
         
+        let bodyRow = UIStackView(arrangedSubviews: [bodyTextField, completeButton])
+        bodyRow.axis = .horizontal
+        bodyRow.spacing = 8
+        bodyRow.alignment = .center
+        
         containerStackView.axis = .vertical
         containerStackView.spacing = 6
         containerStackView.translatesAutoresizingMaskIntoConstraints = false
         containerStackView.addArrangedSubview(topRow)
-        containerStackView.addArrangedSubview(bodyLabel)
+        containerStackView.addArrangedSubview(bodyRow)
         containerStackView.addArrangedSubview(dateLabel)
         
         contentView.addSubview(containerStackView)
         
         NSLayoutConstraint.activate([
             containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            
+            completeButton.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
     
     private func setupMenu() {
         let edit = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { [weak self] _ in
+            self?.enableEditing()
             self?.onEditTapped?()
         }
         let delete = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
@@ -88,9 +107,22 @@ class CommentCell: UITableViewCell {
         moreButton.menu = UIMenu(title: "", children: [edit, delete])
     }
     
+    private func enableEditing() {
+        bodyTextField.isUserInteractionEnabled = true
+        bodyTextField.becomeFirstResponder()
+        completeButton.isHidden = false
+    }
+    
+    @objc private func didTapComplete() {
+        bodyTextField.isUserInteractionEnabled = false
+        completeButton.isHidden = true
+        bodyTextField.resignFirstResponder()
+        onEditCompleted?(bodyTextField.text ?? "")
+    }
+    
     func configure(with comment: Comment) {
         nicknameLabel.text = comment.writerNickName
-        bodyLabel.text = comment.body
+        bodyTextField.text = comment.body
         dateLabel.text = DateFormat.dayTime(str: comment.updatedAt)
     }
 }

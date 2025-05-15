@@ -36,6 +36,24 @@ class TILDetailViewModel {
         )
         createTILComment(comment: comment) { success in
             if success {
+                print("✅ 댓글 등록 성공")
+                completion(true)
+            }
+        }
+    }
+    
+    func editComment(text: String, id: Int) {
+        editTILComment(commentId: id, body: text, isPublic: true, mentionNickName: userName, mentionEmail: userEmail) { success in
+            if success {
+                print("✅ 댓글 수정 성공")
+            }
+        }
+    }
+    
+    func deleteComment(id: Int, completion: @escaping (Bool) -> Void) {
+        deleteTILComment(commentId: id, writerId: userId) { success in
+            if success {
+                print("✅ 댓글 삭제 성공")
                 completion(true)
             }
         }

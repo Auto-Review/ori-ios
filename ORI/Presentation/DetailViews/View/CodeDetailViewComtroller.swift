@@ -439,12 +439,16 @@ extension CodeDetailViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: comment)
         
         cell.onEditTapped = {
-            print("수정")
+            if self.viewModel.userId == comment.writerId {
+                cell.onEditCompleted = { newBody in
+                    self.viewModel.editComment(text: newBody, id: comment.id)
+                }
+            }
         }
         
         cell.onDeleteTapped = {
             if self.viewModel.userId == comment.writerId {
-                deleteCodeComment(commentId: comment.id, writerId: self.viewModel.userId) { success in
+                self.viewModel.deleteComment(id: comment.id) { success in
                     if success {
                         self.loadComments()
                     }
