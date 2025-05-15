@@ -30,10 +30,8 @@ class MyViewController: UIViewController {
     lazy var nameLabel: UILabel = createLabel(text: "Name")
     lazy var bioLabel: UILabel = createLabel(text: "Bio")
     
-    let userName = UserDefaults.standard.string(forKey: "userName")
-    let userEmail = UserDefaults.standard.string(forKey: "userEmail")
-    lazy var emailTextField: UITextField = createTextField(text: userName ?? "")
-    lazy var nameTextField: UITextField = createTextField(text: userEmail ?? "")
+    lazy var emailTextField: UITextField = createTextField(text: viewModel.userEmail)
+    lazy var nameTextField: UITextField = createTextField(text: viewModel.userName)
     lazy var bioTextField: UITextField = createTextField(text: "4월 20일까지 모든 것을 끝냅시다!")
     
     lazy var emailStackView: UIStackView = createStackView(label: emailLabel, textField: emailTextField)
@@ -133,10 +131,13 @@ class MyViewController: UIViewController {
             view.endEditing(true) // 키보드 닫기
             editButton.setImage(UIImage(systemName: "pencil"), for: .normal)
             nameTextField.backgroundColor = .clear
-            if viewModel.myInfo.nickname != nameTextField.text {
-                let newName = nameTextField.text ?? "user"
-                updateMyProfile(id: viewModel.myInfo.id, nickname: newName)
-                UserDefaults.standard.set(newName, forKey: "userName")
+            let newName = nameTextField.text ?? "user"
+            if viewModel.userName != newName {
+                updateMyProfile(id: viewModel.userId, nickname: newName) { success in
+                    if success {
+                        UserDefaults.standard.set(newName, forKey: "userName")
+                    }
+                }
             }
         } else {
             nameTextField.backgroundColor = .white

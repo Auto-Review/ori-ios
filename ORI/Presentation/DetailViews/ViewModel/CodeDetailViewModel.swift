@@ -8,8 +8,9 @@
 import SwiftUI
 
 class CodeDetailViewModel {
-    var myInfo: Member = Member(id: 0, email: "", nickname: "")
     var codePostComments: Comments = Comments(commentList: [], totalPage: 0)
+    let userName = UserDefaults.standard.string(forKey: "userName") ?? "user"
+    let userEmail = UserDefaults.standard.string(forKey: "userEmail") ?? "user"
     
     func loadCommentList(codePostId: Int, page: Int, size: Int, completion: @escaping () -> Void) {
         fetchCodeCommentList(codePostId: codePostId, page: page, size: size) { [weak self] result in
@@ -23,25 +24,13 @@ class CodeDetailViewModel {
         }
     }
     
-    func loadMyData(completion: @escaping (Member) -> Void) {
-        fetchMyProfile() { [weak self] result in
-            switch result {
-            case .success(let posts):
-                self?.myInfo = posts
-                completion(posts)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
     func createComment(text: String, postId: Int, completion: @escaping (Bool) -> Void) {
         let comment = WriteComment(
             postId: postId,
             body: text,
             isPublic: true,
-            mentionNickName: myInfo.nickname,
-            mentionEmail: myInfo.email,
+            mentionNickName: userName,
+            mentionEmail: userEmail,
             parentId: nil
         )
         createCodeComment(comment: comment)

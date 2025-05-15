@@ -105,7 +105,7 @@ func fetchMyProfile(completion: @escaping (Result<Member, Error>) -> Void) {
         }
 }
 
-func updateMyProfile(id: Int, nickname: String) {
+func updateMyProfile(id: Int, nickname: String, completion: @escaping (Bool) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/profile"
     
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
@@ -126,8 +126,10 @@ func updateMyProfile(id: Int, nickname: String) {
             switch response.result {
             case .success(let data):
                 print("✅ 프로필 업데이트 성공: \(data)")
+                completion(true)
             case .failure(let error):
                 print("❌ 업데이트 실패: \(error.localizedDescription)")
+                completion(false)
             }
         }
 }
