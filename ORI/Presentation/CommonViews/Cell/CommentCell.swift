@@ -69,13 +69,6 @@ class CommentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        moreButton.isHidden = false
-        completeButton.isHidden = true
-        bodyTextField.isUserInteractionEnabled = false
-    }
-    
     private func setupLayout() {
         selectionStyle = .none
         
@@ -154,11 +147,13 @@ class CommentCell: UITableViewCell {
         nicknameLabel.text = comment.writerNickName
         bodyTextField.text = comment.body
         dateLabel.text = DateFormat.dayTime(str: comment.updatedAt)
-        
-        if !(comment.writerId == self.userId) {
-            DispatchQueue.main.async {
-                self.moreButton.isHidden = true
-            }
+
+        let isCurrentUser = comment.writerId == self.userId
+
+        DispatchQueue.main.async {
+            self.moreButton.isHidden = !isCurrentUser
+            self.completeButton.isHidden = true
+            self.bodyTextField.isUserInteractionEnabled = false
         }
     }
 }
