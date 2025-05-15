@@ -101,7 +101,9 @@ class CodeListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func updateNoPostsLabelVisibility() {
-        noPostsLabel.isHidden = !viewModel.posts.isEmpty
+        DispatchQueue.main.async {
+            self.noPostsLabel.isHidden = !self.viewModel.posts.isEmpty
+        }
     }
     
     private func loadDataAndUpdateUI() {

@@ -93,7 +93,9 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     private func updateNoPostsLabelVisibility() {
-        noPostsLabel.isHidden = !viewModel.myTILPosts.isEmpty
+        DispatchQueue.main.async {
+            self.noPostsLabel.isHidden = !self.viewModel.myTILPosts.isEmpty
+        }
     }
     
     private func loadDataAndUpdateUI() {

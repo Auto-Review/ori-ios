@@ -79,7 +79,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     private func updateNoPostsLabelVisibility() {
-        noPostsLabel.isHidden = !viewModel.lists.isEmpty
+        DispatchQueue.main.async {
+            self.noPostsLabel.isHidden = !self.viewModel.lists.isEmpty
+        }
     }
     
     private func loadDataAndUpdateUI() {
