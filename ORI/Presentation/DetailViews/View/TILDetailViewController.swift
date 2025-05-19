@@ -8,7 +8,7 @@
 import UIKit
 
 class TILDetailViewController: UIViewController, UITextViewDelegate  {
-    let viewModel = DetailViewModel()
+    let viewModel = TILDetailViewModel()
     var post: TIL
     
     init(post: TIL) {
@@ -26,7 +26,6 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     let backgroundCreateCommentView = UIView()
     
     var tableViewHeightConstraint: NSLayoutConstraint?
-    var textViewHeightConstraint: NSLayoutConstraint?
     
     private let commentTableView: UITableView = {
         let tableView = UITableView()
@@ -79,7 +78,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         return button
     }()
     
-    private let textView: UITextView = {
+    private let postTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
@@ -106,21 +105,19 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailNavigationBar(text: post.title)
-        addViewModelData()
+        detailNavigationBar(text: post.title, postId: post.id)
+        loadComments()
         addScrollView()
         addPostDetail()
     }
     
-    private func addViewModelData() {
-        viewModel.loadMyData() { my in
-            DispatchQueue.main.async {
-                self.commentnameLabel.text = my.nickname
-            }
-        }
+    private func loadComments() {
         viewModel.loadCommentList(tilPostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
-                self.reloadComments()
+                self.commentTableView.reloadData()
+                let rowCount = self.viewModel.tilPostComments.commentList.count
+                let rowHeight: CGFloat = 90
+                self.tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
             }
         }
     }
@@ -184,11 +181,11 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     private func setPostDetailView() {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(dateLabel)
-        backgroundView.addSubview(textView)
+        backgroundView.addSubview(postTextView)
         
         nicknameLabel.text = post.writerNickName
         dateLabel.text = DateFormat.dayTime(str: post.createdDate)
-        textView.text = post.content
+        postTextView.text = post.content
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
@@ -197,10 +194,10 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
             dateLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 10),
             
-            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
-            textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
-            textView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
+            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
+            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            postTextView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
         ])
     }
     
@@ -248,32 +245,22 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         ])
         
         DispatchQueue.main.async { [self] in
-            self.commentnameLabel.text = viewModel.myInfo.nickname
-            let size = self.textView.sizeThatFits(CGSize(width: self.textView.frame.width, height: .greatestFiniteMagnitude))
-            self.textViewHeightConstraint?.constant = size.height
+            self.commentnameLabel.text = viewModel.userName
         }
     }
     
-    private func reloadComments() {
-        commentTableView.reloadData()
-        let rowCount = viewModel.tilPostComments.commentList.count
-        let rowHeight: CGFloat = 90
-        tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
-    }
-    
     func textViewDidChange(_ textView: UITextView) {
-        placeHolderLabel.isHidden = !textView.text.isEmpty
+        DispatchQueue.main.async {
+            self.placeHolderLabel.isHidden = !textView.text.isEmpty
+        }
     }
     
     @objc func createComment() {
         let text = commentTextView.text ?? ""
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
-                self.viewModel.loadCommentList(tilPostId: self.post.id, page: 0, size: 20) {
-                    DispatchQueue.main.async {
-                        self.reloadComments()
-                    }
-                }
+                self.loadComments()
+                self.commentTextView.text = ""
             }
         }
     }
@@ -290,6 +277,20 @@ extension TILDetailViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.configure(with: comment)
+        
+        cell.onEditTapped = {
+            cell.onEditCompleted = { newBody in
+                self.viewModel.editComment(text: newBody, id: comment.id)
+            }
+        }
+        
+        cell.onDeleteTapped = {
+            self.viewModel.deleteComment(id: comment.id) { success in
+                if success {
+                    self.loadComments()
+                }
+            }
+        }
         return cell
     }
     

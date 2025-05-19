@@ -30,8 +30,8 @@ class MyViewController: UIViewController {
     lazy var nameLabel: UILabel = createLabel(text: "Name")
     lazy var bioLabel: UILabel = createLabel(text: "Bio")
     
-    lazy var emailTextField: UITextField = createTextField(text: viewModel.myInfo.email)
-    lazy var nameTextField: UITextField = createTextField(text: viewModel.myInfo.nickname)
+    lazy var emailTextField: UITextField = createTextField(text: viewModel.userEmail)
+    lazy var nameTextField: UITextField = createTextField(text: viewModel.userName)
     lazy var bioTextField: UITextField = createTextField(text: "4월 20일까지 모든 것을 끝냅시다!")
     
     lazy var emailStackView: UIStackView = createStackView(label: emailLabel, textField: emailTextField)
@@ -66,7 +66,6 @@ class MyViewController: UIViewController {
         mainNavigationBar()
         setupConstraints()
         addMyTabView()
-        setupMyInfo()
     }
     
     func setupConstraints() {
@@ -89,15 +88,6 @@ class MyViewController: UIViewController {
             editButton.widthAnchor.constraint(equalToConstant: 15),
             editButton.heightAnchor.constraint(equalToConstant: 15),
         ])
-    }
-    
-    private func setupMyInfo() {
-        viewModel.loadMyData {
-            DispatchQueue.main.async {
-                self.nameTextField.text = self.viewModel.myInfo.nickname
-                self.emailTextField.text = self.viewModel.myInfo.email
-            }
-        }
     }
     
     func createLabel(text: String) -> UILabel {
@@ -141,8 +131,13 @@ class MyViewController: UIViewController {
             view.endEditing(true) // 키보드 닫기
             editButton.setImage(UIImage(systemName: "pencil"), for: .normal)
             nameTextField.backgroundColor = .clear
-            if viewModel.myInfo.nickname != nameTextField.text {
-                updateMyProfile(id: viewModel.myInfo.id, nickname: nameTextField.text ?? "user")
+            let newName = nameTextField.text ?? "user"
+            if viewModel.userName != newName {
+                updateMyProfile(id: viewModel.userId, nickname: newName) { success in
+                    if success {
+                        UserDefaults.standard.set(newName, forKey: "userName")
+                    }
+                }
             }
         } else {
             nameTextField.backgroundColor = .white

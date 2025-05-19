@@ -27,7 +27,6 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     let backgroundCreateCommentView = UIView()
     
     var tableViewHeightConstraint: NSLayoutConstraint?
-    var textViewHeightConstraint: NSLayoutConstraint?
     
     private let commentTableView: UITableView = {
         let tableView = UITableView()
@@ -80,7 +79,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         return button
     }()
     
-    private let textView: UITextView = {
+    private let postTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
@@ -137,22 +136,19 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailNavigationBar(text: post.title)
-        addViewModelData()
+        detailNavigationBar(text: post.title, postId: post.id)
+        loadComments()
         addScrollView()
         addPostDetail()
     }
     
-    private func addViewModelData() {
-        viewModel.loadMyData() { my in
-            DispatchQueue.main.async {
-                self.commentnameLabel.text = my.nickname
-            }
-        }
-
+    private func loadComments() {
         viewModel.loadCommentList(codePostId: post.id, page: 0, size: 20) {
             DispatchQueue.main.async {
-                self.reloadComments()
+                self.commentTableView.reloadData()
+                let rowCount = self.viewModel.codePostComments.commentList.count
+                let rowHeight: CGFloat = 90
+                self.tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
             }
         }
     }
@@ -203,7 +199,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         contentView.addSubview(commentLabel)
         contentView.addSubview(backgroundCreateCommentView)
         contentView.addSubview(commentTableView)
-                
+        
         NSLayoutConstraint.activate([
             stars.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -279,24 +275,24 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     private func setDetailPostView() {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(languageLabel)
-        backgroundView.addSubview(textView)
+        backgroundView.addSubview(postTextView)
         backgroundView.addSubview(publicLabel)
         backgroundView.addSubview(codeBlock)
         
         nicknameLabel.text = post.writerNickName
         languageLabel.text = post.language
-        textView.text = post.description
+        postTextView.text = post.description
         codeBlock.text = post.code
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
             nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             
-            textView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 3),
-            textView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            textView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 3),
+            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
             
-            languageLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 7),
+            languageLabel.topAnchor.constraint(equalTo: postTextView.bottomAnchor, constant: 7),
             languageLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
             
             publicLabel.centerYAnchor.constraint(equalTo: languageLabel.centerYAnchor),
@@ -354,9 +350,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         ])
         
         DispatchQueue.main.async { [self] in
-            self.commentnameLabel.text = viewModel.myInfo.nickname
-            let size = self.textView.sizeThatFits(CGSize(width: self.textView.frame.width, height: .greatestFiniteMagnitude))
-            self.textViewHeightConstraint?.constant = size.height
+            self.commentnameLabel.text = viewModel.userName
         }
     }
     
@@ -366,7 +360,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         stackView.spacing = 4
         stackView.alignment = .center
         stackView.distribution = .fillEqually
-
+        
         for i in 1...5 {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
@@ -377,16 +371,16 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
             imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-
+            
             stackView.addArrangedSubview(imageView)
         }
-
+        
         return stackView
     }
     
     @objc func dateButtonTapped(_ sender: UIButton) {
         guard let date = sender.title(for: .normal) else { return }
-
+        
         for button in dateStackView.arrangedSubviews.compactMap({ $0 as? UIButton }) {
             button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             let attributedString = NSAttributedString(string: button.titleLabel?.text ?? "", attributes: [
@@ -403,13 +397,13 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         if DateFormat.dayTime(str: self.post.createDate) == date {
             self.codeBlock.text = self.post.code
-            self.textView.text = self.post.description
+            self.postTextView.text = self.post.description
         } else {
             fetchReviewDeatilList(id: sender.tag) { result in
                 switch result {
                 case .success(let list):
                     self.codeBlock.text = list.code
-                    self.textView.text = list.description
+                    self.postTextView.text = list.description
                 case .failure(let error):
                     print("Error fetching posts: \(error)")
                 }
@@ -418,25 +412,17 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        placeHolderLabel.isHidden = !textView.text.isEmpty
-    }
-
-    private func reloadComments() {
-        commentTableView.reloadData()
-        let rowCount = viewModel.codePostComments.commentList.count
-        let rowHeight: CGFloat = 90
-        tableViewHeightConstraint?.constant = CGFloat(rowCount) * rowHeight
+        DispatchQueue.main.async {
+            self.placeHolderLabel.isHidden = !textView.text.isEmpty
+        }
     }
     
     @objc func createComment() {
         let text = commentTextView.text ?? ""
         viewModel.createComment(text: text, postId: post.id) { success in
             if success {
-                self.viewModel.loadCommentList(codePostId: self.post.id, page: 0, size: 20) {
-                    DispatchQueue.main.async {
-                        self.reloadComments()
-                    }
-                }
+                self.loadComments()
+                self.commentTextView.text = ""
             }
         }
     }
@@ -453,6 +439,20 @@ extension CodeDetailViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.configure(with: comment)
+        
+        cell.onEditTapped = {
+            cell.onEditCompleted = { newBody in
+                self.viewModel.editComment(text: newBody, id: comment.id)
+            }
+        }
+        
+        cell.onDeleteTapped = {
+            self.viewModel.deleteComment(id: comment.id) { success in
+                if success {
+                    self.loadComments()
+                }
+            }
+        }
         return cell
     }
     

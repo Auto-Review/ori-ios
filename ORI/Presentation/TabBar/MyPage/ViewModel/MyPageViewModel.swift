@@ -12,7 +12,9 @@ class MyPageViewModel {
     var isCode = true
     var myTILPosts: [TIL] = []
     var myCodePosts: [MyCode] = []
-    var myInfo: Member = Member(id: 0, email: "", nickname: "")
+    let userId = UserDefaultsManager.shared.userId
+    let userName = UserDefaultsManager.shared.userName
+    let userEmail = UserDefaultsManager.shared.userEmail
     
     // 코드 포스트 무한 스크롤
     private var currentCodePage = 0
@@ -84,19 +86,6 @@ class MyPageViewModel {
                     self.currentTILPage += 1
                 }
             case .failure:
-                break
-            }
-            completion()
-        }
-    }
-    
-    // 내 정보 가져오기 (이메일, 이름)
-    func loadMyData(completion: @escaping () -> Void) {
-        fetchMyProfile() { [weak self] result in
-            switch result {
-            case .success(let user):
-                self?.myInfo = user
-            case .failure(_):
                 break
             }
             completion()

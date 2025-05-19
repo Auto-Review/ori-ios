@@ -112,6 +112,7 @@ class MainViewController: UIViewController, FSCalendarDelegate, FSCalendarDelega
         mainNavigationBar()
         setupConstraints()
         loadDataAndUpdateUI()
+        viewModel.loadMyData()
     }
     
     private func setupConstraints() {
