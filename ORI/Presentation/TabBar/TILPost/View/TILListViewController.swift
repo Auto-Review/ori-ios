@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TILListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     let viewModel = TILListViewModel()
     var tableView = UITableView()
     
@@ -25,6 +25,7 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70
+        tableView.prefetchDataSource = self
         
         mainNavigationBar()
         setupTableView()
@@ -110,12 +111,11 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
 }
 
 extension TILListViewController {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let frameHeight = scrollView.frame.size.height
-        if offsetY > contentHeight - frameHeight - 100 {
-            loadMoreData()
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if viewModel.posts.count - 10 == indexPath.row && !viewModel.lastPage {
+                loadMoreData()
+            }
         }
     }
     

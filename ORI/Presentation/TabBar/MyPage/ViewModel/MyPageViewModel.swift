@@ -19,7 +19,7 @@ class MyPageViewModel {
     // 코드 포스트 무한 스크롤
     private var currentCodePage = 0
     private var isCodeFetching = false
-    private var lastCodePage = false
+    var lastCodePage = false
     
     func resetMyCodeList() {
         currentCodePage = 0
@@ -57,7 +57,7 @@ class MyPageViewModel {
     // TIL 포스트 무한 스크롤
     private var currentTILPage = 0
     private var isTILFetching = false
-    private var lastTILPage = false
+    var lastTILPage = false
     
     func resetMyTILList() {
         currentTILPage = 0
