@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     var viewModel: MyPageViewModel
     var tableView = UITableView()
     
@@ -34,6 +34,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70
+        tableView.prefetchDataSource = self
         
         mainNavigationBar()
         setupTableView()
@@ -122,12 +123,11 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
 }
 
 extension MyCodeListViewController {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let frameHeight = scrollView.frame.size.height
-        if offsetY > contentHeight - frameHeight - 100 {
-            loadMoreData()
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if viewModel.myCodePosts.count - 5 == indexPath.row && !viewModel.lastCodePage {
+                loadMoreData()
+            }
         }
     }
     
