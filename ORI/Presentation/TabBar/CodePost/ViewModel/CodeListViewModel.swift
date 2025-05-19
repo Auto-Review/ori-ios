@@ -11,7 +11,7 @@ class CodeListViewModel {
     var posts: [Code] = []
     private var currentPage = 0
     private var isFetching = false
-    private var lastPage = false
+    var lastPage = false
     
     func resetMyCodeList() {
         currentPage = 0
