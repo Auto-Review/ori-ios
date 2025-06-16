@@ -110,7 +110,6 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17)
         label.textColor = .systemGray2
-        label.text = "전체공개"
         return label
     }()
     
@@ -136,7 +135,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailNavigationBar(text: post.title, postId: post.id)
+        detailNavigationBar(text: post.title, postId: post.id, bookmarked: post.bookmarked)
         loadComments()
         addScrollView()
         addPostDetail()
@@ -281,6 +280,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         nicknameLabel.text = post.writerNickName
         languageLabel.text = post.language
+        publicLabel.text = post.isPublic ? "전체공개" : "비공개"
         postTextView.text = post.description
         codeBlock.text = post.code
         

@@ -13,7 +13,7 @@ func createTILBookmark() {
 }
 
 func createCodeBookmark(id: Int) {
-    let url = "http://\(NetworkConstants.baseURL)/code-post/bookmark"
+    let url = "http://\(NetworkConstants.baseURL)/post/code/bookmark"
     
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
         print("❌ Access Token이 없습니다.")
