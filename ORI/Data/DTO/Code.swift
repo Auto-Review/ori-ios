@@ -66,4 +66,23 @@ struct CodeDetail: Decodable {
     let code: String
     let dtoList: [Review]
     let createDate: String
+    var isPublic: Bool
+    var bookmarked: Bool
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case writerId
+        case writerEmail
+        case writerNickName
+        case title
+        case level
+        case reviewDay
+        case description
+        case language
+        case code
+        case dtoList
+        case createDate
+        case isPublic = "public"
+        case bookmarked
+    }
 }

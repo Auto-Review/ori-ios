@@ -21,3 +21,13 @@ struct TIL: Decodable {
     let content: String
     let createdDate: String
 }
+
+struct TILDetail: Decodable {
+    let id: Int
+    let writerId: Int
+    let writerEmail: String
+    let writerNickName: String
+    let title: String
+    let content: String
+    let createdDate: String
+}
