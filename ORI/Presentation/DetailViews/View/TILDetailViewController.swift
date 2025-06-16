@@ -105,7 +105,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailNavigationBar(text: post.title, postId: post.id)
+        detailNavigationBar(text: post.title, postId: post.id, bookmarked: false)
         loadComments()
         addScrollView()
         addPostDetail()
