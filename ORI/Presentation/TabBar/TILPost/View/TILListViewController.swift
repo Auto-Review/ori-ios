@@ -90,8 +90,15 @@ class TILListViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPost = viewModel.posts[indexPath.row]
-        let detailVC = TILDetailViewController(post: selectedPost)
-        navigationController?.pushViewController(detailVC, animated: true)
+        fetchTILDeatilList(id: selectedPost.id) { result in
+            switch result {
+            case .success(let post):
+                let detailVC = TILDetailViewController(post: post)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
     
     private func updateNoPostsLabelVisibility() {

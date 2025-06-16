@@ -111,8 +111,15 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPost = viewModel.myTILPosts[indexPath.row]
-        let detailVC = TILDetailViewController(post: selectedPost)
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        fetchTILDeatilList(id: selectedPost.id) { result in
+            switch result {
+            case .success(let post):
+                let detailVC = TILDetailViewController(post: post)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            case .failure(let err):
+                print(err)
+            }
+        }
     }
 }
 

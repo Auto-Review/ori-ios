@@ -29,5 +29,5 @@ struct TILDetail: Decodable {
     let writerNickName: String
     let title: String
     let content: String
-    let createdDate: String
+    let createDate: String
 }
