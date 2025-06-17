@@ -19,14 +19,16 @@ class CommentCell: UITableViewCell {
     
     private let nicknameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         label.textColor = .black
         return label
     }()
     
     private let moreButton: UIButton = {
+        let icon = UIImage(systemName: "ellipsis")?
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 12, weight: .regular))
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        button.setImage(icon, for: .normal)
         button.tintColor = .gray
         button.showsMenuAsPrimaryAction = true
         return button
@@ -34,8 +36,7 @@ class CommentCell: UITableViewCell {
     
     private let bodyTextField: UITextField = {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 15)
-        textField.textColor = .darkGray
+        textField.font = UIFont.systemFont(ofSize: 12)
         textField.isUserInteractionEnabled = false
         return textField
     }()
@@ -44,14 +45,14 @@ class CommentCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.setTitle("완료", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         button.isHidden = true
         return button
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .lightGray
         return label
     }()
@@ -106,10 +107,10 @@ class CommentCell: UITableViewCell {
         contentView.addSubview(containerStackView)
         
         NSLayoutConstraint.activate([
-            containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
+            containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 6),
+            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -6),
+            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6)
         ])
     }
     

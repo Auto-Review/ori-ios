@@ -1,5 +1,5 @@
 //
-//  CodeDetailViewComtroller.swift
+//  CodeDetailViewController.swift
 //  ORI
 //
 //  Created by Song Kim on 5/13/25.
@@ -33,6 +33,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.isScrollEnabled = false
         tableView.separatorInset = .zero
+        tableView.layoutMargins = .zero
+        tableView.cellLayoutMarginsFollowReadableWidth = false
         tableView.register(CommentCell.self, forCellReuseIdentifier: "CommentCell")
         return tableView
     }()
@@ -40,7 +42,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     private let placeHolderLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemGray4
         label.text = "악플, 잘못된 정보는 경고없이 삭제될 수 있습니다."
         return label
@@ -49,7 +51,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     private let commentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.text = "COMMENTS"
         return label
     }()
@@ -57,14 +59,14 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     private let commentnameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         return label
     }()
     
     private let commentTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = UIFont.systemFont(ofSize: 12)
         textView.textContainer.lineFragmentPadding = 0
         return textView
     }()
@@ -74,8 +76,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("COMMIT", for: .normal)
         button.backgroundColor = .clear
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        button.setTitleColor(UIColor.systemGray2, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        button.setTitleColor(.systemGray2, for: .normal)
         return button
     }()
     
@@ -85,7 +87,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.isSelectable = false
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = UIFont.systemFont(ofSize: 12)
         textView.textContainer.lineFragmentPadding = 0
         return textView
     }()
@@ -93,14 +95,14 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
     private let languageLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemGray2
         return label
     }()
@@ -108,7 +110,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     private let publicLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemGray2
         return label
     }()
@@ -119,9 +121,12 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.isSelectable = false
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = UIFont.systemFont(ofSize: 12)
         textView.backgroundColor = .systemGray6
         textView.layer.cornerRadius = 5
+        
+        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        textView.textContainer.lineFragmentPadding = 0
         return textView
     }()
     
@@ -195,29 +200,36 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         contentView.addSubview(stars)
         contentView.addSubview(DateButtonView)
         contentView.addSubview(backgroundView)
+        contentView.addSubview(codeBlock)
         contentView.addSubview(commentLabel)
         contentView.addSubview(backgroundCreateCommentView)
         contentView.addSubview(commentTableView)
         
+        codeBlock.text = post.code
+        
         NSLayoutConstraint.activate([
-            stars.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            stars.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            DateButtonView.topAnchor.constraint(equalTo: stars.bottomAnchor, constant: 10),
-            DateButtonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            DateButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            DateButtonView.topAnchor.constraint(equalTo: stars.bottomAnchor, constant: 12),
+            DateButtonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            DateButtonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            backgroundView.topAnchor.constraint(equalTo: DateButtonView.bottomAnchor, constant: 10),
-            backgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            backgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            backgroundView.topAnchor.constraint(equalTo: DateButtonView.bottomAnchor, constant: 12),
+            backgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            backgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            commentLabel.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 20),
-            commentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            codeBlock.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 12),
+            codeBlock.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            codeBlock.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 10),
-            backgroundCreateCommentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            backgroundCreateCommentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 150)
+            commentLabel.topAnchor.constraint(equalTo: codeBlock.bottomAnchor, constant: 24),
+            commentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
+            backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 12),
+            backgroundCreateCommentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            backgroundCreateCommentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 100)
         ])
         
         setDateStackView()
@@ -231,8 +243,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         NSLayoutConstraint.activate([
             dateStackView.topAnchor.constraint(equalTo: DateButtonView.topAnchor, constant: 10),
-            dateStackView.leadingAnchor.constraint(equalTo: DateButtonView.leadingAnchor, constant: 15),
-            dateStackView.trailingAnchor.constraint(equalTo: DateButtonView.trailingAnchor, constant: -15),
+            dateStackView.leadingAnchor.constraint(equalTo: DateButtonView.leadingAnchor, constant: 16),
+            dateStackView.trailingAnchor.constraint(equalTo: DateButtonView.trailingAnchor, constant: -16),
             dateStackView.bottomAnchor.constraint(equalTo: DateButtonView.bottomAnchor, constant: -10)
         ])
         
@@ -240,9 +252,9 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         let date = DateFormat.dayTime(str: post.createDate)
         button.setTitle(date, for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         button.contentHorizontalAlignment = .leading
-        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
         button.addTarget(self, action: #selector(dateButtonTapped(_:)), for: .touchUpInside)
         dateStackView.addArrangedSubview(button)
         
@@ -250,7 +262,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
            let firstDate = firstButton.title(for: .normal),
            firstDate == DateFormat.dayTime(str: post.createDate) {
             
-            firstButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+            firstButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
             let attributedString = NSAttributedString(string: firstDate, attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue
             ])
@@ -262,9 +274,9 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
             let date = DateFormat.dayTime(str: dto.updatedAt)
             button.setTitle(date, for: .normal)
             button.setTitleColor(.black, for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
             button.contentHorizontalAlignment = .leading
-            button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 20).isActive = true
             button.tag = dto.id
             button.addTarget(self, action: #selector(dateButtonTapped(_:)), for: .touchUpInside)
             dateStackView.addArrangedSubview(button)
@@ -276,32 +288,26 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         backgroundView.addSubview(languageLabel)
         backgroundView.addSubview(postTextView)
         backgroundView.addSubview(publicLabel)
-        backgroundView.addSubview(codeBlock)
         
         nicknameLabel.text = post.writerNickName
         languageLabel.text = post.language
         publicLabel.text = post.isPublic ? "전체공개" : "비공개"
         postTextView.text = post.description
-        codeBlock.text = post.code
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
-            nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
             
-            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 3),
-            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 2),
+            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
+            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -16),
             
-            languageLabel.topAnchor.constraint(equalTo: postTextView.bottomAnchor, constant: 7),
-            languageLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            languageLabel.topAnchor.constraint(equalTo: postTextView.bottomAnchor, constant: 2),
+            languageLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
             
             publicLabel.centerYAnchor.constraint(equalTo: languageLabel.centerYAnchor),
-            publicLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
-            
-            codeBlock.topAnchor.constraint(equalTo: languageLabel.bottomAnchor, constant: 15),
-            codeBlock.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            codeBlock.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
-            codeBlock.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10),
+            publicLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -16),
+            publicLabel.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -10)
         ])
     }
     
@@ -314,14 +320,14 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         NSLayoutConstraint.activate([
             commentnameLabel.topAnchor.constraint(equalTo: backgroundCreateCommentView.topAnchor, constant: 20),
-            commentnameLabel.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
+            commentnameLabel.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 16),
             
             commentTextView.topAnchor.constraint(equalTo: commentnameLabel.bottomAnchor, constant: 5),
-            commentTextView.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
-            commentTextView.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -15),
+            commentTextView.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 16),
+            commentTextView.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -16),
             
             commentButton.topAnchor.constraint(equalTo: commentTextView.bottomAnchor),
-            commentButton.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -15),
+            commentButton.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -16),
             commentButton.bottomAnchor.constraint(equalTo: backgroundCreateCommentView.bottomAnchor, constant: -10)
         ])
         
@@ -344,8 +350,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         NSLayoutConstraint.activate([
             commentTableView.topAnchor.constraint(equalTo: backgroundCreateCommentView.bottomAnchor, constant: 10),
-            commentTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            commentTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            commentTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            commentTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             commentTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
         
@@ -369,8 +375,8 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
             imageView.tintColor = i <= rating ? .systemOrange : .lightGray
             
             imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
             
             stackView.addArrangedSubview(imageView)
         }
@@ -382,14 +388,14 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         guard let date = sender.title(for: .normal) else { return }
         
         for button in dateStackView.arrangedSubviews.compactMap({ $0 as? UIButton }) {
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
             let attributedString = NSAttributedString(string: button.titleLabel?.text ?? "", attributes: [
                 .underlineStyle: []
             ])
             button.setAttributedTitle(attributedString, for: .normal)
         }
         
-        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         let attributedString = NSAttributedString(string: date, attributes: [
             .underlineStyle: NSUnderlineStyle.single.rawValue
         ])
