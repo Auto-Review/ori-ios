@@ -9,9 +9,9 @@ import UIKit
 
 class TILDetailViewController: UIViewController, UITextViewDelegate  {
     let viewModel = TILDetailViewModel()
-    var post: TIL
+    var post: TILDetail
     
-    init(post: TIL) {
+    init(post: TILDetail) {
         self.post = post
         super.init(nibName: nil, bundle: nil)
     }
@@ -105,7 +105,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailNavigationBar(text: post.title, postId: post.id)
+        detailNavigationBar(text: post.title, postId: post.id, bookmarked: false, isCode: false)
         loadComments()
         addScrollView()
         addPostDetail()
@@ -184,7 +184,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         backgroundView.addSubview(postTextView)
         
         nicknameLabel.text = post.writerNickName
-        dateLabel.text = DateFormat.dayTime(str: post.createdDate)
+        dateLabel.text = DateFormat.dayTime(str: post.createDate)
         postTextView.text = post.content
         
         NSLayoutConstraint.activate([
