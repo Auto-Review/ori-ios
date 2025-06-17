@@ -30,7 +30,10 @@ extension UIViewController {
     }
     
     @objc func closeButtonTapped() {
-        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
+        if let nav = navigationController, nav.viewControllers.count > 1 {
+            nav.popViewController(animated: true) // Push로 왔다면 pop
+        } else {
+            dismiss(animated: true, completion: nil) // Modal로 왔다면 dismiss
+        }
     }
 }

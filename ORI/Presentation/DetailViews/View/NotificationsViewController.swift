@@ -13,7 +13,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     private let noPostsLabel: UILabel = {
         let label = UILabel()
-        label.text = "받은 알람이 없습니다."
+        label.text = "확인할 소식이 없습니다."
         label.textColor = .gray
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
