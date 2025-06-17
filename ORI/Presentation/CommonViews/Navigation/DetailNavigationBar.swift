@@ -9,12 +9,14 @@ import UIKit
 
 private var id = 0
 private var isBookmark = false
+private var isCodePost = true
 private var bookmarkButton: UIButton?
 
 extension UIViewController {
     func detailNavigationBar(text: String, postId: Int, bookmarked: Bool, isCode: Bool) {
         id = postId
         isBookmark = bookmarked
+        isCodePost = isCode
 
         // Title
         let titleLabel: UILabel = {
@@ -49,7 +51,7 @@ extension UIViewController {
     @objc func clickbookmarkButton(isCode: Bool) {
         isBookmark.toggle()
         updateBookmarkButtonUI()
-        if isCode {
+        if isCodePost {
             createCodeBookmark(id: id)
         } else {
             createTILBookmark(id: id)
