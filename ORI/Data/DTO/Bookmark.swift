@@ -8,7 +8,7 @@
 import UIKit
 
 struct CodeBookmark: Decodable {
-    let listDto: [CodeBookmarkPost]
+    let dtoList: [CodeBookmarkPost]
     let totalPage: Int
 }
 
