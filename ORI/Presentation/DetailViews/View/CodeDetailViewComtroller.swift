@@ -135,7 +135,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        detailNavigationBar(text: post.title, postId: post.id, bookmarked: post.bookmarked)
+        detailNavigationBar(text: post.title, postId: post.id, bookmarked: post.bookmarked, isCode: true)
         loadComments()
         addScrollView()
         addPostDetail()

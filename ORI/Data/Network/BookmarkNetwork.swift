@@ -8,8 +8,31 @@
 import UIKit
 import Alamofire
 
-func createTILBookmark() {
+func createTILBookmark(id: Int) {
+    let url = "http://\(NetworkConstants.baseURL)/post/til/bookmark"
     
+    guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
+        print("❌ Access Token이 없습니다.")
+        return
+    }
+    
+    let headers: HTTPHeaders = [
+        "Authorization": accessToken,
+        "Content-Type": "application/json"
+    ]
+    
+    let parameters: [String: Any] = ["postId": id]
+    
+    AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        .validate(statusCode: 200..<300)
+        .response { response in
+            switch response.result {
+            case .success:
+                print("TIL 북마크 성공")
+            case .failure(let error):
+                print("❌ 에러 내용: \(error)")
+            }
+        }
 }
 
 func createCodeBookmark(id: Int) {
