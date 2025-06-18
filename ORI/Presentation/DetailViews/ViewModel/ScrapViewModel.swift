@@ -1,0 +1,60 @@
+//
+//  ScrapViewModel.swift
+//  ORI
+//
+//  Created by Song Kim on 6/17/25.
+//
+
+import UIKit
+
+class ScrapViewModel {
+    var posts: [CodeBookmarkPost] = []
+    private var currentPage = 0
+    private var isFetching = false
+    var lastPage = false
+    
+    func resetMyCodeList() {
+        currentPage = 0
+        isFetching = false
+        lastPage = false
+        posts = []
+    }
+    
+    func loadMoreAllCodeBookMarkList(completion: @escaping () -> Void) {
+        guard !isFetching, !lastPage else {
+            completion()
+            return
+        }
+        isFetching = true
+        
+        fetchCodeBookmark(page: self.currentPage, size: 20) { [weak self] result in
+            guard let self = self else { return }
+            self.isFetching = false
+            
+            switch result {
+            case .success(let response):
+                self.posts.append(contentsOf: response.dtoList)
+                if response.totalPage <= self.currentPage + 1 {
+                    self.lastPage = true
+                } else {
+                    self.currentPage += 1
+                }
+            case .failure(let err):
+                print(err)
+                break
+            }
+            completion()
+        }
+    }
+    
+    var cellModels: [PostCellModel] {
+        posts.map {
+            PostCellModel(
+                title: $0.codePostTitle,
+                author: $0.writer,
+                date: String($0.updateAt.prefix(10)),
+                reviewCountText: "RE: \($0.commentCount)"
+            )
+        }
+    }
+}

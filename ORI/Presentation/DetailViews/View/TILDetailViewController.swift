@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TILDetailViewController: UIViewController, UITextViewDelegate  {
+class TILDetailViewController: UIViewController, UITextViewDelegate, UIGestureRecognizerDelegate  {
     let viewModel = TILDetailViewModel()
     var post: TILDetail
     
@@ -39,7 +39,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     private let placeHolderLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .systemGray4
         label.text = "악플, 잘못된 정보는 경고없이 삭제될 수 있습니다."
         return label
@@ -48,7 +48,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     private let commentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         label.text = "COMMENTS"
         return label
     }()
@@ -56,14 +56,14 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     private let commentnameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         return label
     }()
     
     private let commentTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = UIFont.systemFont(ofSize: 12)
         textView.textContainer.lineFragmentPadding = 0
         return textView
     }()
@@ -73,7 +73,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("COMMIT", for: .normal)
         button.backgroundColor = .clear
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         button.setTitleColor(UIColor.systemGray2, for: .normal)
         return button
     }()
@@ -84,7 +84,7 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.isSelectable = false
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = UIFont.systemFont(ofSize: 12)
         textView.textContainer.lineFragmentPadding = 0
         return textView
     }()
@@ -92,19 +92,28 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+    
+    private let publicLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .systemGray2
         return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         detailNavigationBar(text: post.title, postId: post.id, bookmarked: false, isCode: false)
         loadComments()
         addScrollView()
@@ -160,17 +169,17 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         backgroundCreateCommentView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            backgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            backgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            backgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            backgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            backgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            commentLabel.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 20),
-            commentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            commentLabel.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 24),
+            commentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 10),
-            backgroundCreateCommentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            backgroundCreateCommentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 150)
+            backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 12),
+            backgroundCreateCommentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            backgroundCreateCommentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 120)
         ])
         
         setPostDetailView()
@@ -182,21 +191,26 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         backgroundView.addSubview(nicknameLabel)
         backgroundView.addSubview(dateLabel)
         backgroundView.addSubview(postTextView)
+        backgroundView.addSubview(publicLabel)
         
         nicknameLabel.text = post.writerNickName
         dateLabel.text = DateFormat.dayTime(str: post.createDate)
         postTextView.text = post.content
+        publicLabel.text = "전체공개" // 아직 API에 전체공개 비공개가 없음
         
         NSLayoutConstraint.activate([
             nicknameLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
-            nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
+            nicknameLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
             
             dateLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 10),
+            dateLabel.leadingAnchor.constraint(equalTo: nicknameLabel.trailingAnchor, constant: 16),
             
-            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 10),
-            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 15),
-            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -15),
+            publicLabel.centerYAnchor.constraint(equalTo: nicknameLabel.centerYAnchor),
+            publicLabel.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -16),
+            
+            postTextView.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 16),
+            postTextView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 16),
+            postTextView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -16),
             postTextView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20)
         ])
     }
@@ -209,14 +223,14 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         
         NSLayoutConstraint.activate([
             commentnameLabel.topAnchor.constraint(equalTo: backgroundCreateCommentView.topAnchor, constant: 20),
-            commentnameLabel.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
+            commentnameLabel.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 16),
             
             commentTextView.topAnchor.constraint(equalTo: commentnameLabel.bottomAnchor, constant: 5),
-            commentTextView.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 15),
-            commentTextView.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -15),
+            commentTextView.leadingAnchor.constraint(equalTo: backgroundCreateCommentView.leadingAnchor, constant: 16),
+            commentTextView.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -16),
             
             commentButton.topAnchor.constraint(equalTo: commentTextView.bottomAnchor),
-            commentButton.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -15),
+            commentButton.trailingAnchor.constraint(equalTo: backgroundCreateCommentView.trailingAnchor, constant: -16),
             commentButton.bottomAnchor.constraint(equalTo: backgroundCreateCommentView.bottomAnchor, constant: -10)
         ])
         
@@ -239,9 +253,9 @@ class TILDetailViewController: UIViewController, UITextViewDelegate  {
         
         NSLayoutConstraint.activate([
             commentTableView.topAnchor.constraint(equalTo: backgroundCreateCommentView.bottomAnchor, constant: 10),
-            commentTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            commentTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            commentTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            commentTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            commentTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            commentTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
         
         DispatchQueue.main.async { [self] in

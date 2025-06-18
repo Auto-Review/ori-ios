@@ -51,7 +51,10 @@ extension UIViewController {
     }
     
     @objc func scrapButtonTapped() {
-        print("스크랩 버튼 클릭됨")
+        let scrapVC = ScrapViewController()
+        let navVC = UINavigationController(rootViewController: scrapVC)
+        navVC.modalPresentationStyle = .overFullScreen
+        present(navVC, animated: true, completion: nil)
     }
     
     @objc func notificationButtonTapped() {
