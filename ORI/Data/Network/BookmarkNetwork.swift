@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-func createTILBookmark(id: Int) {
+func createTILBookmark(id: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/til/bookmark"
     
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
@@ -23,19 +23,20 @@ func createTILBookmark(id: Int) {
     
     let parameters: [String: Any] = ["postId": id]
     
-    AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+    AF.request(url, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
         .validate(statusCode: 200..<300)
         .response { response in
             switch response.result {
             case .success:
                 print("TIL 북마크 성공")
+                completion(.success(true))
             case .failure(let error):
-                print("❌ 에러 내용: \(error)")
+                completion(.failure(error))
             }
         }
 }
 
-func createCodeBookmark(id: Int) {
+func createCodeBookmark(id: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
     let url = "http://\(NetworkConstants.baseURL)/post/code/bookmark"
     
     guard let accessToken = KeychainManager.load(key: "accessToken"), !accessToken.isEmpty else {
@@ -55,9 +56,10 @@ func createCodeBookmark(id: Int) {
         .response { response in
             switch response.result {
             case .success:
-                print("Code 북마크 성공")
+                print("Code 북마크 상태변경 성공")
+                completion(.success(true))
             case .failure(let error):
-                print("❌ 에러 내용: \(error)")
+                completion(.failure(error))
             }
         }
 }
