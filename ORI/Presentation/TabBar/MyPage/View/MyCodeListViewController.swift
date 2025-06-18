@@ -114,6 +114,7 @@ class MyCodeListViewController: UIViewController, UITableViewDelegate, UITableVi
             switch result {
             case .success(let list):
                 let detailVC = CodeDetailViewController(post: list)
+                detailVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(detailVC, animated: true)
             case .failure(let error):
                 print("Error fetching posts: \(error)")

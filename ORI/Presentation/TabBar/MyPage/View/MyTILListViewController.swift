@@ -115,6 +115,7 @@ class MyTILListViewController: UIViewController, UITableViewDelegate, UITableVie
             switch result {
             case .success(let post):
                 let detailVC = TILDetailViewController(post: post)
+                detailVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(detailVC, animated: true)
             case .failure(let err):
                 print(err)

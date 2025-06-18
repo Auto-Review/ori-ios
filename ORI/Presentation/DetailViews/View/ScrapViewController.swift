@@ -93,6 +93,7 @@ class ScrapViewController: UIViewController, UITableViewDelegate, UITableViewDat
             switch result {
             case .success(let list):
                 let detailVC = CodeDetailViewController(post: list)
+                detailVC.hidesBottomBarWhenPushed = true
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(detailVC, animated: true)
                 }
