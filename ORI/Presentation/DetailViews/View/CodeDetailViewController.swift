@@ -230,7 +230,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate, UIGestureR
             backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 12),
             backgroundCreateCommentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             backgroundCreateCommentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 100)
+            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 120)
         ])
         
         setDateStackView()

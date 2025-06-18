@@ -169,17 +169,17 @@ class TILDetailViewController: UIViewController, UITextViewDelegate, UIGestureRe
         backgroundCreateCommentView.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            backgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             backgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             backgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            commentLabel.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 16),
+            commentLabel.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: 24),
             commentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 10),
+            backgroundCreateCommentView.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 12),
             backgroundCreateCommentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             backgroundCreateCommentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 150)
+            backgroundCreateCommentView.heightAnchor.constraint(equalToConstant: 120)
         ])
         
         setPostDetailView()
