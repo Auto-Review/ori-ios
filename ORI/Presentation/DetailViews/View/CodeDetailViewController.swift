@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CodeDetailViewController: UIViewController, UITextViewDelegate  {
+class CodeDetailViewController: UIViewController, UITextViewDelegate, UIGestureRecognizerDelegate  {
     let viewModel = CodeDetailViewModel()
     var post: CodeDetail
     
@@ -140,6 +140,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self // 슬라이드로 뒤로가기
         detailNavigationBar(text: post.title, postId: post.id, bookmarked: post.bookmarked, isCode: true)
         loadComments()
         addScrollView()
@@ -209,7 +210,7 @@ class CodeDetailViewController: UIViewController, UITextViewDelegate  {
         
         NSLayoutConstraint.activate([
             stars.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stars.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 19),
             
             DateButtonView.topAnchor.constraint(equalTo: stars.bottomAnchor, constant: 12),
             DateButtonView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

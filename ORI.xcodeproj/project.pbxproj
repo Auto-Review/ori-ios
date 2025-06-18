@@ -43,7 +43,7 @@
 		57A295632D9153CD0057BF28 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57A295622D9153CD0057BF28 /* Alamofire */; };
 		57B1629A2DCD9EEA00A41B00 /* NotificationCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */; };
 		57B1629C2DCD9FFD00A41B00 /* PostCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */; };
-		57B162A22DD2DA8900A41B00 /* CodeDetailViewComtroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A12DD2DA8200A41B00 /* CodeDetailViewComtroller.swift */; };
+		57B162A22DD2DA8900A41B00 /* CodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A12DD2DA8200A41B00 /* CodeDetailViewController.swift */; };
 		57B162A42DD2DCC600A41B00 /* CodeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A32DD2DCC600A41B00 /* CodeDetailViewModel.swift */; };
 		57B162A62DD310BB00A41B00 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A52DD310B800A41B00 /* Review.swift */; };
 		57B162A82DD310E900A41B00 /* ReviewNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B162A72DD310E200A41B00 /* ReviewNetwork.swift */; };
@@ -116,7 +116,7 @@
 		579F0D822D9BD5F30076F9A9 /* MainNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotificationCell.swift; sourceTree = "<group>"; };
 		57B162992DCD9EEA00A41B00 /* NotificationCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellModel.swift; sourceTree = "<group>"; };
 		57B1629B2DCD9FFD00A41B00 /* PostCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellModel.swift; sourceTree = "<group>"; };
-		57B162A12DD2DA8200A41B00 /* CodeDetailViewComtroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailViewComtroller.swift; sourceTree = "<group>"; };
+		57B162A12DD2DA8200A41B00 /* CodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailViewController.swift; sourceTree = "<group>"; };
 		57B162A32DD2DCC600A41B00 /* CodeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDetailViewModel.swift; sourceTree = "<group>"; };
 		57B162A52DD310B800A41B00 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		57B162A72DD310E200A41B00 /* ReviewNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNetwork.swift; sourceTree = "<group>"; };
@@ -390,7 +390,7 @@
 		575BFC952DC311AF00CDD29E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				57B162A12DD2DA8200A41B00 /* CodeDetailViewComtroller.swift */,
+				57B162A12DD2DA8200A41B00 /* CodeDetailViewController.swift */,
 				57B3929D2DAC9AED00CAB138 /* TILDetailViewController.swift */,
 				5729F6D72CDB921C00FB9ADC /* NotificationsViewController.swift */,
 				573CB5672E00FFD90062F625 /* ScrapViewController.swift */,
@@ -685,7 +685,7 @@
 				577758892D83B02A00EB464F /* LogoutManager.swift in Sources */,
 				5729F6CF2CDB096000FB9ADC /* Member.swift in Sources */,
 				576353D52D8A976700910917 /* MyTILListViewController.swift in Sources */,
-				57B162A22DD2DA8900A41B00 /* CodeDetailViewComtroller.swift in Sources */,
+				57B162A22DD2DA8900A41B00 /* CodeDetailViewController.swift in Sources */,
 				5729F6DA2CDC5DE500FB9ADC /* LoginViewModel.swift in Sources */,
 				579F0D832D9BD5F30076F9A9 /* MainNotificationCell.swift in Sources */,
 				576354B52D8CF2DD00910917 /* Notification.swift in Sources */,
@@ -864,7 +864,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TYK28FA5FZ;
+				DEVELOPMENT_TEAM = BLC9AMHM68;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ORI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -877,7 +877,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.ksimong.ORI;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.ksiomng.ori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -897,7 +897,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TYK28FA5FZ;
+				DEVELOPMENT_TEAM = BLC9AMHM68;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ORI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -910,7 +910,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.ksimong.ORI;
+				PRODUCT_BUNDLE_IDENTIFIER = ios.ksiomng.ori;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
